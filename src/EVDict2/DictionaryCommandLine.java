@@ -13,7 +13,9 @@ public class DictionaryCommandLine {
         showAllWords();
     }
 
-    public void insertFromFile() {
-
+    public void dictionaryAdvanced() {
+        dict_man.insertFromFile();
+        showAllWords();
+        dict_man.dictionaryLookup();
     }
 }
