@@ -146,7 +146,7 @@ public class DictionaryManagement {
         int key_length = keyword_suggested.length();
         System.out.println("The list of words begins with characters suggested: ");
         for (Word word_iterator : dict.words) {
-            if(word_iterator.getWord_target().length() >= key_length) {
+            if (word_iterator.getWord_target().length() >= key_length) {
                 if (keyword_suggested.equals(word_iterator.getWord_target().substring(0,key_length))) {
                     System.out.print(word_iterator.getWord_target() + ", ");
                 }
