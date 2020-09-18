@@ -1,10 +1,10 @@
-package english_dictionary;
+package EVDict3;
 
 public class DictionaryCommandline extends DictionaryManagement {
-    
-    /** hàm override lại phương thức của lớp DictionaryManagement
-     * hiển thị kết quả danh sách dữ liệu từ điển
-     */  
+
+    /**
+     * Methods are overridden from the class DictionaryManagement.
+      */
     @Override
     
     public void showAllWords() {

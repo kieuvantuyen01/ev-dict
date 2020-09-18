@@ -1,9 +1,6 @@
-package english_dictionary;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
+package EVDict3;
+
 import java.util.Scanner;
-import java.util.HashSet;
 
 public class DictionaryManagement {
     Dictionary dict = new Dictionary();
@@ -14,22 +11,23 @@ public class DictionaryManagement {
         System.out.print("Number of words: ");
         number_of_words = sc.nextInt();
         String s = sc.nextLine();
-        dict.words = new HashSet<Word>();
         System.out.println("Type list of words: ");
         for (int i = 0; i < number_of_words; i++) {
             System.out.print("Word_Target: ");
             String word_target = sc.nextLine();
             System.out.print("Meaning: ");
             String word_explain = sc.nextLine();
-            dict.words.add(new Word(word_target, word_explain));
+            Word new_word = new Word(word_target, word_explain);
+            dict.words.add(new_word);
         }    
     }
    
     public void showAllWords() {
         int sequence_number = 0;
         System.out.printf("%-4s |%-15s |%-15s%n", "No", "English", "Vietnamese");
+        //TreeSet<Word> newDict = new TreeSet<Word>(dict.words);
         for (Word word_iterator : dict.words) {
-            System.out.printf("%-4d |%-15s |%-15s%n", sequence_number, 
+            System.out.printf("%-4d |%-15s |%-15s%n", sequence_number+1,
                               word_iterator.getWord_target(), word_iterator.getWord_explain());
             sequence_number++;
         }

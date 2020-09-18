@@ -1,4 +1,4 @@
-package english_dictionary;
+package EVDict3;
 
 public class Word {
     private String word_target;
@@ -27,5 +27,9 @@ public class Word {
     
     public void setWord_explain(String word_explain) {
         this.word_explain = word_explain;
+    }
+
+    public int compare(Word other) {
+        return (this.word_target.compareTo(other.word_target));
     }
 }
