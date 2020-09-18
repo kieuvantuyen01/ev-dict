@@ -33,11 +33,6 @@ public class DictionaryManagement {
     }
 
     public void insertFromFile() {
-        /*FileDict file = new FileDict();
-        file.WriteAFile();
-        file.ReadAndWrite();
-        ArrayList<String> list = new ArrayList<String>();
-        file.TextFile(list);*/
         ArrayList<String> list = new ArrayList<String>();
 
         try {
