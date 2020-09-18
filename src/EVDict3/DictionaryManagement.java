@@ -142,7 +142,6 @@ public class DictionaryManagement {
 
     public void dictionarySearcher() {
         System.out.print("\n" + "Characters suggested: ");
-        Scanner sc = new Scanner(System.in);
         String keyword_suggested = sc.next();
         System.out.println("The list of words begins with characters suggested: ");
         for (Word word_iterator : dict.words) {
