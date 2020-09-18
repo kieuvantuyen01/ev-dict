@@ -17,6 +17,6 @@ public class ev_dict3 {
 //        dict_cmd.addNewWord();
 //        dict_cmd.deleteWord();
         dict_cmd.showAllWords();
-        dict_cmd.dictionaryExportToFile();
+//        dict_cmd.dictionaryExportToFile();
     }
 }
