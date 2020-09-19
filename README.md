@@ -4,7 +4,9 @@ Document for all members:
 
 https://www.youtube.com/playlist?list=PLsfLgp1K1xQ7dDUcjtlRQhZJxl0orbEsd
 
-https://www.javatpoint.com/java-swing
+https://www.javatpoint.com/java-swing (tiếng Anh)
+
+https://viettuts.vn/java-swing (tiếng Việt)
 
 *) Code mẫu: 
 
@@ -18,7 +20,7 @@ https://www.youtube.com/watch?v=1De8uQMbEus
 
 https://congdongjava.com/forum/threads/code-cho-t%E1%BB%AB-%C4%90i%E1%BB%83n-%C4%91%C6%A1n-gi%E1%BA%A3n-n%C3%A8.530/
  
-*) API
+*) API:
 
 https://stackoverflow.com/questions/8147284/how-to-use-google-translate-api-in-my-java-application    //API
 
