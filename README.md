@@ -4,6 +4,8 @@ Document for all members:
 
 https://www.youtube.com/playlist?list=PLsfLgp1K1xQ7dDUcjtlRQhZJxl0orbEsd
 
+https://www.javatpoint.com/java-swing
+
 *) Code mẫu: 
 
 https://github.com/INT2204-5-N2/asg1-naq/tree/master/Dictionary/src/main/java/dictionary4
