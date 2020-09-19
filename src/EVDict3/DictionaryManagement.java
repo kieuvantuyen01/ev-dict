@@ -147,9 +147,11 @@ public class DictionaryManagement {
         int keyword_suggested_length = keyword_suggested.length();
         System.out.println("The list of words begins with characters suggested: ");
         for (Word word_iterator : dict.words) {
-            String subWord = word_iterator.getWord_target().substring(0, keyword_suggested_length);
-            if (subWord.equals(keyword_suggested)) {
-                System.out.print(word_iterator.getWord_target() + ", ");
+            if (word_iterator.getWord_target().length() >= keyword_suggested_length) {
+                String subWord = word_iterator.getWord_target().substring(0, keyword_suggested_length);
+                if (subWord.equals(keyword_suggested)) {
+                    System.out.print(word_iterator.getWord_target() + ", ");
+                }
             }
         }
         System.out.println();
