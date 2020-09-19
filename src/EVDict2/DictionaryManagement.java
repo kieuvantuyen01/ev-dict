@@ -8,9 +8,10 @@ import java.util.Scanner;
 public class DictionaryManagement {
     Dictionary dict = new Dictionary();
     int nums;
-    public void insertFromCommandline(){
+
+    public void insertFromCommandline() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Number of words: ");
+        System.out.print("Number of words: ");
         nums = sc.nextInt();
         String s = sc.nextLine();
         dict.words = new Word[nums];
@@ -24,19 +25,11 @@ public class DictionaryManagement {
         }
     }
 
-    public void show() {
-        System.out.println("No      |English        |Vietnamese");
-        for (int i = 0; i < nums; i++) {
-            System.out.println((i+1)+"          "+dict.words[i].getWord_target()+
-                    "       |"+dict.words[i].getWord_explain());
-        }
-    }
-
     public void insertFromFile() {
         ArrayList<String> list = new ArrayList<String>();
 
         try {
-              File file = new File("dictionaries.txt");
+            File file = new File("dictionaries.txt");
             Scanner input = new Scanner(file);
             String line = null;
             while (input.hasNextLine()) {
@@ -51,20 +44,19 @@ public class DictionaryManagement {
             e.printStackTrace();
         }
 
-        int m = list.size();
-        nums = m/2;
+        nums = list.size() / 2;
         int index = 0;
         dict.words = new Word[nums];
-        for (int i = 0; i <= m-2; i+=2) {
+        for (int i = 0; i < list.size(); i += 2) {
             String word_target = list.get(i);
-            String word_explain = list.get(i+1);
+            String word_explain = list.get(i + 1);
             dict.words[index] = new Word(word_target, word_explain);
             index++;
         }
     }
 
     public void dictionaryLookup() {
-        System.out.println("Word you need find: ");
+        System.out.print("Word you need to find: ");
         Scanner sc = new Scanner(System.in);
         String s = sc.next();
         int t = 0;
@@ -72,8 +64,7 @@ public class DictionaryManagement {
             if (dict.words[i].getWord_target().equals(s)) {
                 System.out.println("Meaning: " + dict.words[i].getWord_explain());
                 break;
-            }
-            else t++;
+            } else t++;
         }
         if (t == nums) {
             System.out.println("Not have in our dict!!!");
