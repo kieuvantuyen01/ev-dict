@@ -1,6 +1,7 @@
 Document for all members:
 
 *) Học Java Swing: 
+https://www.youtube.com/playlist?list=PLE1qPKuGSJaCmWIvdMmFovaYYxKlHIHAA  // Khá khoai :v
 
 https://www.youtube.com/playlist?list=PLsfLgp1K1xQ7dDUcjtlRQhZJxl0orbEsd
 
