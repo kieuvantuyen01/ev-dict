@@ -37,8 +37,7 @@ public class DictionaryManagement {
     }
 
     public void insertFromFile() {
-        ArrayList<String> list = new ArrayList<>();
-
+        number_of_words = 0;
         try {
             File file = new File("dictionaries.txt");
             Scanner input = new Scanner(file);
@@ -46,22 +45,16 @@ public class DictionaryManagement {
             while (input.hasNextLine()) {
                 line = input.nextLine();
                 String[] results = line.split("	");
-                for (String temp : results) {
-                    list.add(temp);
-                }
+                String word_target = results[0];
+                String word_explain = results[1];
+                dict.words.add(new Word(word_target, word_explain));
+                number_of_words++;
             }
             input.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        int m = list.size();
-        number_of_words = m / 2;
-        for (int i = 0; i <= m - 2; i += 2) {
-            String word_target = list.get(i);
-            String word_explain = list.get(i + 1);
-            dict.words.add(new Word(word_target, word_explain));
-        }
     }
 
     public void dictionaryLookup() {
