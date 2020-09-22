@@ -19,7 +19,7 @@ public class DictionaryCommandline extends DictionaryManagement {
     public void dictionaryAdvanced() {
         super.insertFromFile();
         super.showAllWords();
-        super.fixWord();
+        //super.fixWord();
         //super.dictionaryLookup();
     }
 }

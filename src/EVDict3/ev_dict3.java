@@ -14,9 +14,11 @@ public class ev_dict3 {
         dict_cmd.dictionaryLookup();
         dict_cmd.dictionarySearcher();*/
         dict_cmd.dictionaryAdvanced();
+        dict_cmd.saveToBookmark(new Word("Hanoi", "thu do"));
+        dict_cmd.saveToBookmark(new Word("car", "xe o to"));
 //        dict_cmd.addNewWord();
 //        dict_cmd.deleteWord();
-        dict_cmd.showAllWords();
+//        dict_cmd.showAllWords();
 //        dict_cmd.dictionaryExportToFile();
     }
 }

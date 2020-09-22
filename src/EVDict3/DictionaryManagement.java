@@ -3,7 +3,6 @@ package EVDict3;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DictionaryManagement {
@@ -54,7 +53,22 @@ public class DictionaryManagement {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public void saveToBookmark(Word new_word) {
+        System.out.println("Do you want to save to bookmark, Yes or No? Type [y]/[n]:");
+        String answer = sc.next();
+        if (answer.equals("y")) {
+            Bookmark output = new Bookmark();
+            String line;
+
+            line = new_word.getWord_target() + "  " + new_word.getWord_explain() + "\n";
+            output.write(line);
+
+            output.close();
+
+            System.out.println("fn");
+        }
     }
 
     public void dictionaryLookup() {
