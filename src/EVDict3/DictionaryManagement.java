@@ -59,15 +59,18 @@ public class DictionaryManagement {
         System.out.println("Do you want to save to bookmark, Yes or No? Type [y]/[n]:");
         String answer = sc.next();
         if (answer.equals("y")) {
-            Bookmark output = new Bookmark();
-            String line;
+            try {
+                FileWriter output = new FileWriter("Bookmark_Dict.txt", true);
+                String line;
+                line = new_word.getWord_target() + "  " + new_word.getWord_explain() + "\n";
+                output.write(line);
 
-            line = new_word.getWord_target() + "  " + new_word.getWord_explain() + "\n";
-            output.write(line);
+                output.close();
 
-            output.close();
-
-            System.out.println("fn");
+                System.out.println("fn");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
