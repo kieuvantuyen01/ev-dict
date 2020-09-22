@@ -1,18 +1,16 @@
-package english_dictionary;
+package EVDict4;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.TreeSet;
 
 public class DictionaryManagement {
     Dictionary dict = new Dictionary();
     int number_of_words;
     Scanner sc = new Scanner(System.in);
-    
-    public void  insertFromCommandline() {
+
+    public void insertFromCommandline() {
         System.out.print("Number of words: ");
         number_of_words = sc.nextInt();
         String s = sc.nextLine();
@@ -22,23 +20,23 @@ public class DictionaryManagement {
             String word_target = sc.nextLine();
             System.out.print("Meaning: ");
             String word_explain = sc.nextLine();
-            dict.words.add(new Word(word_target, word_explain));
-        }    
+            Word new_word = new Word(word_target, word_explain);
+            dict.words.add(new_word);
+        }
     }
-   
+
     public void showAllWords() {
         int sequence_number = 0;
         System.out.printf("%-4s |%-15s |%-15s%n", "No", "English", "Vietnamese");
         for (Word word_iterator : dict.words) {
-            System.out.printf("%-4d |%-15s |%-15s%n", sequence_number, 
-                              word_iterator.getWord_target(), word_iterator.getWord_explain());
+            System.out.printf("%-4d |%-15s |%-15s%n", sequence_number + 1,
+                    word_iterator.getWord_target(), word_iterator.getWord_explain());
             sequence_number++;
         }
-    }   
-    
-    public void insertFromFile() {
-        ArrayList<String> list = new ArrayList<>();
+    }
 
+    public void insertFromFile() {
+        number_of_words = 0;
         try {
             File file = new File("dictionaries.txt");
             Scanner input = new Scanner(file);
@@ -46,24 +44,36 @@ public class DictionaryManagement {
             while (input.hasNextLine()) {
                 line = input.nextLine();
                 String[] results = line.split("	");
-                for (String temp : results) {
-                    list.add(temp);
-                }
+                String word_target = results[0];
+                String word_explain = results[1];
+                dict.words.add(new Word(word_target, word_explain));
+                number_of_words++;
             }
             input.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
-        int m = list.size();
-        number_of_words = m / 2;
-        for (int i = 0; i <= m - 2; i += 2) {
-            String word_target = list.get(i);
-            String word_explain = list.get(i + 1);
-            dict.words.add(new Word(word_target, word_explain));
+    public void saveToBookmark(Word new_word) {
+        System.out.println("Do you want to save to bookmark, Yes or No? Type [y]/[n]:");
+        String answer = sc.next();
+        if (answer.equals("y")) {
+            try {
+                FileWriter output = new FileWriter("Bookmark_Dict.txt", true);
+                String line;
+                line = new_word.getWord_target() + "  " + new_word.getWord_explain() + "\n";
+                output.write(line);
+
+                output.close();
+
+                System.out.println("fn");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
-    
+
     public void dictionaryLookup() {
         System.out.print("\n" + "Word you need to find: ");
         String keyword_to_find = sc.next();
@@ -72,23 +82,21 @@ public class DictionaryManagement {
             if (word_iterator.getWord_target().equals(keyword_to_find)) {
                 System.out.println("Meaning: " + word_iterator.getWord_explain());
                 break;
-            }
-            else {
-               dictionary_iterator++; 
+            } else {
+                dictionary_iterator++;
             }
         }
         if (dictionary_iterator == number_of_words) {
             System.out.println("Not have in our dict!!!");
         }
     }
-    
-    void addNewWord() {
+
+    public void addNewWord() {
         System.out.print("\n" + "Number of words added: ");
-        Scanner sc = new Scanner(System.in);
         int number_of_words_added = sc.nextInt();
         String s = sc.nextLine();
         System.out.println("Type list of words: ");
-        for(int i=0; i < number_of_words_added; i++) {
+        for (int i = 0; i < number_of_words_added; i++) {
             System.out.print("Word_Target: ");
             String word_target = sc.nextLine();
             System.out.print("Meaning: ");
@@ -96,25 +104,18 @@ public class DictionaryManagement {
             dict.words.add(new Word(word_target, word_explain));
         }
     }
-    
-    void deleteWord() {
-        System.out.print("\n" + "Number of words deleted: ");
-        Scanner sc = new Scanner(System.in);
-        int number_of_words_deleted = sc.nextInt();
-        String s = sc.nextLine();
-        System.out.println("Type list of words: ");
-        for(int i=0; i < number_of_words_deleted; i++) {
-            System.out.print("Word_Target: ");
-            String word_target = sc.nextLine();
-            for (Word word_iterator : dict.words) {
-                if(word_iterator.getWord_target().equals(word_target)) {
-                    dict.words.remove(word_iterator);
-                    break;
-                }
+
+    public void deleteWord() {
+        System.out.print("Type the word you want to delete: ");
+        String word_target = sc.nextLine();
+        for (Word word_iterator : dict.words) {
+            if (word_iterator.getWord_target().equals(word_target)) {
+                dict.words.remove(word_iterator);
+                break;
             }
         }
     }
-    
+
     public void fixWord() {
         System.out.println("What do you want to fix: Word or Meaning ? Type [w]/[m]:");
         String answer = sc.nextLine();
@@ -148,7 +149,7 @@ public class DictionaryManagement {
             }
         }
     }
-    
+
     public void dictionarySearcher() {
         System.out.print("\n" + "Characters suggested: ");
         Scanner sc = new Scanner(System.in);
@@ -164,8 +165,8 @@ public class DictionaryManagement {
             }
         }
         System.out.println();
-    } 
-    
+    }
+
     public void dictionaryExportToFile() {
         try {
             FileWriter file_writer = new FileWriter("dictionaries2.txt");
