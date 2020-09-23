@@ -1,0 +1,5 @@
+dog	chó
+cat	mèo
+fish	cá
+bird	chim
+tiger	hổ
