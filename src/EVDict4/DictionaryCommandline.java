@@ -1,25 +1,25 @@
 package EVDict4;
 
 public class DictionaryCommandline extends DictionaryManagement {
-
-    /**
-     * Methods are overridden from the class DictionaryManagement.
-     */
+    
+    /** 
+     * hàm override lại phương thức của lớp DictionaryManagement
+     */  
     @Override
-
+    
     public void showAllWords() {
         super.showAllWords();
     }
-
+    
     public void dictionaryBasic() {
         super.insertFromCommandline();
         showAllWords();
     }
-
+    
     public void dictionaryAdvanced() {
         super.insertFromFile();
         super.showAllWords();
-        //super.fixWord();
-        //super.dictionaryLookup();
+        super.dictionaryLookup();
     }
+    
 }

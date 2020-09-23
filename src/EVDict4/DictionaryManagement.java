@@ -106,12 +106,19 @@ public class DictionaryManagement {
     }
 
     public void deleteWord() {
-        System.out.print("Type the word you want to delete: ");
-        String word_target = sc.nextLine();
-        for (Word word_iterator : dict.words) {
-            if (word_iterator.getWord_target().equals(word_target)) {
-                dict.words.remove(word_iterator);
-                break;
+        System.out.print("\n" + "Number of words deleted: ");
+        Scanner sc = new Scanner(System.in);
+        int number_of_words_deleted = sc.nextInt();
+        String s = sc.nextLine();
+        System.out.println("Type list of words: ");
+        for(int i=0; i < number_of_words_deleted; i++) {
+            System.out.print("Word_Target: ");
+            String word_target = sc.nextLine();
+            for (Word word_iterator : dict.words) {
+                if(word_iterator.getWord_target().equals(word_target)) {
+                    dict.words.remove(word_iterator);
+                    break;
+                }
             }
         }
     }

@@ -2,8 +2,5 @@ dog	chó
 cat	mèo
 fish	cá
 bird	chim
-<<<<<<< HEAD
 tiger	hổ
-=======
 tiger	hổ
->>>>>>> 673906b1cdaaa101e226622dcce25331cf84b8a4
