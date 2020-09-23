@@ -64,6 +64,7 @@ public class DictionaryApplication extends javax.swing.JFrame {
         searchWordTextField.setText("Search EVDict Learner's Dictionary ");
 
         search_Button.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        search_Button.setIcon(new javax.swing.ImageIcon("src\\EVDict4\\image\\search_icon.jpg")); // NOI18N
         search_Button.setText("Search");
         search_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,14 +96,14 @@ public class DictionaryApplication extends javax.swing.JFrame {
         jButton2.setText("Sign up");
 
         jButton3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ev-dict\\src\\EVDict4\\image\\add_icon.jpg")); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon("src\\EVDict4\\image\\add_icon.jpg")); // NOI18N
 
         jButton4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ev-dict\\src\\EVDict4\\image\\delete_icon.jpg")); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon("src\\EVDict4\\image\\delete_icon.jpg")); // NOI18N
 
-        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ev-dict\\src\\EVDict4\\image\\edit_icon.jpg")); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon("src\\EVDict4\\image\\edit_icon.jpg")); // NOI18N
 
-        jButton7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ev-dict\\src\\EVDict4\\image\\output_icon.jpg")); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon("src\\EVDict4\\image\\output_icon.jpg")); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -154,17 +155,17 @@ public class DictionaryApplication extends javax.swing.JFrame {
         wordTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(wordTable);
 
-        jButton6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ev-dict\\src\\EVDict4\\image\\important_icon.jpg")); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon("src\\EVDict4\\image\\important_icon.jpg")); // NOI18N
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ev-dict\\src\\EVDict4\\image\\arrow.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("src\\EVDict4\\image\\arrow.jpg")); // NOI18N
 
-        jButton8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ev-dict\\src\\EVDict4\\image\\history_icon.jpg")); // NOI18N
+        jButton8.setIcon(new javax.swing.ImageIcon("src\\EVDict4\\image\\history_icon.jpg")); // NOI18N
 
-        jButton9.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ev-dict\\src\\EVDict4\\image\\trashcan_icon.jpg")); // NOI18N
+        jButton9.setIcon(new javax.swing.ImageIcon("src\\EVDict4\\image\\trashcan_icon.jpg")); // NOI18N
 
-        jButton10.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ev-dict\\src\\EVDict4\\image\\practice-icon.jpg")); // NOI18N
+        jButton10.setIcon(new javax.swing.ImageIcon("src\\EVDict4\\image\\practiceImage.jpg")); // NOI18N
 
-        tutorialButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ev-dict\\src\\EVDict4\\image\\guide_icon.jpg")); // NOI18N
+        tutorialButton.setIcon(new javax.swing.ImageIcon("src\\EVDict4\\image\\guide_icon.jpg")); // NOI18N
         tutorialButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tutorialButtonActionPerformed(evt);
@@ -173,6 +174,7 @@ public class DictionaryApplication extends javax.swing.JFrame {
 
         findWordLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
+        speakerButton.setIcon(new javax.swing.ImageIcon("src\\EVDict4\\image\\speaker_icon.jpg")); // NOI18N
         speakerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 speakerButtonActionPerformed(evt);
@@ -204,7 +206,7 @@ public class DictionaryApplication extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addComponent(findWordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                         .addComponent(speakerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(68, 68, 68))))
         );
@@ -233,7 +235,7 @@ public class DictionaryApplication extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(findWordLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 3, Short.MAX_VALUE)
+                                .addComponent(findWordLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(53, 53, 53))
