@@ -49,7 +49,7 @@
                               <Component id="findWordLabel" min="-2" pref="372" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="12" max="32767" attributes="0"/>
+                      <EmptySpace pref="13" max="32767" attributes="0"/>
                       <Component id="speakerButton" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                   </Group>
@@ -83,7 +83,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="findWordLabel" pref="29" max="32767" attributes="0"/>
+                              <Component id="findWordLabel" pref="3" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane1" min="-2" pref="357" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
@@ -136,9 +136,6 @@
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="14" style="1"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict4\src\EVDict4\image\search_icon.jpg"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Search"/>
           </Properties>
@@ -207,7 +204,7 @@
               <Font name="Dialog" size="14" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict4\src\EVDict4\image\add_icon.jpg"/>
+              <Image iconType="2" name="C:\Users\Admin\Desktop\ev-dict\src\EVDict4\image\add_icon.jpg"/>
             </Property>
           </Properties>
         </Component>
@@ -217,21 +214,21 @@
               <Font name="Dialog" size="14" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict4\src\EVDict4\image\delete_icon.jpg"/>
+              <Image iconType="2" name="C:\Users\Admin\Desktop\ev-dict\src\EVDict4\image\delete_icon.jpg"/>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton5">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict4\src\EVDict4\image\edit_icon.jpg"/>
+              <Image iconType="2" name="C:\Users\Admin\Desktop\ev-dict\src\EVDict4\image\edit_icon.jpg"/>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton7">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict4\src\EVDict4\image\output_icon.jpg"/>
+              <Image iconType="2" name="C:\Users\Admin\Desktop\ev-dict\src\EVDict4\image\output_icon.jpg"/>
             </Property>
           </Properties>
         </Component>
@@ -282,42 +279,42 @@
     <Component class="javax.swing.JButton" name="jButton6">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict4\src\EVDict4\image\important_icon.jpg"/>
+          <Image iconType="2" name="C:\Users\Admin\Desktop\ev-dict\src\EVDict4\image\important_icon.jpg"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict4\src\EVDict4\image\arrow.jpg"/>
+          <Image iconType="2" name="C:\Users\Admin\Desktop\ev-dict\src\EVDict4\image\arrow.jpg"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton8">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict4\src\EVDict4\image\history_icon.jpg"/>
+          <Image iconType="2" name="C:\Users\Admin\Desktop\ev-dict\src\EVDict4\image\history_icon.jpg"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton9">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict4\src\EVDict4\image\trashcan_icon.jpg"/>
+          <Image iconType="2" name="C:\Users\Admin\Desktop\ev-dict\src\EVDict4\image\trashcan_icon.jpg"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton10">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict4\src\EVDict4\image\practiceImage.jpg"/>
+          <Image iconType="2" name="C:\Users\Admin\Desktop\ev-dict\src\EVDict4\image\practice-icon.jpg"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="tutorialButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict4\src\EVDict4\image\guide_icon.jpg"/>
+          <Image iconType="2" name="C:\Users\Admin\Desktop\ev-dict\src\EVDict4\image\guide_icon.jpg"/>
         </Property>
       </Properties>
       <Events>
@@ -332,11 +329,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="speakerButton">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict4\src\EVDict4\image\speaker_icon.jpg"/>
-        </Property>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="speakerButtonActionPerformed"/>
       </Events>
