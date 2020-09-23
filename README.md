@@ -25,4 +25,11 @@ https://congdongjava.com/forum/threads/code-cho-t%E1%BB%AB-%C4%90i%E1%BB%83n-%C4
 
 https://stackoverflow.com/questions/8147284/how-to-use-google-translate-api-in-my-java-application    //API
 
-https://rapidapi.com/blog/google-translate-api-java/    
+https://rapidapi.com/blog/google-translate-api-java/  
+
+*) Edit distance in java:
+
+https://www.programcreek.com/2013/12/edit-distance-in-java/#:~:text=From%20Wiki%3A,%3A%20replace%2C%20delete%2C%20insert. 
+ 
+https://www.geeksforgeeks.org/edit-distance-dp-5/
+
