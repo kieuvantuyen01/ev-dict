@@ -11,7 +11,9 @@ https://viettuts.vn/java-swing (tiếng Việt)
 
 *) Code mẫu: 
 
-https://github.com/INT2204-5-N2/asg1-naq/tree/master/Dictionary/src/main/java/dictionary4
+https://github.com/INT2204-5-N2/
+
+https://github.com/int2204-5-n1/
 
 https://github.com/yaibait/Simple-Dictionary-Java-Swing
 
