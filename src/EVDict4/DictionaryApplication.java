@@ -40,19 +40,19 @@ public class DictionaryApplication extends javax.swing.JFrame {
         searchWordTextField = new javax.swing.JTextField();
         search_Button = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        signInButton = new javax.swing.JButton();
+        signUpButton = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
+        fixButton = new javax.swing.JButton();
+        exportButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         wordTable = new javax.swing.JTable();
-        jButton6 = new javax.swing.JButton();
+        bookmarkButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        historyButton = new javax.swing.JButton();
+        trashButton = new javax.swing.JButton();
+        practiceButton = new javax.swing.JButton();
         tutorialButton = new javax.swing.JButton();
         findWordLabel = new javax.swing.JLabel();
         speakerButton = new javax.swing.JButton();
@@ -64,6 +64,7 @@ public class DictionaryApplication extends javax.swing.JFrame {
         searchWordTextField.setText("Search EVDict Learner's Dictionary ");
 
         search_Button.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        search_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4/image/search_icon.jpg"))); // NOI18N
         search_Button.setText("Search");
         search_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,7 +77,7 @@ public class DictionaryApplication extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(searchWordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(search_Button))
@@ -88,49 +89,59 @@ public class DictionaryApplication extends javax.swing.JFrame {
                 .addComponent(searchWordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton1.setText("Sign in");
+        signInButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        signInButton.setText("Sign in");
 
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton2.setText("Sign up");
+        signUpButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        signUpButton.setText("Sign up");
 
-        jButton3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ev-dict\\src\\EVDict4\\image\\add_icon.jpg")); // NOI18N
+        addButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4/image/add_icon.jpg"))); // NOI18N
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
-        jButton4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ev-dict\\src\\EVDict4\\image\\delete_icon.jpg")); // NOI18N
+        deleteButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4/image/delete_icon.jpg"))); // NOI18N
 
-        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ev-dict\\src\\EVDict4\\image\\edit_icon.jpg")); // NOI18N
+        fixButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4/image/edit_icon.jpg"))); // NOI18N
 
-        jButton7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ev-dict\\src\\EVDict4\\image\\output_icon.jpg")); // NOI18N
+        exportButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4/image/output_icon.jpg"))); // NOI18N
+        exportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jButton3)
+                .addComponent(addButton)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fixButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(signUpButton)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1))
+                .addComponent(signInButton))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(signInButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(signUpButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fixButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(exportButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 17, Short.MAX_VALUE))
         );
 
@@ -154,17 +165,22 @@ public class DictionaryApplication extends javax.swing.JFrame {
         wordTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(wordTable);
 
-        jButton6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ev-dict\\src\\EVDict4\\image\\important_icon.jpg")); // NOI18N
+        bookmarkButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4/image/important_icon.jpg"))); // NOI18N
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ev-dict\\src\\EVDict4\\image\\arrow.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4/image/arrow.jpg"))); // NOI18N
 
-        jButton8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ev-dict\\src\\EVDict4\\image\\history_icon.jpg")); // NOI18N
+        historyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4/image/history_icon.jpg"))); // NOI18N
 
-        jButton9.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ev-dict\\src\\EVDict4\\image\\trashcan_icon.jpg")); // NOI18N
+        trashButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4/image/trashcan_icon.jpg"))); // NOI18N
 
-        jButton10.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ev-dict\\src\\EVDict4\\image\\practice-icon.jpg")); // NOI18N
+        practiceButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4/image/practice_icon.jpg"))); // NOI18N
+        practiceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                practiceButtonActionPerformed(evt);
+            }
+        });
 
-        tutorialButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\ev-dict\\src\\EVDict4\\image\\guide_icon.jpg")); // NOI18N
+        tutorialButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4/image/guide_icon.jpg"))); // NOI18N
         tutorialButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tutorialButtonActionPerformed(evt);
@@ -173,6 +189,7 @@ public class DictionaryApplication extends javax.swing.JFrame {
 
         findWordLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
+        speakerButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4/image/speaker_icon.jpg"))); // NOI18N
         speakerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 speakerButtonActionPerformed(evt);
@@ -184,15 +201,20 @@ public class DictionaryApplication extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tutorialButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(bookmarkButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(historyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(trashButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(practiceButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tutorialButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,7 +226,7 @@ public class DictionaryApplication extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addComponent(findWordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(speakerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(68, 68, 68))))
         );
@@ -216,13 +238,13 @@ public class DictionaryApplication extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton6)
+                        .addComponent(bookmarkButton)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton8)
+                        .addComponent(historyButton)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton9)
+                        .addComponent(trashButton)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(practiceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(tutorialButton)
                         .addContainerGap())
@@ -233,7 +255,7 @@ public class DictionaryApplication extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(findWordLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 3, Short.MAX_VALUE)
+                                .addComponent(findWordLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(53, 53, 53))
@@ -287,6 +309,18 @@ public class DictionaryApplication extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_tutorialButtonActionPerformed
 
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_exportButtonActionPerformed
+
+    private void practiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_practiceButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_practiceButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -323,24 +357,24 @@ public class DictionaryApplication extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
+    private javax.swing.JButton bookmarkButton;
+    private javax.swing.JButton deleteButton;
+    private javax.swing.JButton exportButton;
     private javax.swing.JLabel findWordLabel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton fixButton;
+    private javax.swing.JButton historyButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton practiceButton;
     private javax.swing.JTextField searchWordTextField;
     private javax.swing.JButton search_Button;
+    private javax.swing.JButton signInButton;
+    private javax.swing.JButton signUpButton;
     private javax.swing.JButton speakerButton;
+    private javax.swing.JButton trashButton;
     private javax.swing.JButton tutorialButton;
     private javax.swing.JTable wordTable;
     // End of variables declaration//GEN-END:variables
