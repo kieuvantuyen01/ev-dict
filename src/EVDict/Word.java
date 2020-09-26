@@ -1,4 +1,4 @@
-package english_dictionary;
+package EVDict;
 
 public class Word {
     private String word_target;

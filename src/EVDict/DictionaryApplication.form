@@ -48,10 +48,9 @@
                               <Component id="speakerButton" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="85" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -73,7 +72,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jScrollPane1" pref="323" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane1" pref="320" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
                           </Group>
@@ -81,17 +80,17 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="exitButton" min="-2" pref="55" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="importantButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="historyButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="trashcanButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButton10" min="-2" pref="56" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="tutorialButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -140,7 +139,7 @@
               <Font name="Dialog" size="14" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Admin\Desktop\english_dictionary\src\english_dictionary\image\search_icon.jpg"/>
+              <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict\src\EVDict\image\search_icon.jpg"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Search"/>
           </Properties>
@@ -163,12 +162,13 @@
                   <Component id="editButton" min="-2" pref="67" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="outputButton" min="-2" pref="65" max="-2" attributes="0"/>
-                  <EmptySpace pref="28" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="languageCombobox" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -176,13 +176,15 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jButton1" max="32767" attributes="0"/>
-                      <Component id="jButton2" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButton2" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
+                          <Component id="jButton1" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
+                      </Group>
                       <Component id="addButton" alignment="1" max="32767" attributes="0"/>
                       <Component id="deleteButton" alignment="1" max="32767" attributes="0"/>
                       <Component id="editButton" max="32767" attributes="0"/>
                       <Component id="outputButton" max="32767" attributes="0"/>
-                      <Component id="languageCombobox" max="32767" attributes="0"/>
+                      <Component id="languageCombobox" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="17" max="32767" attributes="0"/>
               </Group>
@@ -212,7 +214,7 @@
               <Font name="Dialog" size="14" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Admin\Desktop\english_dictionary\src\english_dictionary\image\add_icon.jpg"/>
+              <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict\src\EVDict\image\add_icon.jpg"/>
             </Property>
           </Properties>
           <Events>
@@ -225,7 +227,7 @@
               <Font name="Dialog" size="14" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Admin\Desktop\english_dictionary\src\english_dictionary\image\delete_icon.jpg"/>
+              <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict\src\EVDict\image\delete_icon.jpg"/>
             </Property>
           </Properties>
           <Events>
@@ -235,7 +237,7 @@
         <Component class="javax.swing.JButton" name="editButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Admin\Desktop\english_dictionary\src\english_dictionary\image\edit_icon.jpg"/>
+              <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict\src\EVDict\image\edit_icon.jpg"/>
             </Property>
           </Properties>
           <Events>
@@ -245,7 +247,7 @@
         <Component class="javax.swing.JButton" name="outputButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Admin\Desktop\english_dictionary\src\english_dictionary\image\output_icon.jpg"/>
+              <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict\src\EVDict\image\output_icon.jpg"/>
             </Property>
           </Properties>
         </Component>
@@ -273,7 +275,7 @@
     <Component class="javax.swing.JButton" name="importantButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Admin\Desktop\english_dictionary\src\english_dictionary\image\important_icon.jpg"/>
+          <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict\src\EVDict\image\important_icon.jpg"/>
         </Property>
       </Properties>
       <Events>
@@ -283,7 +285,7 @@
     <Component class="javax.swing.JButton" name="historyButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Admin\Desktop\english_dictionary\src\english_dictionary\image\history_icon.jpg"/>
+          <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict\src\EVDict\image\history_icon.jpg"/>
         </Property>
       </Properties>
       <Events>
@@ -293,7 +295,7 @@
     <Component class="javax.swing.JButton" name="trashcanButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Admin\Desktop\english_dictionary\src\english_dictionary\image\trashcan_icon.jpg"/>
+          <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict\src\EVDict\image\trashcan_icon.jpg"/>
         </Property>
       </Properties>
       <Events>
@@ -303,14 +305,14 @@
     <Component class="javax.swing.JButton" name="jButton10">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Admin\Desktop\english_dictionary\src\english_dictionary\image\practice_icon.jpg"/>
+          <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict\src\EVDict\image\practice_icon.jpg"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="tutorialButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Admin\Desktop\english_dictionary\src\english_dictionary\image\guide_icon.jpg"/>
+          <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict\src\EVDict\image\guide_icon.jpg"/>
         </Property>
       </Properties>
       <Events>
@@ -320,7 +322,7 @@
     <Component class="javax.swing.JButton" name="speakerButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Admin\Desktop\english_dictionary\src\english_dictionary\image\speaker_icon.jpg"/>
+          <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict\src\EVDict\image\speaker_icon.jpg"/>
         </Property>
       </Properties>
       <Events>

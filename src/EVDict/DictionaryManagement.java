@@ -1,4 +1,4 @@
-package english_dictionary;
+package EVDict;
 
 import java.io.File;
 import java.io.FileWriter;

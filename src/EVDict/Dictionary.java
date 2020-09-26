@@ -1,4 +1,4 @@
-package english_dictionary;
+package EVDict;
 import java.util.TreeSet;
 
 public class Dictionary {

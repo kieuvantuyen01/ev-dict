@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package english_dictionary;
+package EVDict;
 
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
@@ -81,7 +81,7 @@ public class DictionaryApplication extends javax.swing.JFrame {
         });
 
         search_Button.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        search_Button.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\english_dictionary\\src\\english_dictionary\\image\\search_icon.jpg")); // NOI18N
+        search_Button.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\EVDict\\src\\EVDict\\image\\search_icon.jpg")); // NOI18N
         search_Button.setText("Search");
         search_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +112,7 @@ public class DictionaryApplication extends javax.swing.JFrame {
         jButton2.setText("Sign up");
 
         addButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        addButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\english_dictionary\\src\\english_dictionary\\image\\add_icon.jpg")); // NOI18N
+        addButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\EVDict\\src\\EVDict\\image\\add_icon.jpg")); // NOI18N
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addButtonActionPerformed(evt);
@@ -120,21 +120,21 @@ public class DictionaryApplication extends javax.swing.JFrame {
         });
 
         deleteButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        deleteButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\english_dictionary\\src\\english_dictionary\\image\\delete_icon.jpg")); // NOI18N
+        deleteButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\EVDict\\src\\EVDict\\image\\delete_icon.jpg")); // NOI18N
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButtonActionPerformed(evt);
             }
         });
 
-        editButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\english_dictionary\\src\\english_dictionary\\image\\edit_icon.jpg")); // NOI18N
+        editButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\EVDict\\src\\EVDict\\image\\edit_icon.jpg")); // NOI18N
         editButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editButtonActionPerformed(evt);
             }
         });
 
-        outputButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\english_dictionary\\src\\english_dictionary\\image\\output_icon.jpg")); // NOI18N
+        outputButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\EVDict\\src\\EVDict\\image\\output_icon.jpg")); // NOI18N
 
         languageCombobox.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         languageCombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vietnamese-English", "English-Vietnamese" }));
@@ -156,19 +156,21 @@ public class DictionaryApplication extends javax.swing.JFrame {
                 .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(outputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(languageCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1))
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(addButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(deleteButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -177,37 +179,37 @@ public class DictionaryApplication extends javax.swing.JFrame {
                 .addGap(0, 17, Short.MAX_VALUE))
         );
 
-        importantButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\english_dictionary\\src\\english_dictionary\\image\\important_icon.jpg")); // NOI18N
+        importantButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\EVDict\\src\\EVDict\\image\\important_icon.jpg")); // NOI18N
         importantButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 importantButtonActionPerformed(evt);
             }
         });
 
-        historyButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\english_dictionary\\src\\english_dictionary\\image\\history_icon.jpg")); // NOI18N
+        historyButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\EVDict\\src\\EVDict\\image\\history_icon.jpg")); // NOI18N
         historyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 historyButtonActionPerformed(evt);
             }
         });
 
-        trashcanButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\english_dictionary\\src\\english_dictionary\\image\\trashcan_icon.jpg")); // NOI18N
+        trashcanButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\EVDict\\src\\EVDict\\image\\trashcan_icon.jpg")); // NOI18N
         trashcanButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 trashcanButtonActionPerformed(evt);
             }
         });
 
-        jButton10.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\english_dictionary\\src\\english_dictionary\\image\\practice_icon.jpg")); // NOI18N
+        jButton10.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\EVDict\\src\\EVDict\\image\\practice_icon.jpg")); // NOI18N
 
-        tutorialButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\english_dictionary\\src\\english_dictionary\\image\\guide_icon.jpg")); // NOI18N
+        tutorialButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\EVDict\\src\\EVDict\\image\\guide_icon.jpg")); // NOI18N
         tutorialButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tutorialButtonActionPerformed(evt);
             }
         });
 
-        speakerButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\english_dictionary\\src\\english_dictionary\\image\\speaker_icon.jpg")); // NOI18N
+        speakerButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\EVDict\\src\\EVDict\\image\\speaker_icon.jpg")); // NOI18N
         speakerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 speakerButtonActionPerformed(evt);
@@ -257,8 +259,7 @@ public class DictionaryApplication extends javax.swing.JFrame {
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(speakerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(0, 85, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,11 +278,11 @@ public class DictionaryApplication extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE))
                                 .addGap(122, 122, 122))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(importantButton)
                         .addGap(18, 18, 18)
                         .addComponent(historyButton)
@@ -302,9 +303,9 @@ public class DictionaryApplication extends javax.swing.JFrame {
         word_Searching = word_Searching.toLowerCase();
         boolean finding_Word = false;  // Biến để kiểm tra xem từ ms nhập có trong từ điển không
         
-        if(check_language == 0) { 
-            for(Word word_iterator : dic_Application.dict.wordsV_E) {
-                if(word_iterator.getWord_target().equals(word_Searching)) {
+        if (check_language == 0) { 
+            for (Word word_iterator : dic_Application.dict.wordsV_E) {
+                if (word_iterator.getWord_target().equals(word_Searching)) {
                     String word_explain = word_iterator.getWord_explain();
                     voice_speak = word_iterator.getWord_target();
                     meaningPane.setText(word_explain);
@@ -313,9 +314,9 @@ public class DictionaryApplication extends javax.swing.JFrame {
                 }
             }
         }       
-        if(check_language == 1) { 
-            for(Word word_iterator : dic_Application.dict.wordsE_V) {
-                if(word_iterator.getWord_target().equals(word_Searching)) {
+        if (check_language == 1) { 
+            for (Word word_iterator : dic_Application.dict.wordsE_V) {
+                if (word_iterator.getWord_target().equals(word_Searching)) {
                     String word_explain = word_iterator.getWord_explain();
                     voice_speak = word_iterator.getWord_target();
                     meaningPane.setText(word_explain);
@@ -325,10 +326,10 @@ public class DictionaryApplication extends javax.swing.JFrame {
             }
         }
         
-        if(finding_Word) {
+        if (finding_Word) {
             speakerButton.setVisible(true);   // Hiện speakerButton để nói
         }
-        if(!finding_Word) {
+        if (!finding_Word) {
             setInterfaceToDefault();           // Set frame về default
         }
     }//GEN-LAST:event_search_ButtonActionPerformed
@@ -378,7 +379,7 @@ public class DictionaryApplication extends javax.swing.JFrame {
 
     private void searchWordTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchWordTextFieldMouseClicked
         String word_Searching = String.valueOf(searchWordTextField.getText());  // Khi click chuột vào ô search sẽ mất dòng chữ ban đầu
-        if(word_Searching.equals("Search EVDict Learner's Dictionary ")) {
+        if (word_Searching.equals("Search EVDict Learner's Dictionary ")) {
             searchWordTextField.setText("");
         }
     }//GEN-LAST:event_searchWordTextFieldMouseClicked
@@ -400,8 +401,8 @@ public class DictionaryApplication extends javax.swing.JFrame {
     }
     
     void setInterfaceToDefault() {
-        String[] word_Find = new String[2];
-        word_Find[1] = "";
+        String[] word_Find = new String[1];
+        word_Find[0] = "";
         wordList.setListData(word_Find);
         speakerButton.setVisible(false);
         meaningPane.setText("");
@@ -410,15 +411,15 @@ public class DictionaryApplication extends javax.swing.JFrame {
     private void searchWordTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchWordTextFieldKeyReleased
         String word_Seacher = String.valueOf(searchWordTextField.getText());
         word_Seacher = word_Seacher.toLowerCase();
-        if(word_Seacher.length() > 0) {
-            if(check_language == 0) {
+        if (word_Seacher.length() > 0) {
+            if (check_language == 0) {
                 getDataV_E(word_Seacher);
             }
-            else if(check_language == 1) {
+            else if (check_language == 1) {
                 getDataE_V(word_Seacher);
             }
         }
-        if(word_Seacher.length() == 0) {
+        if (word_Seacher.length() == 0) {
             setInterfaceToDefault();   // Set frame về default
         }
     }//GEN-LAST:event_searchWordTextFieldKeyReleased
@@ -429,12 +430,12 @@ public class DictionaryApplication extends javax.swing.JFrame {
 
     private void languageComboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_languageComboboxActionPerformed
         String language_selected = languageCombobox.getSelectedItem().toString();
-        if(language_selected.equals("Vietnamese-English")) {
+        if (language_selected.equals("Vietnamese-English")) {
             setInterfaceToDefault();
             searchWordTextField.setText("Search EVDict Learner's Dictionary ");
             check_language = 0;          
         }
-        else if(language_selected.equals("English-Vietnamese")) {
+        else if (language_selected.equals("English-Vietnamese")) {
             setInterfaceToDefault();
             searchWordTextField.setText("Search EVDict Learner's Dictionary ");
             check_language = 1;   
@@ -443,9 +444,9 @@ public class DictionaryApplication extends javax.swing.JFrame {
 
     private void wordListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_wordListValueChanged
         String word_list_selected = wordList.getSelectedValue();
-        if(check_language == 0) {
-            for(Word word_iterator : dic_Application.dict.wordsV_E) {
-                if(word_iterator.getWord_target().equals(word_list_selected)) {
+        if (check_language == 0) {
+            for (Word word_iterator : dic_Application.dict.wordsV_E) {
+                if (word_iterator.getWord_target().equals(word_list_selected)) {
                     String word_explain = word_iterator.getWord_explain();
                     voice_speak = word_iterator.getWord_target();
                     meaningPane.setText(word_explain);
@@ -454,9 +455,9 @@ public class DictionaryApplication extends javax.swing.JFrame {
                 }
             }
         }
-        else if(check_language == 1) {
-            for(Word word_iterator : dic_Application.dict.wordsE_V) {
-                if(word_iterator.getWord_target().equals(word_list_selected)) {
+        else if (check_language == 1) {
+            for (Word word_iterator : dic_Application.dict.wordsE_V) {
+                if (word_iterator.getWord_target().equals(word_list_selected)) {
                     String word_explain = word_iterator.getWord_explain();
                     voice_speak = word_iterator.getWord_target();
                     meaningPane.setText(word_explain);

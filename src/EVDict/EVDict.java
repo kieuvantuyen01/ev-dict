@@ -1,6 +1,6 @@
-package english_dictionary;
+package EVDict;
 
-public class English_dictionary {
+public class EVDict {
     
     /**
      * Ham test ket qua.
