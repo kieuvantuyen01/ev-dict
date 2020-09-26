@@ -49,17 +49,19 @@ public class DictionaryApplication extends javax.swing.JFrame {
         editButton = new javax.swing.JButton();
         outputButton = new javax.swing.JButton();
         languageCombobox = new javax.swing.JComboBox<>();
+        speakerButton = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        exitButton = new javax.swing.JButton();
         importantButton = new javax.swing.JButton();
         historyButton = new javax.swing.JButton();
         trashcanButton = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         tutorialButton = new javax.swing.JButton();
-        speakerButton = new javax.swing.JButton();
-        exitButton = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        meaningPane = new javax.swing.JTextPane();
+        jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         wordList = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        meaningPane = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("EVDICT");
@@ -161,8 +163,7 @@ public class DictionaryApplication extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButton1))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,8 +177,23 @@ public class DictionaryApplication extends javax.swing.JFrame {
                     .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(outputButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(languageCombobox))
-                .addGap(0, 17, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
+
+        speakerButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\EVDict\\src\\EVDict\\image\\speaker_icon.jpg")); // NOI18N
+        speakerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                speakerButtonActionPerformed(evt);
+            }
+        });
+
+        exitButton.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        exitButton.setText("Exit");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
 
         importantButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\EVDict\\src\\EVDict\\image\\important_icon.jpg")); // NOI18N
         importantButton.addActionListener(new java.awt.event.ActionListener() {
@@ -209,24 +225,35 @@ public class DictionaryApplication extends javax.swing.JFrame {
             }
         });
 
-        speakerButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\EVDict\\src\\EVDict\\image\\speaker_icon.jpg")); // NOI18N
-        speakerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                speakerButtonActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(exitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(importantButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(historyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(trashcanButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(tutorialButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(importantButton)
+                .addGap(18, 18, 18)
+                .addComponent(historyButton)
+                .addGap(18, 18, 18)
+                .addComponent(trashcanButton)
+                .addGap(18, 18, 18)
+                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(tutorialButton)
+                .addGap(0, 37, Short.MAX_VALUE))
+        );
 
-        exitButton.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        exitButton.setText("Exit");
-        exitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitButtonActionPerformed(evt);
-            }
-        });
-
-        jScrollPane2.setViewportView(meaningPane);
-        meaningPane.getAccessibleContext().setAccessibleDescription("text/html");
-
+        wordList.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         wordList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 wordListValueChanged(evt);
@@ -234,32 +261,44 @@ public class DictionaryApplication extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(wordList);
 
+        meaningPane.setContentType("text/html"); // NOI18N
+        meaningPane.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        meaningPane.setText("");
+        jScrollPane2.setViewportView(meaningPane);
+        meaningPane.getAccessibleContext().setAccessibleDescription("text/plain");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane2)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(importantButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(historyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(trashcanButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tutorialButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(exitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(speakerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 85, Short.MAX_VALUE))))
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(speakerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,32 +306,21 @@ public class DictionaryApplication extends javax.swing.JFrame {
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(122, 122, 122))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(110, 110, 110))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(61, 61, 61)
                                 .addComponent(speakerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE))
-                                .addGap(122, 122, 122))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(importantButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(historyButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(trashcanButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(tutorialButton)
-                        .addContainerGap())))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
 
         pack();
@@ -342,11 +370,6 @@ public class DictionaryApplication extends javax.swing.JFrame {
         voice.speak(voice_speak);  
     }//GEN-LAST:event_speakerButtonActionPerformed
 
-    private void tutorialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tutorialButtonActionPerformed
-        new tutorialFrame().setVisible(true);                  
-        this.dispose();
-    }//GEN-LAST:event_tutorialButtonActionPerformed
-
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         new addFrame().setVisible(true);
         this.dispose();
@@ -361,21 +384,6 @@ public class DictionaryApplication extends javax.swing.JFrame {
        new editFrame().setVisible(true);
        this.dispose();
     }//GEN-LAST:event_editButtonActionPerformed
-
-    private void importantButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importantButtonActionPerformed
-        new importantFrame().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_importantButtonActionPerformed
-
-    private void historyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyButtonActionPerformed
-        new historyFrame().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_historyButtonActionPerformed
-
-    private void trashcanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trashcanButtonActionPerformed
-        new trashcanFrame().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_trashcanButtonActionPerformed
 
     private void searchWordTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchWordTextFieldMouseClicked
         String word_Searching = String.valueOf(searchWordTextField.getText());  // Khi click chuột vào ô search sẽ mất dòng chữ ban đầu
@@ -424,10 +432,6 @@ public class DictionaryApplication extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_searchWordTextFieldKeyReleased
 
-    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitButtonActionPerformed
-
     private void languageComboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_languageComboboxActionPerformed
         String language_selected = languageCombobox.getSelectedItem().toString();
         if (language_selected.equals("Vietnamese-English")) {
@@ -467,6 +471,30 @@ public class DictionaryApplication extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_wordListValueChanged
+
+    private void tutorialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tutorialButtonActionPerformed
+        new tutorialFrame().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_tutorialButtonActionPerformed
+
+    private void trashcanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trashcanButtonActionPerformed
+        new trashcanFrame().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_trashcanButtonActionPerformed
+
+    private void historyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyButtonActionPerformed
+        new historyFrame().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_historyButtonActionPerformed
+
+    private void importantButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importantButtonActionPerformed
+        new importantFrame().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_importantButtonActionPerformed
+
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_exitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -514,6 +542,8 @@ public class DictionaryApplication extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JComboBox<String> languageCombobox;

@@ -1,13 +1,20 @@
 package EVDict;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 public class DictionaryManagement {
     Dictionary dict = new Dictionary();
     int number_of_words;
+    String path;
     Scanner sc = new Scanner(System.in);
 
     public void insertFromCommandline() {
@@ -34,41 +41,58 @@ public class DictionaryManagement {
             sequence_number++;
         }
     }
-
-    public void insertFromFileE_V() {
-        number_of_words = 0;
+    
+    public void insertFromFileV_E() {
         try {
-            File file = new File("dictionariesE_V.txt");
-            Scanner input = new Scanner(file);
-            String line;
-            while (input.hasNextLine()) {
-                line = input.nextLine();
-                String[] results = line.split("	");
-                String word_target = results[0];
-                String word_explain = results[1];
-                dict.wordsE_V.add(new Word(word_target, word_explain));
-                number_of_words++;
+            String line, word_target, word_explain;
+            number_of_words = 0;
+            path = "V_E.zip";
+            FileInputStream file = new FileInputStream(path);
+            ZipInputStream zipStream = new ZipInputStream(file);
+            ZipEntry entry = zipStream.getNextEntry();      
+            BufferedReader reader = new BufferedReader(new InputStreamReader(zipStream,"utf-8"));   
+            while ((line = reader.readLine()) != null) {
+                int index = line.indexOf("<html>");
+
+                if (index != -1) {
+                    word_target = line.substring(0, index);
+                    word_target = word_target.trim();
+                    word_explain = line.substring(index);
+                    dict.wordsV_E.add(new Word(word_target, word_explain));
+                    number_of_words++;
+                }
             }
-            input.close();
+            reader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public void insertFromFileV_E() {
-        number_of_words = 0;
+    
+    public void insertFromFileE_V() {
         try {
-            File file = new File("dictionariesV_E.txt");
-            Scanner input = new Scanner(file);
-            String line;
-            while (input.hasNextLine()) {
-                line = input.nextLine();
-                String[] results = line.split("	");
-                String word_target = results[0];
-                String word_explain = results[1];
-                dict.wordsV_E.add(new Word(word_target, word_explain));
-                number_of_words++;
+            String line, word_target, word_explain;
+            number_of_words = 0;
+            path = "E_V.zip";
+            FileInputStream file = new FileInputStream(path);
+            ZipInputStream zipStream = new ZipInputStream(file);
+            ZipEntry entry = zipStream.getNextEntry();      
+            BufferedReader reader = new BufferedReader(new InputStreamReader(zipStream,"utf-8"));   
+            while ((line = reader.readLine()) != null) {
+                int index = line.indexOf("<html>");
+
+                if (index != -1) {
+                    word_target = line.substring(0, index);
+                    word_target = word_target.trim();
+                    word_explain = line.substring(index);
+                    dict.wordsE_V.add(new Word(word_target, word_explain));
+                    number_of_words++;
+                }
             }
-            input.close();
+            reader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -175,11 +199,26 @@ public class DictionaryManagement {
             }
         }
     }
-
+    
+    public String[] dictionarySearcherV_E(String keyword_suggested) {
+        int keyword_suggested_length = keyword_suggested.length();
+        int iterator = 0;
+        String[] word_Find = new String[100000];
+        for (Word word_iterator : dict.wordsV_E) {
+            if (word_iterator.getWord_target().length() >= keyword_suggested_length) {
+                String subWord = word_iterator.getWord_target().substring(0, keyword_suggested_length);
+                if (subWord.equals(keyword_suggested)) {
+                    word_Find[iterator++] = word_iterator.getWord_target();
+                }
+            }
+        }
+        return word_Find;
+    }
+    
     public String[] dictionarySearcherE_V(String keyword_suggested) {
         int keyword_suggested_length = keyword_suggested.length();
         int iterator = 0;
-        String[] word_Find = new String[10000];
+        String[] word_Find = new String[100000];
         for (Word word_iterator : dict.wordsE_V) {
             if (word_iterator.getWord_target().length() >= keyword_suggested_length) {
                 String subWord = word_iterator.getWord_target().substring(0, keyword_suggested_length);
@@ -191,21 +230,6 @@ public class DictionaryManagement {
         return word_Find;
     }
     
-    public String[] dictionarySearcherV_E(String keyword_suggested) {
-        int keyword_suggested_length = keyword_suggested.length();
-        int iterator = 0;
-        String[] word_Find = new String[10000];
-        for (Word word_iterator : dict.wordsV_E) {
-            if (word_iterator.getWord_target().length() >= keyword_suggested_length) {
-                String subWord = word_iterator.getWord_target().substring(0, keyword_suggested_length);
-                if (subWord.equals(keyword_suggested)) {
-                    word_Find[iterator++] = word_iterator.getWord_target();
-                }
-            }
-        }
-        return word_Find;
-    }
-
     public void dictionaryExportToFile() {
         try {
             FileWriter file_writer = new FileWriter("dictionaries2.txt");

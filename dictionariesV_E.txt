@@ -1,8 +1,0 @@
-chó	dog
-mèo	cat
-desk	bàn
-sâu	deep
-nhảy	dance
-cá	fish
-chim	bird
-hổ	tiger

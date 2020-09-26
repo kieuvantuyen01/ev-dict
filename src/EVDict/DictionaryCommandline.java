@@ -17,7 +17,6 @@ public class DictionaryCommandline extends DictionaryManagement {
     }
     
     public void dictionaryAdvanced() {
-        super.insertFromFileE_V();
         super.showAllWords();
         super.dictionaryLookup();
     }
