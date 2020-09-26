@@ -1,4 +1,4 @@
-package EVDict4;
+package english_dictionary;
 
 public class DictionaryCommandline extends DictionaryManagement {
     
@@ -17,7 +17,7 @@ public class DictionaryCommandline extends DictionaryManagement {
     }
     
     public void dictionaryAdvanced() {
-        super.insertFromFile();
+        super.insertFromFileE_V();
         super.showAllWords();
         super.dictionaryLookup();
     }

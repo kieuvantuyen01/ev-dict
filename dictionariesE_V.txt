@@ -1,6 +1,8 @@
 dog	chó
 cat	mèo
+desk	bàn
+deep	sâu
+dance	nhảy
 fish	cá
 bird	chim
-tiger	hổ
 tiger	hổ

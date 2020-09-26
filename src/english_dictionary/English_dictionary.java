@@ -1,6 +1,6 @@
-package EVDict4;
+package english_dictionary;
 
-public class ev_dict4 {
+public class English_dictionary {
     
     /**
      * Ham test ket qua.
@@ -10,7 +10,6 @@ public class ev_dict4 {
     public static void main(String[] args) {
         DictionaryCommandline dictionary_cmd = new DictionaryCommandline();    
         dictionary_cmd.dictionaryAdvanced();
-        dictionary_cmd.dictionarySearcher();
         dictionary_cmd.addNewWord();
         dictionary_cmd.deleteWord(); 
         dictionary_cmd.showAllWords();
