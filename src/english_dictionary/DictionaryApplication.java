@@ -400,8 +400,8 @@ public class DictionaryApplication extends javax.swing.JFrame {
     }
     
     void setInterfaceToDefault() {
-        String[] word_Find = new String[2];
-        word_Find[1] = "";
+        String[] word_Find = new String[1];
+        word_Find[0] = "";
         wordList.setListData(word_Find);
         speakerButton.setVisible(false);
         meaningPane.setText("");
