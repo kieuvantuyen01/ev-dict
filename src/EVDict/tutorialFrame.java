@@ -10,12 +10,15 @@ package EVDict;
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class tutorialFrame extends javax.swing.JFrame {
-
+    DictionaryManagement guide_management;
     /**
      * Creates new form tutorialFrame
      */
     public tutorialFrame() {
         initComponents();
+        
+        guide_management = new DictionaryManagement();
+        guideList.setListData(guide_management.insertGuide());
     }
 
     /**
@@ -28,6 +31,8 @@ public class tutorialFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         backButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        guideList = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -39,21 +44,30 @@ public class tutorialFrame extends javax.swing.JFrame {
             }
         });
 
+        guideList.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jScrollPane2.setViewportView(guideList);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(590, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                .addGap(46, 46, 46))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(105, 105, 105)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(515, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         pack();
@@ -101,5 +115,7 @@ public class tutorialFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
+    private javax.swing.JList<String> guideList;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

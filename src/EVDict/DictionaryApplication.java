@@ -25,7 +25,8 @@ public class DictionaryApplication extends javax.swing.JFrame {
         dic_Application = new DictionaryManagement();
         dic_Application.insertFromFileE_V();   // Đọc file dictionariesE_V lên
         dic_Application.insertFromFileV_E();   // Đọc file dictionariesV_E lên
-        speakerButton.setVisible(false);    // Ẩn speakerButton từ đầu
+        speakerButton.setVisible(false);       // Ẩn speakerButton từ đầu
+        meaningPane.setEditable(false);        // Không cho sửa vào bảng meaningPane
     }
 
     /**

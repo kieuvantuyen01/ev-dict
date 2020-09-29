@@ -14,5 +14,5 @@ public class EVDict {
         dictionary_cmd.deleteWord(); 
         dictionary_cmd.showAllWords();
         dictionary_cmd.dictionaryExportToFile(); 
-    } 
+    }
 }

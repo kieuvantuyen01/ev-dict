@@ -229,6 +229,23 @@ public class DictionaryManagement {
         }
         return word_Find;
     }
+    public String[] insertGuide() {
+        int iterator = 0;
+        String[] dictionaries_guide = new String[100];
+        try {
+            File file = new File("guide.txt");
+            Scanner input = new Scanner(file);
+            String line;
+            while (input.hasNextLine()) {
+                line = input.nextLine();
+                dictionaries_guide[iterator++] = line;
+            }
+            input.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return dictionaries_guide;
+    }
     
     public void dictionaryExportToFile() {
         try {
