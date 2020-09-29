@@ -36,7 +36,7 @@ public class FileImplement extends DictionaryData {
         }
     }
     
-    public void reloadFile() {
-        FileWriter
-    }
+//    public void reloadFile() {
+//        FileWriter
+//    }
 }

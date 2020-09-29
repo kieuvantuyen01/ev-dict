@@ -8,7 +8,6 @@ package EVDict4_1;
 import EVDict4.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -27,25 +26,24 @@ public class DictApp extends javax.swing.JFrame {
     }
     
     public int state = 0;
+    public static int check_input = 0;
     
     FileImplement dic1 = new FileImplement("src\\EVDict4_1\\E_V.zip", 0);
     FileImplement dic2 = new FileImplement("src\\EVDict4_1\\V_E.zip", 1);
     
     AddForm af = new AddForm();
     
-    SearchforJTextFiled s = new SearchforJTextFiled();
-    
-    public void initJList() {
+    public void initDictList() {
         if (state == 0) {
             DefaultListModel list = new DefaultListModel();
-            for(String key: dic1.getWord_target())
-                list.addElement(key);
-            jList.setModel(list);
+            for(String word: dic1.getWord_target())
+                list.addElement(word);
+            dictList.setModel(list);
         } else if (state == 1) {
             DefaultListModel list = new DefaultListModel();
-            for(String key: dic2.getWord_target())
-                list.addElement(key);
-            jList.setModel(list);
+            for(String word: dic2.getWord_target())
+                list.addElement(word);
+            dictList.setModel(list);
         }
     }
 
@@ -60,12 +58,12 @@ public class DictApp extends javax.swing.JFrame {
 
         searchTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList = new javax.swing.JList<>();
+        dictList = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        meaningTextPane = new javax.swing.JTextPane();
+        evButton = new javax.swing.JButton();
+        veButton = new javax.swing.JButton();
+        searchButton = new javax.swing.JButton();
         addButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         fixButton = new javax.swing.JButton();
@@ -93,48 +91,48 @@ public class DictApp extends javax.swing.JFrame {
             }
         });
 
-        jList.setModel(new javax.swing.AbstractListModel<String>() {
+        dictList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jList.addAncestorListener(new javax.swing.event.AncestorListener() {
+        dictList.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jListAncestorAdded(evt);
+                dictListAncestorAdded(evt);
             }
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        jList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        dictList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jListValueChanged(evt);
+                dictListValueChanged(evt);
             }
         });
-        jScrollPane1.setViewportView(jList);
+        jScrollPane1.setViewportView(dictList);
 
-        jTextPane1.setContentType("text/html"); // NOI18N
-        jScrollPane2.setViewportView(jTextPane1);
+        meaningTextPane.setContentType("text/html"); // NOI18N
+        jScrollPane2.setViewportView(meaningTextPane);
 
-        jButton1.setText("E_VButton");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        evButton.setText("E_VButton");
+        evButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("V_EButton");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                evButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setText("search");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        veButton.setText("V_EButton");
+        veButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                veButtonActionPerformed(evt);
+            }
+        });
+
+        searchButton.setText("search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
             }
         });
 
@@ -197,7 +195,7 @@ public class DictApp extends javax.swing.JFrame {
                             .addComponent(searchTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
                             .addComponent(jScrollPane2))
                         .addGap(65, 65, 65)
-                        .addComponent(jButton3))
+                        .addComponent(searchButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(addButton)
@@ -208,9 +206,9 @@ public class DictApp extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(exportButton)
                         .addGap(16, 16, 16)
-                        .addComponent(jButton1)
+                        .addComponent(evButton)
                         .addGap(30, 30, 30)
-                        .addComponent(jButton2)))
+                        .addComponent(veButton)))
                 .addContainerGap(146, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -218,8 +216,8 @@ public class DictApp extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(evButton)
+                    .addComponent(veButton)
                     .addComponent(addButton)
                     .addComponent(deleteButton)
                     .addComponent(fixButton)
@@ -229,7 +227,7 @@ public class DictApp extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3))
+                            .addComponent(searchButton))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE))
@@ -242,101 +240,104 @@ public class DictApp extends javax.swing.JFrame {
     private void searchTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextFieldKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            //jTextPane1.setContentType("text/html");
             if (searchTextField.getText().trim().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Từ đang bị trống, vui lòng nhập lại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                check_input = -1;
             } else if (state == 0) {
                 if (dic1.getWord_target().contains(searchTextField.getText())) {
-                    if(searchTextField.getText()!= null)
-                        //back.push(searchTextField.getText());
-                    jTextPane1.setText(dic1.getEVDict().get(searchTextField.getText()));
+                    check_input = 1;
+                    meaningTextPane.setText(dic1.getEVDict().get(searchTextField.getText()));
                 } else {
-                    JOptionPane.showMessageDialog(null, "Từ này đang không có trong từ điển!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    check_input = 0;
                 }
             } else if (state == 1) {
                 if (dic2.getWord_target().contains(searchTextField.getText())) {
-                    if(searchTextField.getText()!= null)
-                        //back.push(searchTextField.getText());
-                    jTextPane1.setText(dic2.getEVDict().get(searchTextField.getText()));
+                    check_input = 1;
+                    meaningTextPane.setText(dic2.getEVDict().get(searchTextField.getText()));
                 } else {
-                    JOptionPane.showMessageDialog(null, "Từ này đang không có trong từ điển!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    check_input = 0;
                 }
+            }
+            if (check_input == -1) {
+                JOptionPane.showMessageDialog(null, "Từ đang bị trống, vui lòng nhập lại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            } else if (check_input == 0) {
+                JOptionPane.showMessageDialog(null, "Từ này đang không có trong từ điển!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_searchTextFieldKeyPressed
 
     private void searchTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextFieldKeyReleased
         // TODO add your handling code here:
-        ArrayList<String> newDictList;
-        DefaultListModel<String>list = new DefaultListModel<>();
+        ArrayList<String> newDictList = new ArrayList<>();
+        DefaultListModel<String> list = new DefaultListModel<>();
+        String searchWord = searchTextField.getText();
         if (state == 0) {
-            if (searchTextField.getText().trim().isEmpty()) {
+            if (searchWord.trim().isEmpty()) {
                 newDictList = new ArrayList(dic1.getWord_target());
             } else {
-                newDictList = dic1.searchWord(searchTextField.getText(), dic1.getWord_target());
-            }
-            for (String key : newDictList) {
-                list.addElement(key);
+                newDictList = dic1.searchWord(searchWord, dic1.getWord_target());
             }
         } else if (state == 1) {
-            if (searchTextField.getText().trim().isEmpty()) {
+            if (searchWord.trim().isEmpty()) {
                 newDictList = new ArrayList(dic2.getWord_target());
             } else {
-                newDictList = dic2.searchWord(searchTextField.getText(), dic2.getWord_target());
-            }
-            for (String key : newDictList) {
-                list.addElement(key);
+                newDictList = dic2.searchWord(searchWord, dic2.getWord_target());
             }
         }
-        jList.setModel(list);
+        for (String word : newDictList) {
+            list.addElement(word);
+        }
+        dictList.setModel(list);
     }//GEN-LAST:event_searchTextFieldKeyReleased
 
-    private void jListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListValueChanged
+    private void dictListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_dictListValueChanged
         // TODO add your handling code here:
+        String word = dictList.getSelectedValue();
+        searchTextField.setText(word);
+        String meaning = "";
         if (state == 0) {
-            String str = jList.getSelectedValue();
-            searchTextField.setText(str);
-            jTextPane1.setText(dic1.getEVDict().get(str));
+            meaning = dic1.getEVDict().get(word);
         } else if (state == 1) {
-            String str = jList.getSelectedValue();
-            searchTextField.setText(str);
-            jTextPane1.setText(dic2.getEVDict().get(str));
+            meaningTextPane.setText(dic2.getEVDict().get(word));
         }
-    }//GEN-LAST:event_jListValueChanged
+        meaningTextPane.setText(meaning);
+    }//GEN-LAST:event_dictListValueChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void evButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evButtonActionPerformed
         // TODO add your handling code here:
-        state = 0;
-        initJList();
         searchTextField.setText("");
-        jTextPane1.setText("");
-    }//GEN-LAST:event_jButton1ActionPerformed
+        meaningTextPane.setText("");
+        state = 0;
+        initDictList();
+    }//GEN-LAST:event_evButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
-        if (searchTextField.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Word is empty. Press!!", "Error", JOptionPane.ERROR_MESSAGE);
+        String searchWord = searchTextField.getText();       
+        if (searchWord.trim().isEmpty()) {
+            check_input = -1;
         } else if (state == 0) {
-            if (dic1.getWord_target().contains(searchTextField.getText())) {
-                //back.peek();
-                jTextPane1.setText(dic1.getEVDict().get(searchTextField.getText()));
-            } else {
-                JOptionPane.showMessageDialog(null, "The word was not found or no existed in dictionary!!", "Error", JOptionPane.ERROR_MESSAGE);
+            if (dic1.getWord_target().contains(searchWord)) {
+                check_input = 1;
+                meaningTextPane.setText(dic1.getEVDict().get(searchTextField.getText()));
             }
         } else if (state == 1) {
-            if (dic2.getWord_target().contains(searchTextField.getText())) {
-                //back.peek();
-                jTextPane1.setText(dic2.getEVDict().get(searchTextField.getText()));
-            } else {
-                JOptionPane.showMessageDialog(null, "The word was not found or no existed in dictionary!!", "Error", JOptionPane.ERROR_MESSAGE);
+            if (dic2.getWord_target().contains(searchWord)) {
+                check_input = 1;
+                meaningTextPane.setText(dic2.getEVDict().get(searchTextField.getText()));
             }
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+        
+        if (check_input == -1) {
+            JOptionPane.showMessageDialog(null, "Từ đang bị trống, vui lòng nhập lại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } else if (check_input == 0) {
+            JOptionPane.showMessageDialog(null, "Từ này đang không có trong từ điển!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_searchButtonActionPerformed
 
-    private void jListAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jListAncestorAdded
+    private void dictListAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_dictListAncestorAdded
         // TODO add your handling code here:
-        initJList();
-    }//GEN-LAST:event_jListAncestorAdded
+        initDictList();
+    }//GEN-LAST:event_dictListAncestorAdded
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
@@ -345,13 +346,13 @@ public class DictApp extends javax.swing.JFrame {
         af.meaningTextPane.setText("");
     }//GEN-LAST:event_addButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void veButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_veButtonActionPerformed
         // TODO add your handling code here:
         state = 1;
-        initJList();
+        initDictList();
         searchTextField.setText("");
-        jTextPane1.setText("");
-    }//GEN-LAST:event_jButton2ActionPerformed
+        meaningTextPane.setText("");
+    }//GEN-LAST:event_veButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -507,7 +508,7 @@ public class DictApp extends javax.swing.JFrame {
                     dic1.EVDict.put(word, meaning);
                     JOptionPane.showMessageDialog(null, "Đã hoàn thành", "Thông báo", -1);
                     setVisible(false);
-                    initJList();
+                    initDictList();
                 }
                 
             }
@@ -524,7 +525,7 @@ public class DictApp extends javax.swing.JFrame {
                     dic2.EVDict.put(word, meaning);
                     JOptionPane.showMessageDialog(null, "Đã hoàn thành", "Thông báo", -1);
                     setVisible(false);
-                    initJList();
+                    initDictList();
                 }
                 
             }
@@ -559,12 +560,10 @@ public class DictApp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton deleteButton;
+    private javax.swing.JList<String> dictList;
+    private javax.swing.JButton evButton;
     private javax.swing.JButton exportButton;
     private javax.swing.JButton fixButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JList<String> jList;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -577,7 +576,9 @@ public class DictApp extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextPane meaningTextPane;
+    private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchTextField;
+    private javax.swing.JButton veButton;
     // End of variables declaration//GEN-END:variables
 }

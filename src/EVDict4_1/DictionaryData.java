@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DictionaryData {
-    /**
-     * Tu dien Anh-Viet.
-     */
+
     public HashMap<String, String> EVDict = new HashMap<>();
     public ArrayList<String> word = new ArrayList<>();
 
