@@ -7,46 +7,35 @@ public class DictionaryData {
     /**
      * Tu dien Anh-Viet.
      */
-    public HashMap<String, String> EVDict1 = new HashMap<>();
-    public ArrayList<String> word_target1 = new ArrayList<>();
+    public HashMap<String, String> EVDict = new HashMap<>();
+    public ArrayList<String> word = new ArrayList<>();
 
-    public HashMap<String, String> getEVDict1() {
-        return EVDict1;
-    }
-
-    public void setEVDict1(HashMap<String, String> EVDict1) {
-        this.EVDict1 = EVDict1;
-    }
-
-    public ArrayList<String> getWord_target1() {
-        return word_target1;
-    }
-
-    public void setWord_target1(ArrayList<String> word_target1) {
-        this.word_target1 = word_target1;
-    }
-
-    /**
-     * Tu dien Viet-Anh.
-     */
-    public HashMap<String, String> EVDict2 = new HashMap<>();
-    public ArrayList<String> word_target2 = new ArrayList<>();
-
-    public HashMap<String, String> getEVDict2() {
-        return EVDict2;
-    }
-
-    public void setEVDict2(HashMap<String, String> EVDict2) {
-        this.EVDict2 = EVDict2;
-    }
-
-    public ArrayList<String> getWord_target2() {
-        return word_target2;
-    }
-
-    public void setWord_target2(ArrayList<String> word_target2) {
-        this.word_target2 = word_target2;
-    }
+    public ArrayList<String> searchWord(String wordSearch, ArrayList<String> words){
+        ArrayList<String> listWord = new ArrayList();   
+        int len = wordSearch.length();
+        for(int i = 0; i < words.size(); i++) {
+            if(words.get(i).length() >= len) {
+                if(words.get(i).substring(0, len).equals(wordSearch)) {
+                    listWord.add(words.get(i));
+                }
+            }
+        }
+        return listWord;
+    } 
     
-    
+    public HashMap<String, String> getEVDict() {
+        return EVDict;
+    }
+
+    public void setEVDict(HashMap<String, String> EVDict) {
+        this.EVDict = EVDict;
+    }
+
+    public ArrayList<String> getWord_target() {
+        return word;
+    }
+
+    public void setWord_target(ArrayList<String> word) {
+        this.word = word;
+    }
 }

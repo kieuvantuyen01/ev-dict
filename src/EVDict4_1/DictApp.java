@@ -38,14 +38,14 @@ public class DictApp extends javax.swing.JFrame {
     public void initJList() {
         if (state == 0) {
             DefaultListModel list = new DefaultListModel();
-            for(String key: dic1.getWord_target1())
+            for(String key: dic1.getWord_target())
                 list.addElement(key);
-            jList1.setModel(list);
+            jList.setModel(list);
         } else if (state == 1) {
             DefaultListModel list = new DefaultListModel();
-            for( String key: dic2.getWord_target2())
+            for(String key: dic2.getWord_target())
                 list.addElement(key);
-            jList1.setModel(list);
+            jList.setModel(list);
         }
     }
 
@@ -60,7 +60,7 @@ public class DictApp extends javax.swing.JFrame {
 
         searchTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jList = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         jButton1 = new javax.swing.JButton();
@@ -93,26 +93,26 @@ public class DictApp extends javax.swing.JFrame {
             }
         });
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        jList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jList1.addAncestorListener(new javax.swing.event.AncestorListener() {
+        jList.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jList1AncestorAdded(evt);
+                jListAncestorAdded(evt);
             }
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        jList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jList1ValueChanged(evt);
+                jListValueChanged(evt);
             }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(jList);
 
         jTextPane1.setContentType("text/html"); // NOI18N
         jScrollPane2.setViewportView(jTextPane1);
@@ -244,22 +244,22 @@ public class DictApp extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             //jTextPane1.setContentType("text/html");
             if (searchTextField.getText().trim().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Word is empty. Press!!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Từ đang bị trống, vui lòng nhập lại", "Lỗi", JOptionPane.ERROR_MESSAGE);
             } else if (state == 0) {
-                if (dic1.getWord_target1().contains(searchTextField.getText())) {
+                if (dic1.getWord_target().contains(searchTextField.getText())) {
                     if(searchTextField.getText()!= null)
                         //back.push(searchTextField.getText());
-                    jTextPane1.setText(dic1.getEVDict1().get(searchTextField.getText()));
+                    jTextPane1.setText(dic1.getEVDict().get(searchTextField.getText()));
                 } else {
-                    JOptionPane.showMessageDialog(null, "The word was not found or no exist in dictionary!!", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Từ này đang không có trong từ điển!", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 }
             } else if (state == 1) {
-                if (dic2.getWord_target2().contains(searchTextField.getText())) {
+                if (dic2.getWord_target().contains(searchTextField.getText())) {
                     if(searchTextField.getText()!= null)
                         //back.push(searchTextField.getText());
-                    jTextPane1.setText(dic2.getEVDict2().get(searchTextField.getText()));
+                    jTextPane1.setText(dic2.getEVDict().get(searchTextField.getText()));
                 } else {
-                    JOptionPane.showMessageDialog(null, "The word was not found or no exist in dictionary!!", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Từ này đang không có trong từ điển!", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
@@ -267,44 +267,42 @@ public class DictApp extends javax.swing.JFrame {
 
     private void searchTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextFieldKeyReleased
         // TODO add your handling code here:
-        ArrayList<String> newList;
+        ArrayList<String> newDictList;
         DefaultListModel<String>list = new DefaultListModel<>();
         if (state == 0) {
             if (searchTextField.getText().trim().isEmpty()) {
-                newList = new ArrayList(dic1.getWord_target1());
+                newDictList = new ArrayList(dic1.getWord_target());
             } else {
-                newList = s.searchKey(searchTextField.getText(), dic1.getWord_target1());
+                newDictList = dic1.searchWord(searchTextField.getText(), dic1.getWord_target());
             }
-            for (String key : newList) {
+            for (String key : newDictList) {
                 list.addElement(key);
             }
         } else if (state == 1) {
             if (searchTextField.getText().trim().isEmpty()) {
-                newList = new ArrayList(dic2.getWord_target2());
+                newDictList = new ArrayList(dic2.getWord_target());
             } else {
-                newList = s.searchKey(searchTextField.getText(), dic2.getWord_target2());
+                newDictList = dic2.searchWord(searchTextField.getText(), dic2.getWord_target());
             }
-            for (String key : newList) {
+            for (String key : newDictList) {
                 list.addElement(key);
             }
         }
-        jList1.setModel(list);
+        jList.setModel(list);
     }//GEN-LAST:event_searchTextFieldKeyReleased
 
-    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+    private void jListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListValueChanged
         // TODO add your handling code here:
         if (state == 0) {
-            jTextPane1.setContentType("text/html");
-            String str = jList1.getSelectedValue();
+            String str = jList.getSelectedValue();
             searchTextField.setText(str);
-            jTextPane1.setText(dic1.getEVDict1().get(str));
+            jTextPane1.setText(dic1.getEVDict().get(str));
         } else if (state == 1) {
-            jTextPane1.setContentType("text/html");
-            String str = jList1.getSelectedValue();
+            String str = jList.getSelectedValue();
             searchTextField.setText(str);
-            jTextPane1.setText(dic2.getEVDict2().get(str));
+            jTextPane1.setText(dic2.getEVDict().get(str));
         }
-    }//GEN-LAST:event_jList1ValueChanged
+    }//GEN-LAST:event_jListValueChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -316,30 +314,29 @@ public class DictApp extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        jTextPane1.setContentType("text/html");
         if (searchTextField.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Word is empty. Press!!", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (state == 0) {
-            if (dic1.getWord_target1().contains(searchTextField.getText())) {
+            if (dic1.getWord_target().contains(searchTextField.getText())) {
                 //back.peek();
-                jTextPane1.setText(dic1.getEVDict1().get(searchTextField.getText()));
+                jTextPane1.setText(dic1.getEVDict().get(searchTextField.getText()));
             } else {
                 JOptionPane.showMessageDialog(null, "The word was not found or no existed in dictionary!!", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else if (state == 1) {
-            if (dic2.getWord_target2().contains(searchTextField.getText())) {
+            if (dic2.getWord_target().contains(searchTextField.getText())) {
                 //back.peek();
-                jTextPane1.setText(dic2.getEVDict2().get(searchTextField.getText()));
+                jTextPane1.setText(dic2.getEVDict().get(searchTextField.getText()));
             } else {
                 JOptionPane.showMessageDialog(null, "The word was not found or no existed in dictionary!!", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jList1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jList1AncestorAdded
+    private void jListAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jListAncestorAdded
         // TODO add your handling code here:
         initJList();
-    }//GEN-LAST:event_jList1AncestorAdded
+    }//GEN-LAST:event_jListAncestorAdded
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
@@ -498,16 +495,16 @@ public class DictApp extends javax.swing.JFrame {
         if (wordTextField.getText().isEmpty() || meaningTextPane.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ô từ mới đang bị rỗng!!! Vui lòng nhập lại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else if (state == 0) {
-            if (dic1.getWord_target1().contains(wordTextField.getText())) {
+            if (dic1.getWord_target().contains(wordTextField.getText())) {
                 JOptionPane.showMessageDialog(null, "Từ bị nhập vào đã tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             } else {
                 int answer = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thêm vào?", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 if (answer == JOptionPane.YES_OPTION) {
                     String word = wordTextField.getText().toLowerCase();
                     String meaning = "<html>" + meaningTextPane.getText();
-                    dic1.word_target1.add(word);
-                    Collections.sort(dic1.word_target1);
-                    dic1.EVDict1.put(word, meaning);
+                    dic1.word.add(word);
+                    Collections.sort(dic1.word);
+                    dic1.EVDict.put(word, meaning);
                     JOptionPane.showMessageDialog(null, "Đã hoàn thành", "Thông báo", -1);
                     setVisible(false);
                     initJList();
@@ -515,16 +512,16 @@ public class DictApp extends javax.swing.JFrame {
                 
             }
         } else if (state == 1) {
-            if (dic1.getWord_target1().contains(wordTextField.getText())) {
+            if (dic1.getWord_target().contains(wordTextField.getText())) {
                 JOptionPane.showMessageDialog(null, "Từ bị nhập vào đã tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             } else {
                 int answer = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thêm vào?", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 if (answer == JOptionPane.YES_OPTION) {
                     String word = wordTextField.getText().toLowerCase();
                     String meaning = "<html>" + meaningTextPane.getText();
-                    dic2.word_target2.add(word);
-                    Collections.sort(dic2.word_target2);
-                    dic2.EVDict2.put(word, meaning);
+                    dic2.word.add(word);
+                    Collections.sort(dic2.word);
+                    dic2.EVDict.put(word, meaning);
                     JOptionPane.showMessageDialog(null, "Đã hoàn thành", "Thông báo", -1);
                     setVisible(false);
                     initJList();
@@ -567,7 +564,7 @@ public class DictApp extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

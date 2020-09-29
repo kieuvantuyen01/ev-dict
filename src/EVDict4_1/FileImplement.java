@@ -18,19 +18,14 @@ public class FileImplement extends DictionaryData {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(zipStream, "utf-8"));
 
-            String line, word, meaning;
+            String line, new_word, meaning;
             int wordsNum = 0;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("<html>");
-                word = parts[0];
+                new_word = parts[0];
                 meaning = "<html>" + parts[1];
-                if (state == 0) {
-                    word_target1.add(word);
-                    EVDict1.put(word, meaning);
-                } else if (state == 1) {
-                    word_target2.add(word);
-                    EVDict2.put(word, meaning);
-                }
+                    word.add(new_word);
+                    EVDict.put(new_word, meaning);
                 wordsNum++;
             }
             reader.close();
@@ -39,5 +34,9 @@ public class FileImplement extends DictionaryData {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void reloadFile() {
+        FileWriter
     }
 }
