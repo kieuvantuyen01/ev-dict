@@ -2,11 +2,22 @@ package EVDict4_1;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.DefaultListModel;
 
 public class DictionaryData {
+    public String path = "src\\EVDict4_1\\E_V.txt";
+    public int state = 0;
 
     public HashMap<String, String> EVDict = new HashMap<>();
     public ArrayList<String> word = new ArrayList<>();
+    
+    public DefaultListModel initDict() {
+        DefaultListModel dfl = new DefaultListModel();
+        for(String new_words: word) {
+            dfl.addElement(new_words);
+        }
+        return dfl;
+    }
 
     public ArrayList<String> searchWord(String wordSearch, ArrayList<String> words){
         ArrayList<String> listWord = new ArrayList();   

@@ -1,26 +1,27 @@
 package EVDict4_1;
 
 import java.io.*;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
 public class FileImplement extends DictionaryData {
+    
 
-    public FileImplement(String path, int state) {
-        readFile(path, state);
+    public FileImplement(int new_state) {
+        if (new_state == 1) {
+            this.path = "src\\EVDict4_1\\V_E.txt";
+            this.state = new_state;
+        }
+        readFile();
     }
 
-    public void readFile(String path, int state) {
-        try {
-            FileInputStream file = new FileInputStream(path);
-            ZipInputStream zipStream = new ZipInputStream(file);
-            ZipEntry entry = zipStream.getNextEntry();
+    public void readFile() {
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(zipStream, "utf-8"));
+        try {
+            FileInputStream fis = new FileInputStream(path);
+            BufferedReader br = new BufferedReader(new InputStreamReader(fis, "utf-8"));
 
             String line, new_word, meaning;
             int wordsNum = 0;
-            while ((line = reader.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
                 String[] parts = line.split("<html>");
                 new_word = parts[0];
                 meaning = "<html>" + parts[1];
@@ -28,7 +29,7 @@ public class FileImplement extends DictionaryData {
                     EVDict.put(new_word, meaning);
                 wordsNum++;
             }
-            reader.close();
+            br.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -36,7 +37,13 @@ public class FileImplement extends DictionaryData {
         }
     }
     
-//    public void reloadFile() {
-//        FileWriter
-//    }
+    public void updateFile() throws IOException {
+        FileOutputStream fos = new FileOutputStream(path);
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos, "utf-8"));
+
+        for (String new_word : word) {
+            bw.write(new_word + EVDict.get(new_word) + "\n");
+        }
+        bw.close();        
+    }
 }
