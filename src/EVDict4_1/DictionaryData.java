@@ -29,11 +29,11 @@ public class DictionaryData {
         this.EVDict = EVDict;
     }
 
-    public ArrayList<String> getWord_target() {
+    public ArrayList<String> getWord() {
         return word;
     }
 
-    public void setWord_target(ArrayList<String> word) {
+    public void setWord(ArrayList<String> word) {
         this.word = word;
     }
 }

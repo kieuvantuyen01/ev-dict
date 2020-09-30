@@ -37,8 +37,8 @@ public class AddForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        evButton = new javax.swing.JButton();
-        veButton = new javax.swing.JButton();
+        evTypeButton = new javax.swing.JButton();
+        veTypeButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         wordTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -49,17 +49,17 @@ public class AddForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        evButton.setText("Eng_Viet");
-        evButton.addActionListener(new java.awt.event.ActionListener() {
+        evTypeButton.setText("Eng_Viet");
+        evTypeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                evButtonActionPerformed(evt);
+                evTypeButtonActionPerformed(evt);
             }
         });
 
-        veButton.setText("Viet_Anh");
-        veButton.addActionListener(new java.awt.event.ActionListener() {
+        veTypeButton.setText("Viet_Anh");
+        veTypeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                veButtonActionPerformed(evt);
+                veTypeButtonActionPerformed(evt);
             }
         });
 
@@ -93,9 +93,9 @@ public class AddForm extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(62, 62, 62)
-                                .addComponent(evButton)
+                                .addComponent(evTypeButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                                .addComponent(veButton))
+                                .addComponent(veTypeButton))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
@@ -111,8 +111,8 @@ public class AddForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(evButton)
-                    .addComponent(veButton)
+                    .addComponent(evTypeButton)
+                    .addComponent(veTypeButton)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -154,16 +154,17 @@ public class AddForm extends javax.swing.JFrame {
 //        }
     }//GEN-LAST:event_submitButtonActionPerformed
 
-    private void evButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evButtonActionPerformed
+    private void evTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evTypeButtonActionPerformed
         // TODO add your handling code here:
+        state = 0;
         JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
-    }//GEN-LAST:event_evButtonActionPerformed
+    }//GEN-LAST:event_evTypeButtonActionPerformed
 
-    private void veButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_veButtonActionPerformed
+    private void veTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_veTypeButtonActionPerformed
         // TODO add your handling code here:
         state = 1;
         JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
-    }//GEN-LAST:event_veButtonActionPerformed
+    }//GEN-LAST:event_veTypeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,14 +202,14 @@ public class AddForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton evButton;
+    private javax.swing.JButton evTypeButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane meaningTextPane;
     private javax.swing.JButton submitButton;
-    private javax.swing.JButton veButton;
+    private javax.swing.JButton veTypeButton;
     private javax.swing.JTextField wordTextField;
     // End of variables declaration//GEN-END:variables
 }
