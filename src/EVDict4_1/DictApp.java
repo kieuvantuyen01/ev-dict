@@ -7,8 +7,11 @@ package EVDict4_1;
 
 import EVDict4.*;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -23,28 +26,27 @@ public class DictApp extends javax.swing.JFrame {
      */
     public DictApp() {
         initComponents();
+        initDictList();
     }
     
     public int state = 0;
     public static int check_input = 0;
+    DefaultListModel list;
     
-    FileImplement dic1 = new FileImplement("src\\EVDict4_1\\E_V.zip", 0);
-    FileImplement dic2 = new FileImplement("src\\EVDict4_1\\V_E.zip", 1);
+    FileImplement dic1 = new FileImplement(0);
+    FileImplement dic2 = new FileImplement(1);
     
     AddForm af = new AddForm();
     
     public void initDictList() {
+        list = new DefaultListModel();
         if (state == 0) {
-            DefaultListModel list = new DefaultListModel();
-            for(String word: dic1.getWord())
-                list.addElement(word);
-            dictList.setModel(list);
+            list = dic1.initDict();
+            
         } else if (state == 1) {
-            DefaultListModel list = new DefaultListModel();
-            for(String word: dic2.getWord())
-                list.addElement(word);
-            dictList.setModel(list);
+            list = dic2.initDict();
         }
+        dictList.setModel(list);
     }
 
     /**
@@ -80,6 +82,11 @@ public class DictApp extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         searchTextField.setText("jTextField1");
         searchTextField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -336,7 +343,6 @@ public class DictApp extends javax.swing.JFrame {
 
     private void dictListAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_dictListAncestorAdded
         // TODO add your handling code here:
-        initDictList();
     }//GEN-LAST:event_dictListAncestorAdded
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
@@ -353,6 +359,20 @@ public class DictApp extends javax.swing.JFrame {
         state = 1;
         initDictList();
     }//GEN-LAST:event_veButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        int answer = JOptionPane.showConfirmDialog(null, "Bạn có muốn lưu lại những thay đổi không?", "Thông báo", JOptionPane.YES_OPTION);
+        if (answer == JOptionPane.YES_OPTION) {
+            try {
+                dic1.updateFile();
+                dic2.updateFile();
+            } catch (IOException ex) {
+                Logger.getLogger(DictApp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
