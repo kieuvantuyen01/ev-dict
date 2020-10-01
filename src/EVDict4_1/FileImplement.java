@@ -33,19 +33,25 @@ public class FileImplement extends DictionaryData {
         DictData.put(new_word, meaning); 
     }
 
-    public void readFile() throws FileNotFoundException, UnsupportedEncodingException, IOException {
-        FileInputStream fis = new FileInputStream(path);
-        BufferedReader br = new BufferedReader(new InputStreamReader(fis, "utf-8"));
+    public void readFile() {
+        try {
+            FileInputStream fis = new FileInputStream(path);
+            BufferedReader br = new BufferedReader(new InputStreamReader(fis, "utf-8"));
 
-        String line, new_word, meaning;
-        while ((line = br.readLine()) != null) {
-            String[] parts = line.split("<html>");
-            new_word = parts[0];
-            meaning = "<html>" + parts[1];
+            String line, new_word, meaning;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split("<html>");
+                new_word = parts[0];
+                meaning = "<html>" + parts[1];
                 word.add(new_word);
                 DictData.put(new_word, meaning);
+            }
+            br.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        br.close();
     }
     
     public void updateFile() throws IOException {

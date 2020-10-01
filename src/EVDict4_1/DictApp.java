@@ -5,6 +5,8 @@
  */
 package EVDict4_1;
 
+import com.sun.speech.freetts.Voice;
+import com.sun.speech.freetts.VoiceManager;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,11 +28,13 @@ public class DictApp extends javax.swing.JFrame {
     public DictApp() {
         initComponents();
         initDictList();
+        speakerButton.setVisible(false);
     }
     
     public int state = 0;
     public int check_input = 0;
     DefaultListModel list;
+    String word_select = "";
     
     FileImplement dic1 = new FileImplement(0);
     FileImplement dic2 = new FileImplement(1);
@@ -69,6 +73,7 @@ public class DictApp extends javax.swing.JFrame {
         deleteButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         exportButton = new javax.swing.JButton();
+        speakerButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -161,6 +166,13 @@ public class DictApp extends javax.swing.JFrame {
 
         exportButton.setText("Export");
 
+        speakerButton.setText("Speaker");
+        speakerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                speakerButtonActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
 
         jMenuItem1.setText("jMenuItem1");
@@ -207,7 +219,9 @@ public class DictApp extends javax.swing.JFrame {
                             .addComponent(searchTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
                             .addComponent(jScrollPane2))
                         .addGap(65, 65, 65)
-                        .addComponent(searchButton))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(speakerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(addButton)
@@ -240,8 +254,14 @@ public class DictApp extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(searchButton))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(speakerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -304,14 +324,15 @@ public class DictApp extends javax.swing.JFrame {
 
     private void dictListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_dictListValueChanged
         // TODO add your handling code here:
-        String word = dictList.getSelectedValue();
-        searchTextField.setText(word);
+        word_select = dictList.getSelectedValue();
+        searchTextField.setText(word_select);
         String meaning = "";
         if (state == 0) {
-            meaning = dic1.getDictData().get(word);
+            meaning = dic1.getDictData().get(word_select);
         } else if (state == 1) {
-            meaning = dic2.getDictData().get(word);
+            meaning = dic2.getDictData().get(word_select);
         }
+        speakerButton.setVisible(true);
         meaningTextPane.setText(meaning);
     }//GEN-LAST:event_dictListValueChanged
 
@@ -423,6 +444,15 @@ public class DictApp extends javax.swing.JFrame {
         // TODO add your handling code here:
         searchTextField.setText("");
     }//GEN-LAST:event_searchTextFieldMouseClicked
+
+    private void speakerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_speakerButtonActionPerformed
+        // TODO add your handling code here:
+        Voice voice;
+        VoiceManager voiceManager = VoiceManager.getInstance();   
+        voice = voiceManager.getVoice("kevin16");
+        voice.allocate();
+        voice.speak(word_select);
+    }//GEN-LAST:event_speakerButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -808,6 +838,7 @@ public class DictApp extends javax.swing.JFrame {
     private javax.swing.JTextPane meaningTextPane;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchTextField;
+    private javax.swing.JButton speakerButton;
     private javax.swing.JButton veButton;
     // End of variables declaration//GEN-END:variables
 }
