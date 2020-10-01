@@ -165,6 +165,11 @@ public class DictApp extends javax.swing.JFrame {
         });
 
         exportButton.setText("Export");
+        exportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportButtonActionPerformed(evt);
+            }
+        });
 
         speakerButton.setText("Speaker");
         speakerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -453,6 +458,17 @@ public class DictApp extends javax.swing.JFrame {
         voice.allocate();
         voice.speak(word_select);
     }//GEN-LAST:event_speakerButtonActionPerformed
+
+    private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            dic1.updateFile();
+            dic2.updateFile();
+        } catch (IOException ex) {
+            Logger.getLogger(DictApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Mọi thông tin đã được thay đổi!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_exportButtonActionPerformed
 
     /**
      * @param args the command line arguments
