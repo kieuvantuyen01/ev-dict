@@ -14,6 +14,11 @@ public class FileImplement extends DictionaryData {
         readFile();
     }
     
+    public void editInDict(String old_word, String new_word, String meaning) {
+        addIntoDict(new_word, meaning);
+        removeFromDict(old_word);
+    }
+    
     public void removeFromDict(String new_word) {
         int id_remove = word.indexOf(new_word);
         if (id_remove != -1) {
@@ -28,28 +33,19 @@ public class FileImplement extends DictionaryData {
         DictData.put(new_word, meaning); 
     }
 
-    public void readFile() {
+    public void readFile() throws FileNotFoundException, UnsupportedEncodingException, IOException {
+        FileInputStream fis = new FileInputStream(path);
+        BufferedReader br = new BufferedReader(new InputStreamReader(fis, "utf-8"));
 
-        try {
-            FileInputStream fis = new FileInputStream(path);
-            BufferedReader br = new BufferedReader(new InputStreamReader(fis, "utf-8"));
-
-            String line, new_word, meaning;
-            int wordsNum = 0;
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split("<html>");
-                new_word = parts[0];
-                meaning = "<html>" + parts[1];
-                    word.add(new_word);
-                    DictData.put(new_word, meaning);
-                wordsNum++;
-            }
-            br.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        String line, new_word, meaning;
+        while ((line = br.readLine()) != null) {
+            String[] parts = line.split("<html>");
+            new_word = parts[0];
+            meaning = "<html>" + parts[1];
+                word.add(new_word);
+                DictData.put(new_word, meaning);
         }
+        br.close();
     }
     
     public void updateFile() throws IOException {

@@ -12,21 +12,16 @@ import javax.swing.JOptionPane;
  *
  * @author ADMIN
  */
-public class AddForm extends javax.swing.JFrame {
+public class EditForm extends javax.swing.JFrame {
 //
 //    /**
-//     * Creates new form AddForm
+//     * Creates new form EditForm
 //     */
-//    public AddForm() {
+//    public EditForm() {
 //        initComponents();
 //    }
-//    
+    
     public int state = 0;
-//    
-//    FileImplement dic1 = new FileImplement("src\\EVDict4_1\\E_V.zip");
-//    FileImplement dic2 = new FileImplement("src\\EVDict4_1\\V_E.zip");
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -186,20 +181,21 @@ public class AddForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddForm().setVisible(true);
+                new EditForm().setVisible(true);
             }
         });
     }
@@ -210,9 +206,9 @@ public class AddForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextPane meaningTextPane;
+    public javax.swing.JTextPane meaningTextPane;
     private javax.swing.JButton submitButton;
     private javax.swing.JButton veTypeButton;
-    private javax.swing.JTextField wordTextField;
+    public javax.swing.JTextField wordTextField;
     // End of variables declaration//GEN-END:variables
 }
