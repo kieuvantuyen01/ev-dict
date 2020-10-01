@@ -1,6 +1,7 @@
 package EVDict4_1;
 
 import java.io.*;
+import java.util.Collections;
 
 public class FileImplement extends DictionaryData {
     
@@ -11,6 +12,20 @@ public class FileImplement extends DictionaryData {
             this.state = new_state;
         }
         readFile();
+    }
+    
+    public void removeFromDict(String new_word) {
+        int id_remove = word.indexOf(new_word);
+        if (id_remove != -1) {
+            word.remove(id_remove);
+            DictData.remove(id_remove);
+        }
+    }
+    
+    public void addIntoDict(String new_word, String meaning) {
+        word.add(new_word);
+        Collections.sort(word);
+        DictData.put(new_word, meaning); 
     }
 
     public void readFile() {
@@ -26,7 +41,7 @@ public class FileImplement extends DictionaryData {
                 new_word = parts[0];
                 meaning = "<html>" + parts[1];
                     word.add(new_word);
-                    EVDict.put(new_word, meaning);
+                    DictData.put(new_word, meaning);
                 wordsNum++;
             }
             br.close();
@@ -42,7 +57,7 @@ public class FileImplement extends DictionaryData {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos, "utf-8"));
 
         for (String new_word : word) {
-            bw.write(new_word + EVDict.get(new_word) + "\n");
+            bw.write(new_word + DictData.get(new_word) + "\n");
         }
         bw.close();        
     }

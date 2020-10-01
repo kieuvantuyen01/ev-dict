@@ -8,13 +8,13 @@ public class DictionaryData {
     public String path = "src\\EVDict4_1\\E_V.txt";
     public int state = 0;
 
-    public HashMap<String, String> EVDict = new HashMap<>();
+    public HashMap<String, String> DictData = new HashMap<>();
     public ArrayList<String> word = new ArrayList<>();
     
     public DefaultListModel initDict() {
         DefaultListModel dfl = new DefaultListModel();
-        for(String new_words: word) {
-            dfl.addElement(new_words);
+        for(String new_word: word) {
+            dfl.addElement(new_word);
         }
         return dfl;
     }
@@ -32,12 +32,12 @@ public class DictionaryData {
         return listWord;
     } 
     
-    public HashMap<String, String> getEVDict() {
-        return EVDict;
+    public HashMap<String, String> getDictData() {
+        return DictData;
     }
 
-    public void setEVDict(HashMap<String, String> EVDict) {
-        this.EVDict = EVDict;
+    public void setDictData(HashMap<String, String> DictData) {
+        this.DictData = DictData;
     }
 
     public ArrayList<String> getWord() {
