@@ -20,11 +20,10 @@ public class DictionaryData {
     }
 
     public ArrayList<String> searchWord(String wordSearch, ArrayList<String> words){
-        ArrayList<String> listWord = new ArrayList();   
-        int len = wordSearch.length();
+        ArrayList<String> listWord = new ArrayList();
         for(int i = 0; i < words.size(); i++) {
-            if(words.get(i).length() >= len) {
-                if(words.get(i).substring(0, len).equals(wordSearch)) {
+            if(words.get(i).length() >= wordSearch.length()) {
+                if(words.get(i).substring(0, wordSearch.length()).equals(wordSearch)) {
                     listWord.add(words.get(i));
                 }
             }
