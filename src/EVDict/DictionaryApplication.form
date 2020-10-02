@@ -226,6 +226,9 @@
               <Image iconType="2" name="C:\Users\Admin\Desktop\EVDict\src\EVDict\image\output_icon.jpg"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="outputButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="languageCombobox">
           <Properties>

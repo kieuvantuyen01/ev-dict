@@ -8,11 +8,6 @@ public class EVDict {
      */
     
     public static void main(String[] args) {
-        DictionaryCommandline dictionary_cmd = new DictionaryCommandline();    
-        dictionary_cmd.dictionaryAdvanced();
-        dictionary_cmd.addNewWord();
-        dictionary_cmd.deleteWord(); 
-        dictionary_cmd.showAllWords();
-        dictionary_cmd.dictionaryExportToFile(); 
-    }
+        DictionaryManagement dictionary_cmd = new DictionaryManagement();    
+    } 
 }

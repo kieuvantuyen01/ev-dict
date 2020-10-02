@@ -1,34 +1,49 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package EVDict;
 
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class DictionaryApplication extends javax.swing.JFrame {
-    DictionaryManagement dic_Application;
-    int check_language;   
-    String voice_speak;    
+    int check_language = 0;
+    String voice_speak = "";
+    public static int check_input = 0;
+    DefaultListModel list;
+    FileManipulation dicV_E = new FileManipulation(0);
+    FileManipulation dicE_V = new FileManipulation(1);
+
     /**
      * Creates new form DictionaryApplication
      */
+
     public DictionaryApplication() {
         initComponents();
-        
-        dic_Application = new DictionaryManagement();
-        dic_Application.insertFromFileE_V();   // Đọc file dictionariesE_V lên
-        dic_Application.insertFromFileV_E();   // Đọc file dictionariesV_E lên
+        initDictList();
         speakerButton.setVisible(false);       // Ẩn speakerButton từ đầu
         meaningPane.setEditable(false);        // Không cho sửa vào bảng meaningPane
     }
-
+    
+    public void initDictList() {
+        list = new DefaultListModel();
+        if (check_language == 0) {
+            list = dicV_E.initDict();
+            
+        } else if (check_language == 1) {
+            list = dicE_V.initDict();
+        }
+        wordList.setModel(list);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -137,6 +152,11 @@ public class DictionaryApplication extends javax.swing.JFrame {
         });
 
         outputButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\EVDict\\src\\EVDict\\image\\output_icon.jpg")); // NOI18N
+        outputButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                outputButtonActionPerformed(evt);
+            }
+        });
 
         languageCombobox.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         languageCombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vietnamese-English", "English-Vietnamese" }));
@@ -330,35 +350,36 @@ public class DictionaryApplication extends javax.swing.JFrame {
         String word_Searching = String.valueOf(searchWordTextField.getText());
         word_Searching = word_Searching.toLowerCase();
         boolean finding_Word = false;  // Biến để kiểm tra xem từ ms nhập có trong từ điển không
-        
-        if (check_language == 0) { 
-            for (Word word_iterator : dic_Application.dict.wordsV_E) {
-                if (word_iterator.getWord_target().equals(word_Searching)) {
-                    String word_explain = word_iterator.getWord_explain();
-                    voice_speak = word_iterator.getWord_target();
-                    meaningPane.setText(word_explain);
-                    finding_Word = true;  // Gán biến kiểm tra = true
-                    break;
-                }
-            }
-        }       
-        if (check_language == 1) { 
-            for (Word word_iterator : dic_Application.dict.wordsE_V) {
-                if (word_iterator.getWord_target().equals(word_Searching)) {
-                    String word_explain = word_iterator.getWord_explain();
-                    voice_speak = word_iterator.getWord_target();
-                    meaningPane.setText(word_explain);
-                    finding_Word = true;  // Gán biến kiểm tra = true
-                    break;
-                }
+
+        if (word_Searching.trim().isEmpty()) {
+            check_input = -1;
+        } else if (check_language == 0) { 
+            if (dicV_E.getWord().contains(word_Searching)) {
+                check_input = 1;
+                voice_speak = word_Searching;
+                meaningPane.setText(dicV_E.getDictData().get(word_Searching));
+                finding_Word = true;  // Gán biến kiểm tra = true
+            }       
+        } else if (check_language == 1) { 
+            if (dicE_V.getWord().contains(word_Searching)) {   
+                check_input = 1;
+                voice_speak = word_Searching;
+                meaningPane.setText(dicE_V.getDictData().get(word_Searching));
+                finding_Word = true;  // Gán biến kiểm tra = true
             }
         }
-        
+
         if (finding_Word) {
             speakerButton.setVisible(true);   // Hiện speakerButton để nói
         }
         if (!finding_Word) {
             setInterfaceToDefault();           // Set frame về default
+        }
+
+        if (check_input == -1) {              // Hiện thông báo 1 số lỗi
+            JOptionPane.showMessageDialog(null, "Từ đang bị trống, vui lòng nhập lại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } else if (check_input == 0) {
+            JOptionPane.showMessageDialog(null, "Từ này đang không có trong từ điển!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_search_ButtonActionPerformed
 
@@ -376,14 +397,51 @@ public class DictionaryApplication extends javax.swing.JFrame {
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-       new deleteFrame().setVisible(true);
-       this.dispose();
+       String word_deleted = wordList.getSelectedValue();
+        if (word_deleted == null) {
+            JOptionPane.showMessageDialog(null, "Bạn chưa chọn từ để xoá!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int answer = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá từ này khỏi từ điển không?", "Cảnh báo", JOptionPane.YES_OPTION);
+            if (check_language == 0) {                
+                if (answer == JOptionPane.YES_OPTION) {
+                    dicV_E.removeFromDict(word_deleted);
+                    initDictList();
+                    check_input = 1;
+                }                
+            } else if (check_language == 1) {                
+                if (answer == JOptionPane.YES_OPTION) {
+                    dicE_V.removeFromDict(word_deleted);
+                    initDictList();
+                    check_input = 1;
+                }                
+            }
+            if (check_input == 1) {
+                JOptionPane.showMessageDialog(null, "Đã xong!");
+            }
+        }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-       new editFrame().setVisible(true);
-       this.dispose();
+        String word_edited = wordList.getSelectedValue();
+        if (word_edited == null) {
+            JOptionPane.showMessageDialog(null, "Bạn chưa chọn từ để sửa!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } else {
+            new editFrame().setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_editButtonActionPerformed
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {                                   
+        // TODO add your handling code here:
+        int answer = JOptionPane.showConfirmDialog(null, "Bạn có muốn lưu lại những thay đổi không?", "Thông báo", JOptionPane.YES_OPTION);
+        if (answer == JOptionPane.YES_OPTION) {
+            try {
+                dicV_E.updateFile();
+                dicE_V.updateFile();
+            } catch (IOException ex) {
+                Logger.getLogger(DictionaryApplication.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 
     private void searchWordTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchWordTextFieldMouseClicked
         String word_Searching = String.valueOf(searchWordTextField.getText());  // Khi click chuột vào ô search sẽ mất dòng chữ ban đầu
@@ -393,21 +451,45 @@ public class DictionaryApplication extends javax.swing.JFrame {
     }//GEN-LAST:event_searchWordTextFieldMouseClicked
 
     private void searchWordTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchWordTextFieldKeyPressed
-       
+        boolean finding_Word = false;  // Biến để kiểm tra xem từ ms nhập có trong từ điển không
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String searchWord = searchWordTextField.getText();
+            if (searchWord.trim().isEmpty()) {
+                check_input = -1;
+            } else if (check_language == 0) {
+                if (dicV_E.getWord().contains(searchWord)) {
+                    check_input = 1;
+                    voice_speak = searchWord;
+                    meaningPane.setText(dicV_E.getDictData().get(searchWord));
+                    finding_Word = true;  // Gán biến kiểm tra = true
+                } else {
+                    check_input = 0;
+                }
+            } else if (check_language == 1) {
+                if (dicE_V.getWord().contains(searchWord)) {
+                    check_input = 1;
+                    voice_speak = searchWord;
+                    meaningPane.setText(dicE_V.getDictData().get(searchWord));
+                    finding_Word = true;  // Gán biến kiểm tra = true
+                } else {
+                    check_input = 0;
+                }
+            }
+            if (check_input == -1) {
+                JOptionPane.showMessageDialog(null, "Từ đang bị trống, vui lòng nhập lại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            } else if (check_input == 0) {
+                JOptionPane.showMessageDialog(null, "Từ này đang không có trong từ điển!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            if (finding_Word) {
+                speakerButton.setVisible(true);   // Hiện speakerButton để nói
+            }
+            if (!finding_Word) {
+                setInterfaceToDefault();           // Set frame về default
+            }
+        }
     }//GEN-LAST:event_searchWordTextFieldKeyPressed
-    
-    void getDataV_E(String word_Seacher) {
-        String[] word_Find;                                           
-        word_Find = dic_Application.dictionarySearcherV_E(word_Seacher);
-        wordList.setListData(word_Find);
-    }
-    
-    void getDataE_V(String word_Seacher) {
-        String[] word_Find;                                           
-        word_Find = dic_Application.dictionarySearcherE_V(word_Seacher);
-        wordList.setListData(word_Find);
-    }
-    
+
     void setInterfaceToDefault() {
         String[] word_Find = new String[1];
         word_Find[0] = "";
@@ -417,18 +499,31 @@ public class DictionaryApplication extends javax.swing.JFrame {
     }
     
     private void searchWordTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchWordTextFieldKeyReleased
-        String word_Seacher = String.valueOf(searchWordTextField.getText());
-        word_Seacher = word_Seacher.toLowerCase();
-        if (word_Seacher.length() > 0) {
-            if (check_language == 0) {
-                getDataV_E(word_Seacher);
+        ArrayList<String> newDictList = new ArrayList<>();
+        list = new DefaultListModel<>();
+        String key_word_searching = String.valueOf(searchWordTextField.getText());
+        key_word_searching =key_word_searching.toLowerCase();
+        
+        if (check_language == 0) {
+            if (key_word_searching.trim().isEmpty()) {
+                newDictList = new ArrayList(dicV_E.getWord());
+            } else {
+                newDictList = dicV_E.searchWord(key_word_searching, dicV_E.getWord());
             }
-            else if (check_language == 1) {
-                getDataE_V(word_Seacher);
+        } else if (check_language == 1) {
+            if (key_word_searching.trim().isEmpty()) {
+                newDictList = new ArrayList(dicE_V.getWord());
+            } else {
+                newDictList = dicE_V.searchWord(key_word_searching, dicE_V.getWord());
             }
         }
-        if (word_Seacher.length() == 0) {
-            setInterfaceToDefault();   // Set frame về default
+        for (String word : newDictList) {
+            list.addElement(word);
+        }
+        wordList.setModel(list);
+        if (key_word_searching.length() == 0) {
+            speakerButton.setVisible(false);
+            meaningPane.setText("");           // Set frame về default
         }
     }//GEN-LAST:event_searchWordTextFieldKeyReleased
 
@@ -437,39 +532,31 @@ public class DictionaryApplication extends javax.swing.JFrame {
         if (language_selected.equals("Vietnamese-English")) {
             setInterfaceToDefault();
             searchWordTextField.setText("Search EVDict Learner's Dictionary ");
-            check_language = 0;          
+            check_language = 0;    
+            initDictList();
         }
         else if (language_selected.equals("English-Vietnamese")) {
             setInterfaceToDefault();
             searchWordTextField.setText("Search EVDict Learner's Dictionary ");
-            check_language = 1;   
+            check_language = 1; 
+            initDictList();
         }
     }//GEN-LAST:event_languageComboboxActionPerformed
-
+    
     private void wordListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_wordListValueChanged
         String word_list_selected = wordList.getSelectedValue();
+        searchWordTextField.setText(word_list_selected);
+        String meaning = "";
+        
         if (check_language == 0) {
-            for (Word word_iterator : dic_Application.dict.wordsV_E) {
-                if (word_iterator.getWord_target().equals(word_list_selected)) {
-                    String word_explain = word_iterator.getWord_explain();
-                    voice_speak = word_iterator.getWord_target();
-                    meaningPane.setText(word_explain);
-                    speakerButton.setVisible(true);
-                    break;
-                }
-            }
+            meaning = dicV_E.getDictData().get(word_list_selected);
+            speakerButton.setVisible(true);
+        } else if (check_language == 1) {
+            meaning = dicE_V.getDictData().get(word_list_selected);
+            speakerButton.setVisible(true);
         }
-        else if (check_language == 1) {
-            for (Word word_iterator : dic_Application.dict.wordsE_V) {
-                if (word_iterator.getWord_target().equals(word_list_selected)) {
-                    String word_explain = word_iterator.getWord_explain();
-                    voice_speak = word_iterator.getWord_target();
-                    meaningPane.setText(word_explain);
-                    speakerButton.setVisible(true);
-                    break;
-                }
-            }
-        }
+        voice_speak = word_list_selected;
+        meaningPane.setText(meaning);
     }//GEN-LAST:event_wordListValueChanged
 
     private void tutorialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tutorialButtonActionPerformed
@@ -495,6 +582,16 @@ public class DictionaryApplication extends javax.swing.JFrame {
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void outputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outputButtonActionPerformed
+        try {
+            dicV_E.updateFile();
+            dicE_V.updateFile();
+        } catch (IOException ex) {
+            Logger.getLogger(DictionaryApplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Mọi thông tin đã được thay đổi!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_outputButtonActionPerformed
 
     /**
      * @param args the command line arguments

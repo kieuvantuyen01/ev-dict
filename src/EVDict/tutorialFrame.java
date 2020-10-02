@@ -10,14 +10,14 @@ package EVDict;
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class tutorialFrame extends javax.swing.JFrame {
-    DictionaryManagement guide_management;
+    FileManipulation guide_management;
     /**
      * Creates new form tutorialFrame
      */
     public tutorialFrame() {
         initComponents();
         
-        guide_management = new DictionaryManagement();
+        guide_management = new FileManipulation();
         guideList.setListData(guide_management.insertGuide());
     }
 
