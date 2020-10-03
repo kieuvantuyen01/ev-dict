@@ -10,7 +10,6 @@ import com.sun.speech.freetts.VoiceManager;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -27,7 +26,7 @@ public class DictApp extends javax.swing.JFrame {
      */
     public DictApp() {
         initComponents();
-        initDictList();
+        initRecentWordList();
         speakerButton.setVisible(false);
     }
     
@@ -38,14 +37,22 @@ public class DictApp extends javax.swing.JFrame {
     
     FileImplement dic1 = new FileImplement(0);
     FileImplement dic2 = new FileImplement(1);
+    DictionaryData da = new DictionaryData();
+    
     
     AddForm af = new AddForm();
+    
+    public void initRecentWordList() {
+        list = new DefaultListModel();
+        da.readFromFile(da.recentWord, "RecentList.txt");
+        list = da.initRecentList(da.recentWord);
+        dictList.setModel(list); 
+    }
     
     public void initDictList() {
         list = new DefaultListModel();
         if (state == 0) {
             list = dic1.initDict();
-            
         } else if (state == 1) {
             list = dic2.initDict();
         }
@@ -74,6 +81,7 @@ public class DictApp extends javax.swing.JFrame {
         editButton = new javax.swing.JButton();
         exportButton = new javax.swing.JButton();
         speakerButton = new javax.swing.JButton();
+        recentButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -178,6 +186,13 @@ public class DictApp extends javax.swing.JFrame {
             }
         });
 
+        recentButton.setText("Recent Word");
+        recentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recentButtonActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
 
         jMenuItem1.setText("jMenuItem1");
@@ -239,7 +254,9 @@ public class DictApp extends javax.swing.JFrame {
                         .addGap(16, 16, 16)
                         .addComponent(evButton)
                         .addGap(30, 30, 30)
-                        .addComponent(veButton)))
+                        .addComponent(veButton)
+                        .addGap(48, 48, 48)
+                        .addComponent(recentButton)))
                 .addContainerGap(146, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -252,7 +269,8 @@ public class DictApp extends javax.swing.JFrame {
                     .addComponent(addButton)
                     .addComponent(deleteButton)
                     .addComponent(editButton)
-                    .addComponent(exportButton))
+                    .addComponent(exportButton)
+                    .addComponent(recentButton))
                 .addGap(79, 79, 79)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -331,6 +349,12 @@ public class DictApp extends javax.swing.JFrame {
         // TODO add your handling code here:
         word_select = dictList.getSelectedValue();
         searchTextField.setText(word_select);
+        da.saveToRencent(word_select);
+        try {
+            da.readToFile(da.recentWord, "RecentList.txt");
+        } catch (IOException ex) {
+            Logger.getLogger(DictApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
         String meaning = "";
         if (state == 0) {
             meaning = dic1.getDictData().get(word_select);
@@ -469,6 +493,13 @@ public class DictApp extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(null, "Mọi thông tin đã được thay đổi!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_exportButtonActionPerformed
+
+    private void recentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recentButtonActionPerformed
+        // TODO add your handling code here:
+        searchTextField.setText("");
+        meaningTextPane.setText("");
+        initRecentWordList();
+    }//GEN-LAST:event_recentButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -852,6 +883,7 @@ public class DictApp extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextPane meaningTextPane;
+    private javax.swing.JButton recentButton;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchTextField;
     private javax.swing.JButton speakerButton;
