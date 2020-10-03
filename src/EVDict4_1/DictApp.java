@@ -8,7 +8,14 @@ package EVDict4_1;
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,6 +48,7 @@ public class DictApp extends javax.swing.JFrame {
     
     
     AddForm af = new AddForm();
+    GoogleAPIForm apiForm = new GoogleAPIForm();
     
     public void initRecentWordList() {
         list = new DefaultListModel();
@@ -82,6 +90,7 @@ public class DictApp extends javax.swing.JFrame {
         exportButton = new javax.swing.JButton();
         speakerButton = new javax.swing.JButton();
         recentButton = new javax.swing.JButton();
+        apiButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -193,6 +202,13 @@ public class DictApp extends javax.swing.JFrame {
             }
         });
 
+        apiButton.setText("Dịch Văn Bản");
+        apiButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apiButtonActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
 
         jMenuItem1.setText("jMenuItem1");
@@ -230,7 +246,7 @@ public class DictApp extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -256,7 +272,9 @@ public class DictApp extends javax.swing.JFrame {
                         .addGap(30, 30, 30)
                         .addComponent(veButton)
                         .addGap(48, 48, 48)
-                        .addComponent(recentButton)))
+                        .addComponent(recentButton)
+                        .addGap(33, 33, 33)
+                        .addComponent(apiButton, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)))
                 .addContainerGap(146, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -270,7 +288,8 @@ public class DictApp extends javax.swing.JFrame {
                     .addComponent(deleteButton)
                     .addComponent(editButton)
                     .addComponent(exportButton)
-                    .addComponent(recentButton))
+                    .addComponent(recentButton)
+                    .addComponent(apiButton))
                 .addGap(79, 79, 79)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -500,6 +519,11 @@ public class DictApp extends javax.swing.JFrame {
         meaningTextPane.setText("");
         initRecentWordList();
     }//GEN-LAST:event_recentButtonActionPerformed
+
+    private void apiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apiButtonActionPerformed
+        // TODO add your handling code here:
+        apiForm.setVisible(true);
+    }//GEN-LAST:event_apiButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -861,10 +885,202 @@ public class DictApp extends javax.swing.JFrame {
         public javax.swing.JTextField wordTextField;
         // End of variables declaration                   
     }
+    
+    public class GoogleAPIForm extends javax.swing.JFrame {
+        
+        public GoogleAPIForm() {
+            initComponents();
+        }
+
+        private String translate(String langFrom, String langTo, String text) throws IOException {
+            // INSERT YOU URL HERE
+            String urlStr = "https://script.google.com/macros/s/AKfycbxiQVsKyWiGXFDU8LeW-fi9KfS0ZIE01ovCpDUJkbJL0-3R6lw/exec" +
+                    "?q=" + URLEncoder.encode(text, "UTF-8") +
+                    "&target=" + langTo +
+                    "&source=" + langFrom;
+            URL url = new URL(urlStr);
+            StringBuilder response = new StringBuilder();
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestProperty("User-Agent", "Mozilla/5.0");
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+            return response.toString();
+        }
+
+
+        /**
+         * This method is called from within the constructor to initialize the form.
+         * WARNING: Do NOT modify this code. The content of this method is always
+         * regenerated by the Form Editor.
+         */
+        @SuppressWarnings("unchecked")
+        // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+        private void initComponents() {
+
+            evTypeButton = new javax.swing.JButton();
+            veTypeButton = new javax.swing.JButton();
+            jLabel1 = new javax.swing.JLabel();
+            wordTextField = new javax.swing.JTextField();
+            jLabel2 = new javax.swing.JLabel();
+            jLabel3 = new javax.swing.JLabel();
+            submitButton = new javax.swing.JButton();
+            jScrollPane1 = new javax.swing.JScrollPane();
+            meaningTextPane = new javax.swing.JTextPane();
+
+            setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+            evTypeButton.setText("Eng_Viet");
+            evTypeButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    evTypeButtonActionPerformed(evt);
+                }
+            });
+
+            veTypeButton.setText("Viet_Anh");
+            veTypeButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    veTypeButtonActionPerformed(evt);
+                }
+            });
+
+            jLabel1.setText("Kiểu/Type:");
+
+            jLabel2.setText("Văn bản/Text:");
+
+            jLabel3.setText("Dịch/Meaning:");
+
+            submitButton.setText("Submit");
+            submitButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    try {
+                        submitButtonActionPerformed(evt);
+                    } catch (IOException ex) {
+                        Logger.getLogger(DictApp.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+
+            jScrollPane1.setViewportView(meaningTextPane);
+
+            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+            getContentPane().setLayout(layout);
+            layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(18, 18, 18)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(35, 35, 35)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(wordTextField)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(123, 123, 123)
+                            .addComponent(evTypeButton)
+                            .addGap(151, 151, 151)
+                            .addComponent(veTypeButton)))
+                    .addContainerGap(146, Short.MAX_VALUE))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(submitButton)
+                    .addGap(344, 344, 344))
+            );
+            layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(33, 33, 33)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(evTypeButton)
+                        .addComponent(veTypeButton)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(36, 36, 36)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(wordTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(106, 106, 106)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(18, 18, 18)
+                    .addComponent(submitButton)
+                    .addGap(34, 34, 34))
+            );
+
+            pack();
+        }// </editor-fold>                        
+
+        private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) throws IOException {                                             
+            // TODO add your handling code here:
+            String text = apiForm.wordTextField.getText();
+            if (checkAvailable()) {
+                if (wordTextField.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Ô văn bản đang bị trống!!! Vui lòng nhập lại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    if (state == 0) {
+                        apiForm.meaningTextPane.setText(apiForm.translate("en", "vi", text));
+                    } else if (state == 1) {
+                        apiForm.meaningTextPane.setText(apiForm.translate("vi", "en", text));
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Vui lòng thử lại kết nối Internet!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        }                                            
+
+        private void evTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
+            // TODO add your handling code here:
+            state = 0;
+            JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
+        }                                            
+
+        private void veTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
+            // TODO add your handling code here:
+            state = 1;
+            JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Việt-Anh", "Thông báo", -1);
+        }                                            
+
+        // Variables declaration - do not modify                     
+        private javax.swing.JButton evTypeButton;
+        private javax.swing.JLabel jLabel1;
+        private javax.swing.JLabel jLabel2;
+        private javax.swing.JLabel jLabel3;
+        private javax.swing.JScrollPane jScrollPane1;
+        private javax.swing.JTextPane meaningTextPane;
+        private javax.swing.JButton submitButton;
+        private javax.swing.JButton veTypeButton;
+        private javax.swing.JTextField wordTextField;
+        // End of variables declaration                   
+
+        private boolean checkAvailable() {
+            try {
+                final URL url = new URL("http://www.google.com");
+                final URLConnection conn = url.openConnection();
+                conn.connect();
+                conn.getInputStream().close();
+                return true;
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                return false;
+            }
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
+    private javax.swing.JButton apiButton;
     private javax.swing.JButton deleteButton;
     private javax.swing.JList<String> dictList;
     private javax.swing.JButton editButton;

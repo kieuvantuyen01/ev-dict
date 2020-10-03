@@ -85,7 +85,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="112" max="-2" attributes="0"/>
@@ -115,6 +115,8 @@
                       <Component id="veButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                       <Component id="recentButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="apiButton" pref="102" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="146" max="32767" attributes="0"/>
@@ -133,6 +135,7 @@
                   <Component id="editButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="exportButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="recentButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="apiButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -283,6 +286,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="recentButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="apiButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="D&#x1ecb;ch V&#x103;n B&#x1ea3;n"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="apiButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
