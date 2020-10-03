@@ -15,7 +15,10 @@ import javax.swing.DefaultListModel;
 
 public class DictionaryData {
     public String path = "src\\EVDict4_1\\E_V.txt";
-    public int state = 0;
+    enum dictionaryType{
+        EV,VE;
+    }
+    public dictionaryType state = dictionaryType.EV;
 
     public HashMap<String, String> DictData = new HashMap<>();
     public ArrayList<String> word = new ArrayList<>();

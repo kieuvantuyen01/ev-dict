@@ -38,8 +38,8 @@ public class DictApp extends javax.swing.JFrame {
     DefaultListModel list;
     String word_select = "";
     
-    FileImplement dic1 = new FileImplement(0);
-    FileImplement dic2 = new FileImplement(1);
+    FileImplement dictEV = new FileImplement(DictionaryData.dictionaryType.EV);
+    FileImplement dictVE = new FileImplement(DictionaryData.dictionaryType.VE);
     DictionaryData da = new DictionaryData();
     
     
@@ -55,9 +55,9 @@ public class DictApp extends javax.swing.JFrame {
     public void initDictList() {
         list = new DefaultListModel();
         if (state == dictionaryType.EV) {
-            list = dic1.initDict();
+            list = dictEV.initDict();
         } else if (state == dictionaryType.VE) {
-            list = dic2.initDict();
+            list = dictVE.initDict();
         }
         dictList.setModel(list);
     }
@@ -302,16 +302,16 @@ public class DictApp extends javax.swing.JFrame {
             if (searchWord.trim().isEmpty()) {
                 check_input = -1;
             } else if (state == dictionaryType.EV) {
-                if (dic1.getWord().contains(searchWord)) {
+                if (dictEV.getWord().contains(searchWord)) {
                     check_input = 1;
-                    meaningTextPane.setText(dic1.getDictData().get(searchWord));
+                    meaningTextPane.setText(dictEV.getDictData().get(searchWord));
                 } else {
                     check_input = 0;
                 }
             } else if (state == dictionaryType.VE) {
-                if (dic2.getWord().contains(searchWord)) {
+                if (dictVE.getWord().contains(searchWord)) {
                     check_input = 1;
-                    meaningTextPane.setText(dic2.getDictData().get(searchWord));
+                    meaningTextPane.setText(dictVE.getDictData().get(searchWord));
                 } else {
                     check_input = 0;
                 }
@@ -331,15 +331,15 @@ public class DictApp extends javax.swing.JFrame {
         String searchWord = searchTextField.getText();
         if (state == dictionaryType.EV) {
             if (searchWord.trim().isEmpty()) {
-                newDictList = new ArrayList(dic1.getWord());
+                newDictList = new ArrayList(dictEV.getWord());
             } else {
-                newDictList = dic1.searchWord(searchWord, dic1.getWord());
+                newDictList = dictEV.searchWord(searchWord, dictEV.getWord());
             }
         } else if (state == dictionaryType.VE) {
             if (searchWord.trim().isEmpty()) {
-                newDictList = new ArrayList(dic2.getWord());
+                newDictList = new ArrayList(dictVE.getWord());
             } else {
-                newDictList = dic2.searchWord(searchWord, dic2.getWord());
+                newDictList = dictVE.searchWord(searchWord, dictVE.getWord());
             }
         }
         for (String word : newDictList) {
@@ -360,9 +360,9 @@ public class DictApp extends javax.swing.JFrame {
         }
         String meaning = "";
         if (state == dictionaryType.EV) {
-            meaning = dic1.getDictData().get(word_select);
+            meaning = dictEV.getDictData().get(word_select);
         } else if (state == dictionaryType.VE) {
-            meaning = dic2.getDictData().get(word_select);
+            meaning = dictVE.getDictData().get(word_select);
         }
         speakerButton.setVisible(true);
         meaningTextPane.setText(meaning);
@@ -382,14 +382,14 @@ public class DictApp extends javax.swing.JFrame {
         if (searchWord.trim().isEmpty()) {
             check_input = -1;
         } else if (state == dictionaryType.EV) {
-            if (dic1.getWord().contains(searchWord)) {
+            if (dictEV.getWord().contains(searchWord)) {
                 check_input = 1;
-                meaningTextPane.setText(dic1.getDictData().get(searchTextField.getText()));
+                meaningTextPane.setText(dictEV.getDictData().get(searchTextField.getText()));
             }
         } else if (state == dictionaryType.VE) {
-            if (dic2.getWord().contains(searchWord)) {
+            if (dictVE.getWord().contains(searchWord)) {
                 check_input = 1;
-                meaningTextPane.setText(dic2.getDictData().get(searchTextField.getText()));
+                meaningTextPane.setText(dictVE.getDictData().get(searchTextField.getText()));
             }
         }
         
@@ -420,8 +420,8 @@ public class DictApp extends javax.swing.JFrame {
         int answer = JOptionPane.showConfirmDialog(null, "Bạn có muốn lưu lại những thay đổi không?", "Thông báo", JOptionPane.YES_OPTION);
         if (answer == JOptionPane.YES_OPTION) {
             try {
-                dic1.updateFile();
-                dic2.updateFile();
+                dictEV.updateFile();
+                dictVE.updateFile();
             } catch (IOException ex) {
                 Logger.getLogger(DictApp.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -438,13 +438,13 @@ public class DictApp extends javax.swing.JFrame {
             int answer = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá từ này khỏi từ điển không?", "Cảnh báo", JOptionPane.YES_OPTION);
             if (state == dictionaryType.EV) {
                 if (answer == JOptionPane.YES_OPTION) {
-                    dic1.removeFromDict(word);
+                    dictEV.removeFromDict(word);
                     initDictList();
                     check_input = 1;
                 }                
             } else if (state == dictionaryType.VE) {
                 if (answer == JOptionPane.YES_OPTION) {
-                    dic2.removeFromDict(word);
+                    dictVE.removeFromDict(word);
                     initDictList();
                     check_input = 1;
                 }                
@@ -465,9 +465,9 @@ public class DictApp extends javax.swing.JFrame {
             ef.setVisible(true);
             ef.wordTextField.setText(word);
             if (state == dictionaryType.EV) {
-                ef.meaningTextPane.setText(dic1.getDictData().get(word));
+                ef.meaningTextPane.setText(dictEV.getDictData().get(word));
             } else if (state == dictionaryType.VE) {
-                ef.meaningTextPane.setText(dic2.getDictData().get(word));
+                ef.meaningTextPane.setText(dictVE.getDictData().get(word));
             }
         }
     }//GEN-LAST:event_editButtonActionPerformed
@@ -489,8 +489,8 @@ public class DictApp extends javax.swing.JFrame {
     private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
         // TODO add your handling code here:
         try {
-            dic1.updateFile();
-            dic2.updateFile();
+            dictEV.updateFile();
+            dictVE.updateFile();
         } catch (IOException ex) {
             Logger.getLogger(DictApp.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -654,23 +654,23 @@ public class DictApp extends javax.swing.JFrame {
                 check_input = -1;
             } else {
                 if (state == dictionaryType.EV) {
-                    if (dic1.getWord().contains(wordTextField.getText())) {
+                    if (dictEV.getWord().contains(wordTextField.getText())) {
                         check_input = 1;
                     } else {
                         check_input = 0;
                         int answer = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thêm vào?", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         if (answer == JOptionPane.YES_OPTION) {
-                            dic1.addIntoDict(word, meaning);
+                            dictEV.addIntoDict(word, meaning);
                         }                
                     }
                 } else if (state == dictionaryType.VE) {
-                    if (dic2.getWord().contains(wordTextField.getText())) {
+                    if (dictVE.getWord().contains(wordTextField.getText())) {
                         check_input = 1;
                     } else {
                         check_input = 0;
                         int answer = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thêm vào?", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         if (answer == JOptionPane.YES_OPTION) {
-                            dic2.addIntoDict(word, meaning);
+                            dictVE.addIntoDict(word, meaning);
                         }
                     }
                 }
@@ -829,9 +829,9 @@ public class DictApp extends javax.swing.JFrame {
                     String new_word = wordTextField.getText().toLowerCase();
                     String meaning = "<html>" + meaningTextPane.getText();
                     if (state == dictionaryType.EV) {
-                        dic1.editInDict(old_word, new_word, meaning);
+                        dictEV.editInDict(old_word, new_word, meaning);
                     } else if (state == dictionaryType.VE) {
-                        dic2.editInDict(old_word, new_word, meaning);
+                        dictVE.editInDict(old_word, new_word, meaning);
                     }
                     JOptionPane.showMessageDialog(null, "Đã hoàn thành", "Thông báo", -1);
                     setVisible(false);

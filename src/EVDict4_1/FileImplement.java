@@ -7,8 +7,8 @@ import java.util.Collections;
 public class FileImplement extends DictionaryData {
     
 
-    public FileImplement(int new_state) {
-        if (new_state == 1) {
+    public FileImplement(dictionaryType new_state) {
+        if (new_state == dictionaryType.VE) {
             this.path = "src\\EVDict4_1\\V_E.txt";
             this.state = new_state;
         }
