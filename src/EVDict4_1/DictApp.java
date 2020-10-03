@@ -505,7 +505,7 @@ public class DictApp extends javax.swing.JFrame {
             }
         });
     }
-    
+/*
     public class AddForm extends javax.swing.JFrame {
 
         public AddForm() {
@@ -513,7 +513,7 @@ public class DictApp extends javax.swing.JFrame {
         }
 
         @SuppressWarnings("unchecked")
-        // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+        // <editor-fold defaultstate="collapsed" desc="Generated Code">
         private void initComponents() {
 
             evTypeButton = new javax.swing.JButton();
@@ -610,9 +610,9 @@ public class DictApp extends javax.swing.JFrame {
             );
 
             pack();
-        }// </editor-fold>                        
+        }// </editor-fold>
 
-        private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {
             // TODO add your handling code here:
             String word = wordTextField.getText().toLowerCase();
             String meaning = "<html>" + meaningTextPane.getText();
@@ -627,7 +627,7 @@ public class DictApp extends javax.swing.JFrame {
                         int answer = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thêm vào?", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         if (answer == JOptionPane.YES_OPTION) {
                             dic1.addIntoDict(word, meaning);
-                        }                
+                        }
                     }
                 } else if (state == 1) {
                     if (dic2.getWord().contains(wordTextField.getText())) {
@@ -650,22 +650,22 @@ public class DictApp extends javax.swing.JFrame {
             } else if (check_input == 1) {
                 JOptionPane.showMessageDialog(null, "Từ bị nhập vào đã tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
-        }  
+        }
 
-        private void evTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        private void evTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {
             // TODO add your handling code here:
             state = 0;
-            JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
-        }                                        
+//            JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
+        }
 
-        private void veTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        private void veTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {
             // TODO add your handling code here:
             state = 1;
-            JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
+//            JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Việt-Anh", "Thông báo", -1);
         }
 
 
-        // Variables declaration - do not modify                     
+        // Variables declaration - do not modify
         private javax.swing.JButton evTypeButton;
         private javax.swing.JLabel jLabel1;
         private javax.swing.JLabel jLabel2;
@@ -675,9 +675,9 @@ public class DictApp extends javax.swing.JFrame {
         private javax.swing.JButton submitButton;
         private javax.swing.JButton veTypeButton;
         private javax.swing.JTextField wordTextField;
-        // End of variables declaration                   
+        // End of variables declaration
     }
-    
+*/
     public class EditForm extends javax.swing.JFrame {
 
         public EditForm() {
@@ -809,13 +809,13 @@ public class DictApp extends javax.swing.JFrame {
         private void evTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
             // TODO add your handling code here:
             state = 0;
-            JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
+//            JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
         }                                            
 
         private void veTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
             // TODO add your handling code here:
             state = 1;
-            JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
+//            JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Việt-Anh", "Thông báo", -1);
         }                                            
 
         // Variables declaration - do not modify                     
