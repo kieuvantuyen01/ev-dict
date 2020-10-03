@@ -1,6 +1,7 @@
 package EVDict4_1;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Collections;
 
 public class FileImplement extends DictionaryData {

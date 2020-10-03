@@ -10,7 +10,6 @@ import com.sun.speech.freetts.VoiceManager;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -27,7 +26,7 @@ public class DictApp extends javax.swing.JFrame {
      */
     public DictApp() {
         initComponents();
-        initDictList();
+        initRecentWordList();
         speakerButton.setVisible(false);
     }
     
@@ -38,14 +37,22 @@ public class DictApp extends javax.swing.JFrame {
     
     FileImplement dic1 = new FileImplement(0);
     FileImplement dic2 = new FileImplement(1);
+    DictionaryData da = new DictionaryData();
+    
     
     AddForm af = new AddForm();
+    
+    public void initRecentWordList() {
+        list = new DefaultListModel();
+        da.readFromFile(da.recentWord, "RecentList.txt");
+        list = da.initRecentList(da.recentWord);
+        dictList.setModel(list); 
+    }
     
     public void initDictList() {
         list = new DefaultListModel();
         if (state == 0) {
             list = dic1.initDict();
-            
         } else if (state == 1) {
             list = dic2.initDict();
         }
@@ -74,6 +81,7 @@ public class DictApp extends javax.swing.JFrame {
         editButton = new javax.swing.JButton();
         exportButton = new javax.swing.JButton();
         speakerButton = new javax.swing.JButton();
+        recentButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -178,6 +186,13 @@ public class DictApp extends javax.swing.JFrame {
             }
         });
 
+        recentButton.setText("Recent Word");
+        recentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recentButtonActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
 
         jMenuItem1.setText("jMenuItem1");
@@ -239,7 +254,9 @@ public class DictApp extends javax.swing.JFrame {
                         .addGap(16, 16, 16)
                         .addComponent(evButton)
                         .addGap(30, 30, 30)
-                        .addComponent(veButton)))
+                        .addComponent(veButton)
+                        .addGap(48, 48, 48)
+                        .addComponent(recentButton)))
                 .addContainerGap(146, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -252,7 +269,8 @@ public class DictApp extends javax.swing.JFrame {
                     .addComponent(addButton)
                     .addComponent(deleteButton)
                     .addComponent(editButton)
-                    .addComponent(exportButton))
+                    .addComponent(exportButton)
+                    .addComponent(recentButton))
                 .addGap(79, 79, 79)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -331,6 +349,12 @@ public class DictApp extends javax.swing.JFrame {
         // TODO add your handling code here:
         word_select = dictList.getSelectedValue();
         searchTextField.setText(word_select);
+        da.saveToRencent(word_select);
+        try {
+            da.readToFile(da.recentWord, "RecentList.txt");
+        } catch (IOException ex) {
+            Logger.getLogger(DictApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
         String meaning = "";
         if (state == 0) {
             meaning = dic1.getDictData().get(word_select);
@@ -470,6 +494,13 @@ public class DictApp extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Mọi thông tin đã được thay đổi!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_exportButtonActionPerformed
 
+    private void recentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recentButtonActionPerformed
+        // TODO add your handling code here:
+        searchTextField.setText("");
+        meaningTextPane.setText("");
+        initRecentWordList();
+    }//GEN-LAST:event_recentButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -505,7 +536,7 @@ public class DictApp extends javax.swing.JFrame {
             }
         });
     }
-/*
+    
     public class AddForm extends javax.swing.JFrame {
 
         public AddForm() {
@@ -513,7 +544,7 @@ public class DictApp extends javax.swing.JFrame {
         }
 
         @SuppressWarnings("unchecked")
-        // <editor-fold defaultstate="collapsed" desc="Generated Code">
+        // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
         private void initComponents() {
 
             evTypeButton = new javax.swing.JButton();
@@ -610,9 +641,9 @@ public class DictApp extends javax.swing.JFrame {
             );
 
             pack();
-        }// </editor-fold>
+        }// </editor-fold>                        
 
-        private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
             // TODO add your handling code here:
             String word = wordTextField.getText().toLowerCase();
             String meaning = "<html>" + meaningTextPane.getText();
@@ -627,7 +658,7 @@ public class DictApp extends javax.swing.JFrame {
                         int answer = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thêm vào?", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         if (answer == JOptionPane.YES_OPTION) {
                             dic1.addIntoDict(word, meaning);
-                        }
+                        }                
                     }
                 } else if (state == 1) {
                     if (dic2.getWord().contains(wordTextField.getText())) {
@@ -650,22 +681,22 @@ public class DictApp extends javax.swing.JFrame {
             } else if (check_input == 1) {
                 JOptionPane.showMessageDialog(null, "Từ bị nhập vào đã tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
-        }
+        }  
 
-        private void evTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        private void evTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
             // TODO add your handling code here:
             state = 0;
 //            JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
-        }
+        }                                        
 
-        private void veTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        private void veTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
             // TODO add your handling code here:
             state = 1;
-//            JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Việt-Anh", "Thông báo", -1);
+//            JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
         }
 
 
-        // Variables declaration - do not modify
+        // Variables declaration - do not modify                     
         private javax.swing.JButton evTypeButton;
         private javax.swing.JLabel jLabel1;
         private javax.swing.JLabel jLabel2;
@@ -675,9 +706,9 @@ public class DictApp extends javax.swing.JFrame {
         private javax.swing.JButton submitButton;
         private javax.swing.JButton veTypeButton;
         private javax.swing.JTextField wordTextField;
-        // End of variables declaration
+        // End of variables declaration                   
     }
-*/
+    
     public class EditForm extends javax.swing.JFrame {
 
         public EditForm() {
@@ -815,7 +846,7 @@ public class DictApp extends javax.swing.JFrame {
         private void veTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
             // TODO add your handling code here:
             state = 1;
-//            JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Việt-Anh", "Thông báo", -1);
+//            JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
         }                                            
 
         // Variables declaration - do not modify                     
@@ -851,7 +882,8 @@ public class DictApp extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextPane meaningTextPane;  
+    private javax.swing.JTextPane meaningTextPane;
+    private javax.swing.JButton recentButton;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchTextField;
     private javax.swing.JButton speakerButton;
