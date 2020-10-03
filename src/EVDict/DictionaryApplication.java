@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class DictionaryApplication extends javax.swing.JFrame {
+    addFrame addframe = new addFrame();
     int check_language = 0;
     String voice_speak = "";
     public static int check_input = 0;
@@ -392,8 +393,30 @@ public class DictionaryApplication extends javax.swing.JFrame {
     }//GEN-LAST:event_speakerButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        new addFrame().setVisible(true);
-        this.dispose();
+        addframe.setVisible(true);
+        String word = addframe.getWord();
+        String meaning = addframe.getMeaning();
+        int addFrame_check_input = 0;
+        int addFrame_check_language = addframe.addFrame_check_language;
+        boolean is_word_add = addframe.is_word_add;
+        if (addFrame_check_language == 0) {
+            if (dicV_E.getWord().contains(word)) {
+                addFrame_check_input = 1;
+            } else {
+                dicV_E.addIntoDict(word, meaning);
+            }                
+        }
+        else if (addFrame_check_language == 1) {
+            if (dicE_V.getWord().contains(word)) {
+                addFrame_check_input = 1;
+            } else {
+                dicE_V.addIntoDict(word, meaning);
+            }                
+        }
+        initDictList();
+        if (addFrame_check_input == 1) {
+            JOptionPane.showMessageDialog(null, "Từ bị nhập vào đã tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed

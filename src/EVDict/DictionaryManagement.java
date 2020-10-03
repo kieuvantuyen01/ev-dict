@@ -5,7 +5,7 @@ import java.util.HashMap;
 import javax.swing.DefaultListModel;
 
 public class DictionaryManagement {
-    public String path = "C:\\Users\\Admin\\Desktop\\EVDict\\V_E.txt";
+    public String path = "src\\EVDict\\V_E.txt";
     public int check_language = 0;
     public HashMap<String, String> DictData = new HashMap<>();
     public ArrayList<String> word = new ArrayList<>();

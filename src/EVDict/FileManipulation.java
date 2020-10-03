@@ -11,7 +11,7 @@ public class FileManipulation extends DictionaryManagement {
     
     public FileManipulation(int new_check_language) {
         if (new_check_language == 1) {
-            this.path = "C:\\Users\\Admin\\Desktop\\EVDict\\E_V.txt";
+            this.path = "src\\EVDict\\E_V.txt";
             this.check_language = new_check_language;
         }
         readFile();

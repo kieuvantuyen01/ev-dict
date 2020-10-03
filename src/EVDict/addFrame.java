@@ -10,11 +10,19 @@ import javax.swing.JOptionPane;
  * @author ADMIN
  */
 public class addFrame extends javax.swing.JFrame {
-    DictionaryApplication addFrame = new DictionaryApplication();
+    public static boolean is_word_add;
+    public static int addFrame_check_input;
+    public static int addFrame_check_language;
+    String word;
+    String meaning;
     
     public addFrame() {
         initComponents();
-        addFrame.check_language = 0;
+        is_word_add = false ;
+        addFrame_check_input = 0;
+        addFrame_check_language= 0;
+        word = wordTextField.getText().toLowerCase();
+        meaning = "<html>" + meaningTextPane.getText();
     } 
 
     /**
@@ -123,56 +131,41 @@ public class addFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public String getWord() {
+        return word;
+    }
+    public String getMeaning() {
+        return ("<html>" + meaning);
+    }
+    
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        String word = wordTextField.getText().toLowerCase();
-        String meaning = "<html>" + meaningTextPane.getText();
         if (wordTextField.getText().isEmpty() || meaningTextPane.getText().isEmpty()) {
-            addFrame.check_input = -1;
+            addFrame_check_input = -1;
         } else {
-            if (addFrame.check_language == 0) {
-                if (addFrame.dicV_E.getWord().contains(wordTextField.getText())) {
-                        addFrame.check_input = 1;
-                } else {
-                    addFrame.check_input = 0;
-                    int answer = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thêm vào?", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                    if (answer == JOptionPane.YES_OPTION) {
-                        addFrame.dicV_E.addIntoDict(word, meaning);
-                    }                
-                }
-            } else if (addFrame.check_language == 1) {
-                if (addFrame.dicE_V.getWord().contains(wordTextField.getText())) {
-                    addFrame.check_input = 1;
-                } else {
-                    addFrame.check_input = 0;
-                    int answer = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thêm vào?", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                    if (answer == JOptionPane.YES_OPTION) {
-                        addFrame.dicE_V.addIntoDict(word, meaning);
-                    }
-                }
+            int answer = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thêm vào?", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            if (answer == JOptionPane.YES_OPTION) {
+                is_word_add = true;
+                addFrame_check_input = 0;
             }
             JOptionPane.showMessageDialog(null, "Đã hoàn thành", "Thông báo", -1);
-            addFrame.initDictList();
             new DictionaryApplication().setVisible(true);
             this.dispose();
         }
 
-        if (addFrame.check_input == -1) {
+        if (addFrame_check_input == -1) {
             JOptionPane.showMessageDialog(null, "Ô từ mới đang bị rỗng!!! Vui lòng nhập lại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        } else if (addFrame.check_input == 1) {
-            JOptionPane.showMessageDialog(null, "Từ bị nhập vào đã tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        }
+        } 
     }//GEN-LAST:event_submitButtonActionPerformed
 
     private void veTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_veTypeButtonActionPerformed
         // TODO add your handling code here:
-        addFrame.check_language = 0;
+        addFrame_check_language = 0;
         JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Việt-Anh", "Thông báo", -1);
     }//GEN-LAST:event_veTypeButtonActionPerformed
 
     private void evTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evTypeButtonActionPerformed
         // TODO add your handling code here:
-        addFrame.check_language = 1;
+        addFrame_check_language = 1;
         JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
     }//GEN-LAST:event_evTypeButtonActionPerformed
 
