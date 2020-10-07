@@ -19,14 +19,17 @@ import javax.swing.JOptionPane;
  * @author ADMIN
  */
 public class GoogleAPIForm extends javax.swing.JFrame {
-//
-//    /**
-//     * Creates new form GoogleAPIForm
-//     */
-//    public AddForm() {
+
+    /**
+     * Creates new form GoogleAPIForm
+     */
+//    public GoogleAPIForm() {
 //        initComponents();
+//        textSpeakerButton.setVisible(false);
+//        meaningSpeakerButton.setVisible(false);
 //    }
-//    
+    
+//    VoiceImplement speaker = new VoiceImplement();
     public int state = 0;
 
 //    private static String translate(String langFrom, String langTo, String text) throws IOException {
@@ -61,12 +64,15 @@ public class GoogleAPIForm extends javax.swing.JFrame {
         evTypeButton = new javax.swing.JButton();
         veTypeButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        wordTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         submitButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         meaningTextPane = new javax.swing.JTextPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        wordTextPane = new javax.swing.JTextPane();
+        textSpeakerButton = new javax.swing.JButton();
+        meaningSpeakerButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -99,6 +105,22 @@ public class GoogleAPIForm extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(meaningTextPane);
 
+        jScrollPane2.setViewportView(wordTextPane);
+
+        textSpeakerButton.setText("Speaker");
+        textSpeakerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textSpeakerButtonActionPerformed(evt);
+            }
+        });
+
+        meaningSpeakerButton.setText("Speaker");
+        meaningSpeakerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                meaningSpeakerButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,18 +131,23 @@ public class GoogleAPIForm extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(wordTextField)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(123, 123, 123)
                         .addComponent(evTypeButton)
                         .addGap(151, 151, 151)
-                        .addComponent(veTypeButton)))
-                .addContainerGap(146, Short.MAX_VALUE))
+                        .addComponent(veTypeButton)
+                        .addContainerGap(253, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textSpeakerButton)
+                            .addComponent(meaningSpeakerButton))
+                        .addGap(29, 29, 29))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(submitButton)
@@ -134,18 +161,29 @@ public class GoogleAPIForm extends javax.swing.JFrame {
                     .addComponent(evTypeButton)
                     .addComponent(veTypeButton)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(wordTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addGap(69, 69, 69)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(textSpeakerButton)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(64, 64, 64)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(meaningSpeakerButton)
+                        .addGap(68, 68, 68)))
                 .addComponent(submitButton)
                 .addGap(34, 34, 34))
         );
@@ -155,6 +193,7 @@ public class GoogleAPIForm extends javax.swing.JFrame {
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
+//        textSpeakerButton.setVisible(true);
 //        if (wordTextField.getText().isEmpty() || meaningTextPane.getText().isEmpty()) {
 //            JOptionPane.showMessageDialog(null, "Ô từ mới đang bị rỗng!!! Vui lòng nhập lại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
 //        } else if (state == 0) {
@@ -188,6 +227,16 @@ public class GoogleAPIForm extends javax.swing.JFrame {
         state = 1;
         JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
     }//GEN-LAST:event_veTypeButtonActionPerformed
+
+    private void textSpeakerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textSpeakerButtonActionPerformed
+        // TODO add your handling code here:
+//        speaker.HandleVoice(wordTextPane.getText());
+    }//GEN-LAST:event_textSpeakerButtonActionPerformed
+
+    private void meaningSpeakerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meaningSpeakerButtonActionPerformed
+        // TODO add your handling code here:
+//        speaker.HandleVoice(meaningTextPane.getText());
+    }//GEN-LAST:event_meaningSpeakerButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,9 +280,12 @@ public class GoogleAPIForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton meaningSpeakerButton;
     private javax.swing.JTextPane meaningTextPane;
     private javax.swing.JButton submitButton;
+    private javax.swing.JButton textSpeakerButton;
     private javax.swing.JButton veTypeButton;
-    private javax.swing.JTextField wordTextField;
+    private javax.swing.JTextPane wordTextPane;
     // End of variables declaration//GEN-END:variables
 }
