@@ -5,8 +5,6 @@
  */
 package EVDict4_1;
 
-import com.sun.speech.freetts.Voice;
-import com.sun.speech.freetts.VoiceManager;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,6 +43,7 @@ public class DictApp extends javax.swing.JFrame {
     FileImplement dic1 = new FileImplement(0);
     FileImplement dic2 = new FileImplement(1);
     DictionaryData da = new DictionaryData();
+    VoiceImplement speaker = new VoiceImplement();
     
     
     AddForm af = new AddForm();
@@ -139,70 +138,70 @@ public class DictApp extends javax.swing.JFrame {
         meaningTextPane.setContentType("text/html"); // NOI18N
         jScrollPane2.setViewportView(meaningTextPane);
 
-        evButton.setText("E_VButton");
+        evButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/evdict.png"))); // NOI18N
         evButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 evButtonActionPerformed(evt);
             }
         });
 
-        veButton.setText("V_EButton");
+        veButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/vedict.png"))); // NOI18N
         veButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 veButtonActionPerformed(evt);
             }
         });
 
-        searchButton.setText("search");
+        searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/search.png"))); // NOI18N
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchButtonActionPerformed(evt);
             }
         });
 
-        addButton.setText("Add");
+        addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/add.png"))); // NOI18N
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addButtonActionPerformed(evt);
             }
         });
 
-        deleteButton.setText("Remove");
+        deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/remove.png"))); // NOI18N
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButtonActionPerformed(evt);
             }
         });
 
-        editButton.setText("Edit");
+        editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/edit.png"))); // NOI18N
         editButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editButtonActionPerformed(evt);
             }
         });
 
-        exportButton.setText("Export");
+        exportButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/export.png"))); // NOI18N
         exportButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exportButtonActionPerformed(evt);
             }
         });
 
-        speakerButton.setText("Speaker");
+        speakerButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/speaker.png"))); // NOI18N
         speakerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 speakerButtonActionPerformed(evt);
             }
         });
 
-        recentButton.setText("Recent Word");
+        recentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/history.png"))); // NOI18N
         recentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 recentButtonActionPerformed(evt);
             }
         });
 
-        apiButton.setText("Dịch Văn Bản");
+        apiButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/ggtranslate.png"))); // NOI18N
         apiButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 apiButtonActionPerformed(evt);
@@ -246,65 +245,65 @@ public class DictApp extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(107, 107, 107)
+                        .addGap(15, 15, 15)
+                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(searchTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
                             .addComponent(jScrollPane2))
-                        .addGap(65, 65, 65)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(speakerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addGap(82, 82, 82)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(speakerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(addButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(deleteButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(editButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(exportButton)
-                        .addGap(16, 16, 16)
-                        .addComponent(evButton)
-                        .addGap(30, 30, 30)
-                        .addComponent(veButton)
-                        .addGap(48, 48, 48)
-                        .addComponent(recentButton)
-                        .addGap(33, 33, 33)
-                        .addComponent(apiButton, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)))
-                .addContainerGap(146, Short.MAX_VALUE))
+                        .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43)
+                        .addComponent(evButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(veButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(recentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(apiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(evButton)
-                    .addComponent(veButton)
-                    .addComponent(addButton)
-                    .addComponent(deleteButton)
-                    .addComponent(editButton)
-                    .addComponent(exportButton)
-                    .addComponent(recentButton)
-                    .addComponent(apiButton))
-                .addGap(79, 79, 79)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(evButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(veButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(recentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(apiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(exportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(searchButton))
+                        .addGap(47, 47, 47)
+                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(speakerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(speakerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE))))
                 .addContainerGap())
         );
 
@@ -442,6 +441,7 @@ public class DictApp extends javax.swing.JFrame {
                 Logger.getLogger(DictApp.class.getName()).log(Level.SEVERE, null, ex);
             }
             
+            
         }
     }//GEN-LAST:event_formWindowClosing
 
@@ -495,21 +495,18 @@ public class DictApp extends javax.swing.JFrame {
 
     private void speakerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_speakerButtonActionPerformed
         // TODO add your handling code here:
-        Voice voice;
-        VoiceManager voiceManager = VoiceManager.getInstance();   
-        voice = voiceManager.getVoice("kevin16");
-        voice.allocate();
-        voice.speak(word_select);
+        speaker.HandleVoice(word_select);
     }//GEN-LAST:event_speakerButtonActionPerformed
 
     private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
-        // TODO add your handling code here:
         try {
+            // TODO add your handling code here:
             dic1.updateFile();
             dic2.updateFile();
         } catch (IOException ex) {
             Logger.getLogger(DictApp.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         JOptionPane.showMessageDialog(null, "Mọi thông tin đã được thay đổi!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_exportButtonActionPerformed
 
@@ -670,7 +667,8 @@ public class DictApp extends javax.swing.JFrame {
         private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
             // TODO add your handling code here:
             String word = wordTextField.getText().toLowerCase();
-            String meaning = "<html>" + meaningTextPane.getText();
+            String meaning = meaningTextPane.getText();
+            meaning = meaning.replace("\n", "");
             if (wordTextField.getText().isEmpty() || meaningTextPane.getText().isEmpty()) {
                 check_input = -1;
             } else {
@@ -682,7 +680,7 @@ public class DictApp extends javax.swing.JFrame {
                         int answer = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thêm vào?", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         if (answer == JOptionPane.YES_OPTION) {
                             dic1.addIntoDict(word, meaning);
-                        }                
+                        }
                     }
                 } else if (state == 1) {
                     if (dic2.getWord().contains(wordTextField.getText())) {
@@ -691,7 +689,7 @@ public class DictApp extends javax.swing.JFrame {
                         check_input = 0;
                         int answer = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thêm vào?", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         if (answer == JOptionPane.YES_OPTION) {
-                            dic2.addIntoDict(word, meaning);
+                            dic1.addIntoDict(word, meaning);
                         }
                     }
                 }
@@ -848,9 +846,12 @@ public class DictApp extends javax.swing.JFrame {
                 if (answer == JOptionPane.YES_OPTION) {
                     String old_word = dictList.getSelectedValue();
                     String new_word = wordTextField.getText().toLowerCase();
-                    String meaning = "<html>" + meaningTextPane.getText();
+                    String meaning = meaningTextPane.getText();
+                    meaning = meaning.replace("\n", "");
                     if (state == 0) {
-                        dic1.editInDict(old_word, new_word, meaning);
+                        System.out.println(old_word);
+                        dic1.removeFromDict(old_word);
+                        dic1.addIntoDict(new_word, meaning);
                     } else if (state == 1) {
                         dic2.editInDict(old_word, new_word, meaning);
                     }
@@ -890,6 +891,8 @@ public class DictApp extends javax.swing.JFrame {
         
         public GoogleAPIForm() {
             initComponents();
+            textSpeakerButton.setVisible(false);
+            meaningSpeakerButton.setVisible(false);
         }
 
         private String translate(String langFrom, String langTo, String text) throws IOException {
@@ -924,12 +927,15 @@ public class DictApp extends javax.swing.JFrame {
             evTypeButton = new javax.swing.JButton();
             veTypeButton = new javax.swing.JButton();
             jLabel1 = new javax.swing.JLabel();
-            wordTextField = new javax.swing.JTextField();
             jLabel2 = new javax.swing.JLabel();
             jLabel3 = new javax.swing.JLabel();
             submitButton = new javax.swing.JButton();
             jScrollPane1 = new javax.swing.JScrollPane();
             meaningTextPane = new javax.swing.JTextPane();
+            jScrollPane2 = new javax.swing.JScrollPane();
+            wordTextPane = new javax.swing.JTextPane();
+            textSpeakerButton = new javax.swing.JButton();
+            meaningSpeakerButton = new javax.swing.JButton();
 
             setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -966,6 +972,22 @@ public class DictApp extends javax.swing.JFrame {
 
             jScrollPane1.setViewportView(meaningTextPane);
 
+            jScrollPane2.setViewportView(wordTextPane);
+
+            textSpeakerButton.setText("Speaker");
+            textSpeakerButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    textSpeakerButtonActionPerformed(evt);
+                }
+            });
+
+            meaningSpeakerButton.setText("Speaker");
+            meaningSpeakerButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    meaningSpeakerButtonActionPerformed(evt);
+                }
+            });
+
             javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
             getContentPane().setLayout(layout);
             layout.setHorizontalGroup(
@@ -976,18 +998,23 @@ public class DictApp extends javax.swing.JFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(35, 35, 35)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(wordTextField)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
                             .addGap(123, 123, 123)
                             .addComponent(evTypeButton)
                             .addGap(151, 151, 151)
-                            .addComponent(veTypeButton)))
-                    .addContainerGap(146, Short.MAX_VALUE))
+                            .addComponent(veTypeButton)
+                            .addContainerGap(253, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(35, 35, 35)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(textSpeakerButton)
+                                .addComponent(meaningSpeakerButton))
+                            .addGap(29, 29, 29))))
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(submitButton)
@@ -1001,30 +1028,41 @@ public class DictApp extends javax.swing.JFrame {
                         .addComponent(evTypeButton)
                         .addComponent(veTypeButton)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(36, 36, 36)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(wordTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(18, 18, 18)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(34, 34, 34)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(106, 106, 106)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(18, 18, 18)
+                            .addGap(69, 69, 69)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(82, 82, 82)
+                            .addComponent(textSpeakerButton)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(27, 27, 27)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(64, 64, 64)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(18, 18, 18))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(meaningSpeakerButton)
+                            .addGap(68, 68, 68)))
                     .addComponent(submitButton)
                     .addGap(34, 34, 34))
             );
 
             pack();
-        }// </editor-fold>                        
+        }// </editor-fold>                         
 
         private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) throws IOException {                                             
             // TODO add your handling code here:
-            String text = apiForm.wordTextField.getText();
+            String text = apiForm.wordTextPane.getText();
             if (checkAvailable()) {
-                if (wordTextField.getText().isEmpty()) {
+                if (wordTextPane.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Ô văn bản đang bị trống!!! Vui lòng nhập lại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 } else {
                     if (state == 0) {
@@ -1032,6 +1070,8 @@ public class DictApp extends javax.swing.JFrame {
                     } else if (state == 1) {
                         apiForm.meaningTextPane.setText(apiForm.translate("vi", "en", text));
                     }
+                    textSpeakerButton.setVisible(true);
+                    meaningSpeakerButton.setVisible(true);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Vui lòng thử lại kết nối Internet!", "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -1048,7 +1088,17 @@ public class DictApp extends javax.swing.JFrame {
             // TODO add your handling code here:
             state = 1;
             JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Việt-Anh", "Thông báo", -1);
-        }                                            
+        }      
+        
+        private void textSpeakerButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        // TODO add your handling code here:
+            speaker.HandleVoice(wordTextPane.getText());
+        }                                                 
+
+        private void meaningSpeakerButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                     
+            // TODO add your handling code here:
+            speaker.HandleVoice(meaningTextPane.getText());
+        }
 
         // Variables declaration - do not modify                     
         private javax.swing.JButton evTypeButton;
@@ -1056,10 +1106,13 @@ public class DictApp extends javax.swing.JFrame {
         private javax.swing.JLabel jLabel2;
         private javax.swing.JLabel jLabel3;
         private javax.swing.JScrollPane jScrollPane1;
+        private javax.swing.JScrollPane jScrollPane2;
+        private javax.swing.JButton meaningSpeakerButton;
         private javax.swing.JTextPane meaningTextPane;
         private javax.swing.JButton submitButton;
+        private javax.swing.JButton textSpeakerButton;
         private javax.swing.JButton veTypeButton;
-        private javax.swing.JTextField wordTextField;
+        private javax.swing.JTextPane wordTextPane;
         // End of variables declaration                   
 
         private boolean checkAvailable() {
