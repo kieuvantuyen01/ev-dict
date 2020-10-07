@@ -667,7 +667,7 @@ public class DictApp extends javax.swing.JFrame {
         private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
             // TODO add your handling code here:
             String word = wordTextField.getText().toLowerCase();
-            String meaning = meaningTextPane.getText();
+            String meaning = "<html>" + meaningTextPane.getText();
             meaning = meaning.replace("\n", "");
             if (wordTextField.getText().isEmpty() || meaningTextPane.getText().isEmpty()) {
                 check_input = -1;
