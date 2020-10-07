@@ -5,6 +5,8 @@
  */
 package EVDict4_1;
 
+import EVDict1.Dictionary;
+
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,6 +21,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+
+import static EVDict4_1.DictionaryData.dictionaryType.EV;
+import static EVDict4_1.DictionaryData.dictionaryType.VE;
 
 /**
  *
@@ -35,18 +40,19 @@ public class DictApp extends javax.swing.JFrame {
         speakerButton.setVisible(false);
     }
     
-    public int state = 0;
+    public DictionaryData.dictionaryType state = EV;
     public int check_input = 0;
     DefaultListModel list;
     String word_select = "";
     
-    FileImplement dic1 = new FileImplement(0);
-    FileImplement dic2 = new FileImplement(1);
+    FileImplement dictEV = new FileImplement(EV);
+    FileImplement dictVE = new FileImplement(VE);
     DictionaryData da = new DictionaryData();
     VoiceImplement speaker = new VoiceImplement();
     
     
     AddForm af = new AddForm();
+    EditForm ef = new EditForm();
     GoogleAPIForm apiForm = new GoogleAPIForm();
     
     public void initRecentWordList() {
@@ -58,10 +64,10 @@ public class DictApp extends javax.swing.JFrame {
     
     public void initDictList() {
         list = new DefaultListModel();
-        if (state == 0) {
-            list = dic1.initDict();
-        } else if (state == 1) {
-            list = dic2.initDict();
+        if (state == EV) {
+            list = dictEV.initDict();
+        } else if (state == VE) {
+            list = dictVE.initDict();
         }
         dictList.setModel(list);
     }
@@ -316,17 +322,17 @@ public class DictApp extends javax.swing.JFrame {
             String searchWord = searchTextField.getText();
             if (searchWord.trim().isEmpty()) {
                 check_input = -1;
-            } else if (state == 0) {
-                if (dic1.getWord().contains(searchWord)) {
+            } else if (state == EV) {
+                if (dictEV.getWord().contains(searchWord)) {
                     check_input = 1;
-                    meaningTextPane.setText(dic1.getDictData().get(searchWord));
+                    meaningTextPane.setText(dictEV.getDictData().get(searchWord));
                 } else {
                     check_input = 0;
                 }
-            } else if (state == 1) {
-                if (dic2.getWord().contains(searchWord)) {
+            } else if (state == VE) {
+                if (dictVE.getWord().contains(searchWord)) {
                     check_input = 1;
-                    meaningTextPane.setText(dic2.getDictData().get(searchWord));
+                    meaningTextPane.setText(dictVE.getDictData().get(searchWord));
                 } else {
                     check_input = 0;
                 }
@@ -344,17 +350,17 @@ public class DictApp extends javax.swing.JFrame {
         ArrayList<String> newDictList = new ArrayList<>();
         list = new DefaultListModel<>();
         String searchWord = searchTextField.getText();
-        if (state == 0) {
+        if (state == EV) {
             if (searchWord.trim().isEmpty()) {
-                newDictList = new ArrayList(dic1.getWord());
+                newDictList = new ArrayList(dictEV.getWord());
             } else {
-                newDictList = dic1.searchWord(searchWord, dic1.getWord());
+                newDictList = dictEV.searchWord(searchWord, dictEV.getWord());
             }
-        } else if (state == 1) {
+        } else if (state == VE) {
             if (searchWord.trim().isEmpty()) {
-                newDictList = new ArrayList(dic2.getWord());
+                newDictList = new ArrayList(dictVE.getWord());
             } else {
-                newDictList = dic2.searchWord(searchWord, dic2.getWord());
+                newDictList = dictVE.searchWord(searchWord, dictVE.getWord());
             }
         }
         for (String word : newDictList) {
@@ -374,10 +380,10 @@ public class DictApp extends javax.swing.JFrame {
             Logger.getLogger(DictApp.class.getName()).log(Level.SEVERE, null, ex);
         }
         String meaning = "";
-        if (state == 0) {
-            meaning = dic1.getDictData().get(word_select);
-        } else if (state == 1) {
-            meaning = dic2.getDictData().get(word_select);
+        if (state == EV) {
+            meaning = dictEV.getDictData().get(word_select);
+        } else if (state == VE) {
+            meaning = dictVE.getDictData().get(word_select);
         }
         speakerButton.setVisible(true);
         meaningTextPane.setText(meaning);
@@ -387,7 +393,7 @@ public class DictApp extends javax.swing.JFrame {
         // TODO add your handling code here:
         searchTextField.setText("");
         meaningTextPane.setText("");
-        state = 0;
+        state = EV;
         initDictList();
     }//GEN-LAST:event_evButtonActionPerformed
 
@@ -396,15 +402,15 @@ public class DictApp extends javax.swing.JFrame {
         String searchWord = searchTextField.getText();       
         if (searchWord.trim().isEmpty()) {
             check_input = -1;
-        } else if (state == 0) {
-            if (dic1.getWord().contains(searchWord)) {
+        } else if (state == EV) {
+            if (dictEV.getWord().contains(searchWord)) {
                 check_input = 1;
-                meaningTextPane.setText(dic1.getDictData().get(searchTextField.getText()));
+                meaningTextPane.setText(dictEV.getDictData().get(searchTextField.getText()));
             }
-        } else if (state == 1) {
-            if (dic2.getWord().contains(searchWord)) {
+        } else if (state == VE) {
+            if (dictVE.getWord().contains(searchWord)) {
                 check_input = 1;
-                meaningTextPane.setText(dic2.getDictData().get(searchTextField.getText()));
+                meaningTextPane.setText(dictVE.getDictData().get(searchTextField.getText()));
             }
         }
         
@@ -426,7 +432,7 @@ public class DictApp extends javax.swing.JFrame {
         // TODO add your handling code here:
         searchTextField.setText("");
         meaningTextPane.setText("");
-        state = 1;
+        state = VE;
         initDictList();
     }//GEN-LAST:event_veButtonActionPerformed
 
@@ -435,8 +441,8 @@ public class DictApp extends javax.swing.JFrame {
         int answer = JOptionPane.showConfirmDialog(null, "Bạn có muốn lưu lại những thay đổi không?", "Thông báo", JOptionPane.YES_OPTION);
         if (answer == JOptionPane.YES_OPTION) {
             try {
-                dic1.updateFile();
-                dic2.updateFile();
+                dictEV.updateFile();
+                dictVE.updateFile();
             } catch (IOException ex) {
                 Logger.getLogger(DictApp.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -452,15 +458,15 @@ public class DictApp extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Bạn chưa chọn từ để xoá!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
             int answer = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá từ này khỏi từ điển không?", "Cảnh báo", JOptionPane.YES_OPTION);
-            if (state == 0) {                
+            if (state == EV) {
                 if (answer == JOptionPane.YES_OPTION) {
-                    dic1.removeFromDict(word);
+                    dictEV.removeFromDict(word);
                     initDictList();
                     check_input = 1;
                 }                
-            } else if (state == 1) {                
+            } else if (state == VE) {
                 if (answer == JOptionPane.YES_OPTION) {
-                    dic2.removeFromDict(word);
+                    dictVE.removeFromDict(word);
                     initDictList();
                     check_input = 1;
                 }                
@@ -474,16 +480,16 @@ public class DictApp extends javax.swing.JFrame {
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
         String word = dictList.getSelectedValue();
-        EditForm ef = new EditForm();
+        
         if (word == null) {
             JOptionPane.showMessageDialog(null, "Bạn chưa chọn từ để sửa!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
             ef.setVisible(true);
             ef.wordTextField.setText(word);
-            if (state == 0) {
-                ef.meaningTextPane.setText(dic1.getDictData().get(word));
-            } else if (state == 1) {
-                ef.meaningTextPane.setText(dic2.getDictData().get(word));
+            if (state == EV) {
+                ef.meaningTextPane.setText(dictEV.getDictData().get(word));
+            } else if (state == VE) {
+                ef.meaningTextPane.setText(dictVE.getDictData().get(word));
             }
         }
     }//GEN-LAST:event_editButtonActionPerformed
@@ -501,8 +507,8 @@ public class DictApp extends javax.swing.JFrame {
     private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
         try {
             // TODO add your handling code here:
-            dic1.updateFile();
-            dic2.updateFile();
+            dictEV.updateFile();
+            dictVE.updateFile();
         } catch (IOException ex) {
             Logger.getLogger(DictApp.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -521,6 +527,8 @@ public class DictApp extends javax.swing.JFrame {
         // TODO add your handling code here:
         apiForm.setVisible(true);
     }//GEN-LAST:event_apiButtonActionPerformed
+
+    public static DictApp dictApp = new DictApp();
 
     /**
      * @param args the command line arguments
@@ -553,589 +561,16 @@ public class DictApp extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DictApp().setVisible(true);
+                dictApp.setVisible(true);
             }
         });
     }
-    
-    public class AddForm extends javax.swing.JFrame {
-
-        public AddForm() {
-            initComponents();
-        }
-
-        @SuppressWarnings("unchecked")
-        // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-        private void initComponents() {
-
-            evTypeButton = new javax.swing.JButton();
-            veTypeButton = new javax.swing.JButton();
-            jLabel1 = new javax.swing.JLabel();
-            wordTextField = new javax.swing.JTextField();
-            jLabel2 = new javax.swing.JLabel();
-            jLabel3 = new javax.swing.JLabel();
-            submitButton = new javax.swing.JButton();
-            jScrollPane1 = new javax.swing.JScrollPane();
-            meaningTextPane = new javax.swing.JTextPane();
-
-            setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-            evTypeButton.setText("Anh - Việt");
-            evTypeButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    evTypeButtonActionPerformed(evt);
-                }
-            });
-
-            veTypeButton.setText("Việt - Anh");
-            veTypeButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    veTypeButtonActionPerformed(evt);
-                }
-            });
-
-            jLabel1.setText("Loại từ:");
-
-            jLabel2.setText("Từ: ");
-
-            jLabel3.setText("Nghĩa của từ:");
-
-            submitButton.setText("Xác nhận");
-            submitButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    submitButtonActionPerformed(evt);
-                }
-            });
-
-            meaningTextPane.setContentType("text/html"); // NOI18N
-            jScrollPane1.setViewportView(meaningTextPane);
-
-            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-            getContentPane().setLayout(layout);
-            layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(62, 62, 62)
-                                    .addComponent(evTypeButton)
-                                    .addGap(89, 89, 89)
-                                    .addComponent(veTypeButton)
-                                    .addGap(109, 109, 109))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGap(38, 38, 38)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
-                                        .addComponent(wordTextField)))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(216, 216, 216)
-                            .addComponent(submitButton)))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            );
-            layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(33, 33, 33)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(evTypeButton)
-                        .addComponent(veTypeButton)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(32, 32, 32)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(wordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(45, 45, 45)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(submitButton)))
-                    .addContainerGap(45, Short.MAX_VALUE))
-            );
-
-            pack();
-        }// </editor-fold>                        
-
-        private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-            // TODO add your handling code here:
-            String word = wordTextField.getText().toLowerCase();
-            String meaning = "<html>" + meaningTextPane.getText();
-            meaning = meaning.replace("\n", "");
-            if (wordTextField.getText().isEmpty() || meaningTextPane.getText().isEmpty()) {
-                check_input = -1;
-            } else {
-                if (state == 0) {
-                    if (dic1.getWord().contains(wordTextField.getText())) {
-                        check_input = 1;
-                    } else {
-                        check_input = 0;
-                        int answer = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thêm vào?", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                        if (answer == JOptionPane.YES_OPTION) {
-                            dic1.addIntoDict(word, meaning);
-                        }
-                    }
-                } else if (state == 1) {
-                    if (dic2.getWord().contains(wordTextField.getText())) {
-                        check_input = 1;
-                    } else {
-                        check_input = 0;
-                        int answer = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thêm vào?", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                        if (answer == JOptionPane.YES_OPTION) {
-                            dic1.addIntoDict(word, meaning);
-                        }
-                    }
-                }
-                JOptionPane.showMessageDialog(null, "Đã hoàn thành", "Thông báo", -1);
-                setVisible(false);
-                initDictList();
-            }
-
-            if (check_input == -1) {
-                JOptionPane.showMessageDialog(null, "Ô từ mới đang bị rỗng!!! Vui lòng nhập lại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            } else if (check_input == 1) {
-                JOptionPane.showMessageDialog(null, "Từ bị nhập vào đã tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            }
-        }  
-
-        private void evTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
-            // TODO add your handling code here:
-            state = 0;
-            JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
-        }                                        
-
-        private void veTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
-            // TODO add your handling code here:
-            state = 1;
-            JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
-        }
-
-
-        // Variables declaration - do not modify                     
-        private javax.swing.JButton evTypeButton;
-        private javax.swing.JLabel jLabel1;
-        private javax.swing.JLabel jLabel2;
-        private javax.swing.JLabel jLabel3;
-        private javax.swing.JScrollPane jScrollPane1;
-        private javax.swing.JTextPane meaningTextPane;
-        private javax.swing.JButton submitButton;
-        private javax.swing.JButton veTypeButton;
-        private javax.swing.JTextField wordTextField;
-        // End of variables declaration                   
-    }
-    
-    public class EditForm extends javax.swing.JFrame {
-
-        public EditForm() {
-            initComponents();
-        }
-
-        @SuppressWarnings("unchecked")
-        // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-        private void initComponents() {
-
-            evTypeButton = new javax.swing.JButton();
-            veTypeButton = new javax.swing.JButton();
-            jLabel1 = new javax.swing.JLabel();
-            wordTextField = new javax.swing.JTextField();
-            jLabel2 = new javax.swing.JLabel();
-            jLabel3 = new javax.swing.JLabel();
-            submitButton = new javax.swing.JButton();
-            jScrollPane1 = new javax.swing.JScrollPane();
-            meaningTextPane = new javax.swing.JTextPane();
-
-            setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-            evTypeButton.setText("Anh - Việt");
-            evTypeButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    evTypeButtonActionPerformed(evt);
-                }
-            });
-
-            veTypeButton.setText("Việt - Anh");
-            veTypeButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    veTypeButtonActionPerformed(evt);
-                }
-            });
-
-            jLabel1.setText("Loại từ:");
-
-            jLabel2.setText("Từ: ");
-
-            jLabel3.setText("Nghĩa của từ:");
-
-            submitButton.setText("Xác nhận");
-            submitButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    submitButtonActionPerformed(evt);
-                }
-            });
-
-            meaningTextPane.setContentType("text/html"); // NOI18N
-            jScrollPane1.setViewportView(meaningTextPane);
-
-            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-            getContentPane().setLayout(layout);
-            layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(62, 62, 62)
-                                    .addComponent(evTypeButton)
-                                    .addGap(89, 89, 89)
-                                    .addComponent(veTypeButton)
-                                    .addGap(109, 109, 109))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGap(38, 38, 38)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
-                                        .addComponent(wordTextField)))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(216, 216, 216)
-                            .addComponent(submitButton)))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            );
-            layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(33, 33, 33)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(evTypeButton)
-                        .addComponent(veTypeButton)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(32, 32, 32)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(wordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(45, 45, 45)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(submitButton)))
-                    .addContainerGap(45, Short.MAX_VALUE))
-            );
-
-            pack();
-        }// </editor-fold>                        
-
-        private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-            // TODO add your handling code here:
-            if (wordTextField.getText().isEmpty() || meaningTextPane.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Ô từ mới đang bị rỗng!!! Vui lòng nhập lại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            } else {
-                int answer = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn sửa từ này?", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                if (answer == JOptionPane.YES_OPTION) {
-                    String old_word = dictList.getSelectedValue();
-                    String new_word = wordTextField.getText().toLowerCase();
-                    String meaning = meaningTextPane.getText();
-                    meaning = meaning.replace("\n", "");
-                    if (state == 0) {
-                        System.out.println(old_word);
-                        dic1.removeFromDict(old_word);
-                        dic1.addIntoDict(new_word, meaning);
-                    } else if (state == 1) {
-                        dic2.editInDict(old_word, new_word, meaning);
-                    }
-                    JOptionPane.showMessageDialog(null, "Đã hoàn thành", "Thông báo", -1);
-                    setVisible(false);
-                    initDictList();
-                }
-            }
-        }                                            
-
-        private void evTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-            // TODO add your handling code here:
-            state = 0;
-            JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
-        }                                            
-
-        private void veTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-            // TODO add your handling code here:
-            state = 1;
-            JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
-        }                                            
-
-        // Variables declaration - do not modify                     
-        private javax.swing.JButton evTypeButton;
-        private javax.swing.JLabel jLabel1;
-        private javax.swing.JLabel jLabel2;
-        private javax.swing.JLabel jLabel3;
-        private javax.swing.JScrollPane jScrollPane1;
-        public javax.swing.JTextPane meaningTextPane;
-        private javax.swing.JButton submitButton;
-        private javax.swing.JButton veTypeButton;
-        public javax.swing.JTextField wordTextField;
-        // End of variables declaration                   
-    }
-    
-    public class GoogleAPIForm extends javax.swing.JFrame {
-        
-        public GoogleAPIForm() {
-            initComponents();
-            textSpeakerButton.setVisible(false);
-            meaningSpeakerButton.setVisible(false);
-        }
-
-        private String translate(String langFrom, String langTo, String text) throws IOException {
-            // INSERT YOU URL HERE
-            String urlStr = "https://script.google.com/macros/s/AKfycbxiQVsKyWiGXFDU8LeW-fi9KfS0ZIE01ovCpDUJkbJL0-3R6lw/exec" +
-                    "?q=" + URLEncoder.encode(text, "UTF-8") +
-                    "&target=" + langTo +
-                    "&source=" + langFrom;
-            URL url = new URL(urlStr);
-            StringBuilder response = new StringBuilder();
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setRequestProperty("User-Agent", "Mozilla/5.0");
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-            return response.toString();
-        }
-
-
-        /**
-         * This method is called from within the constructor to initialize the form.
-         * WARNING: Do NOT modify this code. The content of this method is always
-         * regenerated by the Form Editor.
-         */
-        @SuppressWarnings("unchecked")
-        // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-        private void initComponents() {
-
-            evTypeButton = new javax.swing.JButton();
-            veTypeButton = new javax.swing.JButton();
-            jLabel1 = new javax.swing.JLabel();
-            jLabel2 = new javax.swing.JLabel();
-            jLabel3 = new javax.swing.JLabel();
-            submitButton = new javax.swing.JButton();
-            jScrollPane1 = new javax.swing.JScrollPane();
-            meaningTextPane = new javax.swing.JTextPane();
-            jScrollPane2 = new javax.swing.JScrollPane();
-            wordTextPane = new javax.swing.JTextPane();
-            textSpeakerButton = new javax.swing.JButton();
-            meaningSpeakerButton = new javax.swing.JButton();
-
-            setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-            evTypeButton.setText("Eng_Viet");
-            evTypeButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    evTypeButtonActionPerformed(evt);
-                }
-            });
-
-            veTypeButton.setText("Viet_Anh");
-            veTypeButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    veTypeButtonActionPerformed(evt);
-                }
-            });
-
-            jLabel1.setText("Kiểu/Type:");
-
-            jLabel2.setText("Văn bản/Text:");
-
-            jLabel3.setText("Dịch/Meaning:");
-
-            submitButton.setText("Submit");
-            submitButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    try {
-                        submitButtonActionPerformed(evt);
-                    } catch (IOException ex) {
-                        Logger.getLogger(DictApp.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            });
-
-            jScrollPane1.setViewportView(meaningTextPane);
-
-            jScrollPane2.setViewportView(wordTextPane);
-
-            textSpeakerButton.setText("Speaker");
-            textSpeakerButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    textSpeakerButtonActionPerformed(evt);
-                }
-            });
-
-            meaningSpeakerButton.setText("Speaker");
-            meaningSpeakerButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    meaningSpeakerButtonActionPerformed(evt);
-                }
-            });
-
-            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-            getContentPane().setLayout(layout);
-            layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(18, 18, 18)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(123, 123, 123)
-                            .addComponent(evTypeButton)
-                            .addGap(151, 151, 151)
-                            .addComponent(veTypeButton)
-                            .addContainerGap(253, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(35, 35, 35)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(textSpeakerButton)
-                                .addComponent(meaningSpeakerButton))
-                            .addGap(29, 29, 29))))
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(submitButton)
-                    .addGap(344, 344, 344))
-            );
-            layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(33, 33, 33)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(evTypeButton)
-                        .addComponent(veTypeButton)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(34, 34, 34)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(69, 69, 69)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(82, 82, 82)
-                            .addComponent(textSpeakerButton)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(27, 27, 27)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(64, 64, 64)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(18, 18, 18))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(meaningSpeakerButton)
-                            .addGap(68, 68, 68)))
-                    .addComponent(submitButton)
-                    .addGap(34, 34, 34))
-            );
-
-            pack();
-        }// </editor-fold>                         
-
-        private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) throws IOException {                                             
-            // TODO add your handling code here:
-            String text = apiForm.wordTextPane.getText();
-            if (checkAvailable()) {
-                if (wordTextPane.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Ô văn bản đang bị trống!!! Vui lòng nhập lại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    if (state == 0) {
-                        apiForm.meaningTextPane.setText(apiForm.translate("en", "vi", text));
-                    } else if (state == 1) {
-                        apiForm.meaningTextPane.setText(apiForm.translate("vi", "en", text));
-                    }
-                    textSpeakerButton.setVisible(true);
-                    meaningSpeakerButton.setVisible(true);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Vui lòng thử lại kết nối Internet!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            }
-        }                                            
-
-        private void evTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-            // TODO add your handling code here:
-            state = 0;
-            JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
-        }                                            
-
-        private void veTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-            // TODO add your handling code here:
-            state = 1;
-            JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Việt-Anh", "Thông báo", -1);
-        }      
-        
-        private void textSpeakerButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        // TODO add your handling code here:
-            speaker.HandleVoice(wordTextPane.getText());
-        }                                                 
-
-        private void meaningSpeakerButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                     
-            // TODO add your handling code here:
-            speaker.HandleVoice(meaningTextPane.getText());
-        }
-
-        // Variables declaration - do not modify                     
-        private javax.swing.JButton evTypeButton;
-        private javax.swing.JLabel jLabel1;
-        private javax.swing.JLabel jLabel2;
-        private javax.swing.JLabel jLabel3;
-        private javax.swing.JScrollPane jScrollPane1;
-        private javax.swing.JScrollPane jScrollPane2;
-        private javax.swing.JButton meaningSpeakerButton;
-        private javax.swing.JTextPane meaningTextPane;
-        private javax.swing.JButton submitButton;
-        private javax.swing.JButton textSpeakerButton;
-        private javax.swing.JButton veTypeButton;
-        private javax.swing.JTextPane wordTextPane;
-        // End of variables declaration                   
-
-        private boolean checkAvailable() {
-            try {
-                final URL url = new URL("http://www.google.com");
-                final URLConnection conn = url.openConnection();
-                conn.connect();
-                conn.getInputStream().close();
-                return true;
-            } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
-                return false;
-            }
-        }
-    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton apiButton;
     private javax.swing.JButton deleteButton;
-    private javax.swing.JList<String> dictList;
+    protected javax.swing.JList<String> dictList;
     private javax.swing.JButton editButton;
     private javax.swing.JButton evButton;
     private javax.swing.JButton exportButton;
