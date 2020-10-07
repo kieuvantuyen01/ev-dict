@@ -153,7 +153,7 @@ public class AddForm extends javax.swing.JFrame {
                     dictApp.check_input = 0;
                     int answer = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thêm vào?", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     if (answer == JOptionPane.YES_OPTION) {
-                        dictApp.dictEV.addIntoDict(word, meaning);
+                        dictApp.dictVE.addIntoDict(word, meaning);
                     }
                 }
             }
@@ -172,13 +172,13 @@ public class AddForm extends javax.swing.JFrame {
     private void evTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         dictApp.state = EV;
-        JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
+//        JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
     }
 
     private void veTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         dictApp.state = VE;
-        JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
+//        JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Việt-Anh", "Thông báo", -1);
     }
 
 
