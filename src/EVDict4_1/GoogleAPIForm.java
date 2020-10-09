@@ -9,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -216,13 +215,13 @@ public class GoogleAPIForm extends javax.swing.JFrame {
     private void evTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         dictApp.state = EV;
-        JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
+//        JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
     }
 
     private void veTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         dictApp.state = VE;
-        JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Việt-Anh", "Thông báo", -1);
+//        JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Việt-Anh", "Thông báo", -1);
     }
 
     private void textSpeakerButtonActionPerformed(java.awt.event.ActionEvent evt) {

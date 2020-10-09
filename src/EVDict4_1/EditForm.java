@@ -12,7 +12,6 @@ import static EVDict4_1.DictionaryData.dictionaryType.EV;
 import static EVDict4_1.DictionaryData.dictionaryType.VE;
 
 /**
- *
  * @author ADMIN
  */
 public class EditForm extends javax.swing.JFrame {
@@ -133,9 +132,7 @@ public class EditForm extends javax.swing.JFrame {
                 String meaning = meaningTextPane.getText();
                 meaning = meaning.replace("\n", "");
                 if (dictApp.state == EV) {
-                    System.out.println(old_word);
-                    dictApp.dictEV.removeFromDict(old_word);
-                    dictApp.dictEV.addIntoDict(new_word, meaning);
+                    dictApp.dictEV.editInDict(old_word, new_word, meaning);
                 } else if (dictApp.state == VE) {
                     dictApp.dictVE.editInDict(old_word, new_word, meaning);
                 }
@@ -149,13 +146,13 @@ public class EditForm extends javax.swing.JFrame {
     private void evTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         dictApp.state = EV;
-        JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
+//        JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Anh-Việt", "Thông báo", -1);
     }
 
     private void veTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         dictApp.state = VE;
-        JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Việt Anh", "Thông báo", -1);
+//        JOptionPane.showMessageDialog(null, "Bạn đã chọn từ điển Việt Anh", "Thông báo", -1);
     }
 
     // Variables declaration - do not modify
