@@ -5,23 +5,19 @@
  */
 package EVDict4_1;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import javax.swing.JOptionPane;
+import java.net.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static EVDict4_1.DictApp.dictApp;
 import static EVDict4_1.DictionaryData.dictionaryType.EV;
 import static EVDict4_1.DictionaryData.dictionaryType.VE;
-import java.net.MalformedURLException;
-import java.net.URLConnection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 /**
- *
  * @author Tham khảo trên Stackoverflow./Refer on Stackoverflow.
  */
 public class GoogleAPIForm extends javax.swing.JFrame {
@@ -34,9 +30,9 @@ public class GoogleAPIForm extends javax.swing.JFrame {
         textSpeakerButton.setVisible(false);
         meaningSpeakerButton.setVisible(false);
     }
-    
 
-    private static String translate(String langFrom, String langTo, String text) throws IOException{
+
+    private static String translate(String langFrom, String langTo, String text) throws IOException {
         // INSERT YOU URL HERE
         String urlStr = "https://script.google.com/macros/s/AKfycbxiQVsKyWiGXFDU8LeW-fi9KfS0ZIE01ovCpDUJkbJL0-3R6lw/exec" +
                 "?q=" + URLEncoder.encode(text, "UTF-8") +
@@ -54,8 +50,7 @@ public class GoogleAPIForm extends javax.swing.JFrame {
         in.close();
         return response.toString();
     }
-    
-    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -254,9 +249,6 @@ public class GoogleAPIForm extends javax.swing.JFrame {
         dictLabel.setText("Anh - Việt");
     }//GEN-LAST:event_evTypeButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -289,7 +281,6 @@ public class GoogleAPIForm extends javax.swing.JFrame {
 //            }
 //        });
 //    }
-    
     private boolean checkAvailable() {
         try {
             final URL url = new URL("http://www.google.com");

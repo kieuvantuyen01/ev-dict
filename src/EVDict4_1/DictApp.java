@@ -6,21 +6,19 @@
 package EVDict4_1;
 
 
+import de.javasoft.plaf.synthetica.SyntheticaPlainLookAndFeel;
+
+import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
-import de.javasoft.plaf.synthetica.SyntheticaBlueIceLookAndFeel;
 
 import static EVDict4_1.DictionaryData.dictionaryType.EV;
 import static EVDict4_1.DictionaryData.dictionaryType.VE;
-import javax.swing.UIManager;
 
 /**
- *
  * @author ADMIN
  */
 public class DictApp extends javax.swing.JFrame {
@@ -33,29 +31,33 @@ public class DictApp extends javax.swing.JFrame {
         initRecentWordList();
         speakerButton.setVisible(false);
     }
-    
+
     public DictionaryData.dictionaryType state = EV;
     public int check_input = 0;
-    DefaultListModel list;
+    DefaultListModel list = new DefaultListModel();
     String word_select = "";
-    
+
     FileImplement dictEV = new FileImplement(EV);
     FileImplement dictVE = new FileImplement(VE);
+
     DictionaryData da = new DictionaryData();
+
     VoiceImplement speaker = new VoiceImplement();
-    
-    
+
     AddForm af = new AddForm();
     EditForm ef = new EditForm();
     GoogleAPIForm apiForm = new GoogleAPIForm();
-    
+
     public void initRecentWordList() {
-        list = new DefaultListModel();
-        da.readFromFile(da.recentWord, "RecentList.txt");
         list = da.initRecentList(da.recentWord);
-        dictList.setModel(list); 
+        dictList.setModel(list);
     }
-    
+
+    public void initBookmarkWordList() {
+        list = da.initBookmarkList(da.markedWord);
+        dictList.setModel(list);
+    }
+
     public void initDictList() {
         list = new DefaultListModel();
         if (state == EV) {
@@ -90,6 +92,8 @@ public class DictApp extends javax.swing.JFrame {
         speakerButton = new javax.swing.JButton();
         recentButton = new javax.swing.JButton();
         apiButton = new javax.swing.JButton();
+        bookmarkButton = new javax.swing.JButton();
+        addBmButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -118,15 +122,22 @@ public class DictApp extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 searchTextFieldKeyPressed(evt);
             }
+
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 searchTextFieldKeyReleased(evt);
             }
         });
 
         dictList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            String[] strings = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
+
+            public int getSize() {
+                return strings.length;
+            }
+
+            public String getElementAt(int i) {
+                return strings[i];
+            }
         });
         dictList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -208,6 +219,21 @@ public class DictApp extends javax.swing.JFrame {
             }
         });
 
+        bookmarkButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/bookmark.png"))); // NOI18N
+        bookmarkButton.setToolTipText("Book mark");
+        bookmarkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookmarkButtonActionPerformed(evt);
+            }
+        });
+
+        addBmButton.setText("jButton1");
+        addBmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBmButtonActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
 
         jMenuItem1.setText("jMenuItem1");
@@ -243,68 +269,79 @@ public class DictApp extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(searchTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2))
-                        .addGap(82, 82, 82)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(speakerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
-                        .addComponent(evButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(veButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(recentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(apiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(63, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(15, 15, 15)
+                                                .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(47, 47, 47)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(37, 37, 37)
+                                                .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(43, 43, 43)
+                                                .addComponent(evButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(38, 38, 38)
+                                                .addComponent(veButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(38, 38, 38)
+                                                .addComponent(recentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(38, 38, 38)
+                                                .addComponent(apiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(searchTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
+                                                        .addComponent(jScrollPane2))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(91, 91, 91)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                        .addComponent(speakerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(84, 84, 84)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(addBmButton)
+                                                                        .addComponent(bookmarkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(evButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(veButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(recentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(apiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(exportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(speakerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE))))
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(evButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(veButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(recentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(apiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                        .addComponent(exportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(47, 47, 47)
+                                                .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(26, 26, 26)
+                                                .addComponent(speakerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(bookmarkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(27, 27, 27)
+                                                .addComponent(addBmButton)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(20, 20, 20)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+                                                        .addComponent(jScrollPane2))))
+                                .addContainerGap())
         );
 
         pack();
@@ -393,7 +430,7 @@ public class DictApp extends javax.swing.JFrame {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
-        String searchWord = searchTextField.getText();       
+        String searchWord = searchTextField.getText();
         if (searchWord.trim().isEmpty()) {
             check_input = -1;
         } else if (state == EV) {
@@ -407,7 +444,7 @@ public class DictApp extends javax.swing.JFrame {
                 meaningTextPane.setText(dictVE.getDictData().get(searchTextField.getText()));
             }
         }
-        
+
         if (check_input == -1) {
             JOptionPane.showMessageDialog(null, "Từ đang bị trống, vui lòng nhập lại", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else if (check_input == 0) {
@@ -440,8 +477,6 @@ public class DictApp extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(DictApp.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            
         }
     }//GEN-LAST:event_formWindowClosing
 
@@ -457,13 +492,13 @@ public class DictApp extends javax.swing.JFrame {
                     dictEV.removeFromDict(word);
                     initDictList();
                     check_input = 1;
-                }                
+                }
             } else if (state == VE) {
                 if (answer == JOptionPane.YES_OPTION) {
                     dictVE.removeFromDict(word);
                     initDictList();
                     check_input = 1;
-                }                
+                }
             }
             if (check_input == 1) {
                 JOptionPane.showMessageDialog(null, "Đã xong!");
@@ -474,7 +509,6 @@ public class DictApp extends javax.swing.JFrame {
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
         String word = dictList.getSelectedValue();
-        
         if (word == null) {
             JOptionPane.showMessageDialog(null, "Bạn chưa chọn từ để sửa!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -506,7 +540,7 @@ public class DictApp extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(DictApp.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         JOptionPane.showMessageDialog(null, "Mọi thông tin đã được thay đổi!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_exportButtonActionPerformed
 
@@ -522,6 +556,29 @@ public class DictApp extends javax.swing.JFrame {
         apiForm.setVisible(true);
     }//GEN-LAST:event_apiButtonActionPerformed
 
+    private void bookmarkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookmarkButtonActionPerformed
+        // TODO add your handling code here:
+        searchTextField.setText("");
+        meaningTextPane.setText("");
+        initBookmarkWordList();
+    }//GEN-LAST:event_bookmarkButtonActionPerformed
+
+    private void addBmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBmButtonActionPerformed
+        // TODO add your handling code here:
+        String word = dictList.getSelectedValue();
+        da.saveToBookmark(word);
+        if (word == null) {
+            JOptionPane.showMessageDialog(null, "Bạn chưa chọn từ để lưu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                da.readToFile(da.recentWord, "BookmarkList.txt");
+            } catch (IOException ex) {
+                Logger.getLogger(DictApp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            JOptionPane.showMessageDialog(null, "Bạn đã thêm vào Bookmark", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_addBmButtonActionPerformed
+
     public static DictApp dictApp = new DictApp();
 
     /**
@@ -531,14 +588,11 @@ public class DictApp extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
-        try 
-        {
-            UIManager.setLookAndFeel(new SyntheticaBlueIceLookAndFeel());
-        } 
-        catch (Exception e) 
-        {
+        try {
+            UIManager.setLookAndFeel(new SyntheticaPlainLookAndFeel());
+        } catch (Exception e) {
             e.printStackTrace();
         }
         //</editor-fold>
@@ -553,10 +607,12 @@ public class DictApp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addBmButton;
     private javax.swing.JButton addButton;
     private javax.swing.JButton apiButton;
+    private javax.swing.JButton bookmarkButton;
     private javax.swing.JButton deleteButton;
-    protected javax.swing.JList<String> dictList;
+    public javax.swing.JList<String> dictList;
     private javax.swing.JButton editButton;
     private javax.swing.JButton evButton;
     private javax.swing.JButton exportButton;
