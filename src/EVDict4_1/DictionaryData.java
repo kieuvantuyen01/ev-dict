@@ -8,6 +8,11 @@ import java.util.HashMap;
 public class DictionaryData {
     public String path = "src\\EVDict4_1\\E_V.txt";
 
+    public DictionaryData() {
+        readFromFile(recentWord, "RecentList.txt");
+        readFromFile(markedWord, "BookmarkList.txt");
+    }
+
     enum dictionaryType {
         EV, VE;
     }
@@ -19,6 +24,14 @@ public class DictionaryData {
 
     public ArrayList<String> recentWord = new ArrayList<>();
     public ArrayList<String> markedWord = new ArrayList<>();
+
+    public ArrayList<String> getMarkedWord() {
+        return markedWord;
+    }
+
+    public void setMarkedWord(ArrayList<String> markedWord) {
+        this.markedWord = markedWord;
+    }
 
     public ArrayList<String> getRecentWord() {
         return recentWord;
@@ -61,18 +74,20 @@ public class DictionaryData {
     }
 
     public void saveToRencent(String new_word) {
-        if (new_word != null && !recentWord.contains(new_word)){
+        if (new_word != null && !recentWord.contains(new_word)) {
             recentWord.add(new_word);
-        }
-        if (recentWord.size() > 50) {
-            recentWord.remove(0);
+            if (recentWord.size() > 50) {
+                recentWord.remove(0);
+            }
         }
     }
 
     public void saveToBookmark(String newWord) {
-        markedWord.add(newWord);
-        if (markedWord.size() > 50) {
-            markedWord.remove(markedWord.get(0));
+        if (newWord != null && !markedWord.contains(newWord)) {
+            markedWord.add(newWord);
+            if (markedWord.size() > 50) {
+                markedWord.remove(0);
+            }
         }
     }
 
@@ -84,7 +99,16 @@ public class DictionaryData {
         }
         return dfl;
     }
-    
+
+    public DefaultListModel initBookmarkList(ArrayList<String> list) {
+        DefaultListModel dfl = new DefaultListModel();
+        for (int i = list.size() - 1; i >= 0; i--) {
+            String bookmark_word = list.get(i);
+            dfl.addElement(bookmark_word);
+        }
+        return dfl;
+    }
+
     public DefaultListModel initDict() {
         DefaultListModel dfl = new DefaultListModel();
         for (String new_word : word) {

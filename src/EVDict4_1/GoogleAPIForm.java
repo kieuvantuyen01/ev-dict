@@ -78,6 +78,7 @@ public class GoogleAPIForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         evTypeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/evdict.png"))); // NOI18N
+        evTypeButton.setBorder(null);
         evTypeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 evTypeButtonActionPerformed(evt);
@@ -85,6 +86,7 @@ public class GoogleAPIForm extends javax.swing.JFrame {
         });
 
         veTypeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/vedict.png"))); // NOI18N
+        veTypeButton.setBorder(null);
         veTypeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 veTypeButtonActionPerformed(evt);

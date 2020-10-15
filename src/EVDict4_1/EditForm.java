@@ -47,6 +47,7 @@ public class EditForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         evTypeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/evdict.png"))); // NOI18N
+        evTypeButton.setBorder(null);
         evTypeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 evTypeButtonActionPerformed(evt);
@@ -54,6 +55,7 @@ public class EditForm extends javax.swing.JFrame {
         });
 
         veTypeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/vedict.png"))); // NOI18N
+        veTypeButton.setBorder(null);
         veTypeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 veTypeButtonActionPerformed(evt);
@@ -151,11 +153,9 @@ public class EditForm extends javax.swing.JFrame {
                 String old_word = dictApp.dictList.getSelectedValue();
                 String new_word = wordTextField.getText().toLowerCase();
                 String meaning = meaningTextPane.getText();
-                meaning = meaning.replace("\n", "");
+                meaning = meaning.replaceAll("\n", "");
                 if (dictApp.state == EV) {
-                    System.out.println(old_word);
-                    dictApp.dictEV.removeFromDict(old_word);
-                    dictApp.dictEV.addIntoDict(new_word, meaning);
+                    dictApp.dictEV.editInDict(old_word, new_word, meaning);
                 } else if (dictApp.state == VE) {
                     dictApp.dictVE.editInDict(old_word, new_word, meaning);
                 }
