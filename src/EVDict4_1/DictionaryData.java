@@ -20,6 +20,10 @@ public class DictionaryData {
     
     public ArrayList<String> recentWord = new ArrayList<>();
     public ArrayList<String> markedWord = new ArrayList<>();
+    
+     public ArrayList<String> getMarkedWord() {
+        return markedWord;
+    }
 
     public ArrayList<String> getRecentWord() {
         return recentWord;
