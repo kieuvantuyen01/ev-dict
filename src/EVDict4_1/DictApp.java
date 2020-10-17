@@ -5,7 +5,6 @@
  */
 package EVDict4_1;
 
-
 import de.javasoft.plaf.synthetica.SyntheticaPlainLookAndFeel;
 
 import javax.swing.*;
@@ -31,33 +30,33 @@ public class DictApp extends javax.swing.JFrame {
         initRecentWordList();
         speakerButton.setVisible(false);
     }
-
+    
     public DictionaryData.dictionaryType state = EV;
     public int check_input = 0;
     DefaultListModel list = new DefaultListModel();
     String word_select = "";
-
+    
     FileImplement dictEV = new FileImplement(EV);
     FileImplement dictVE = new FileImplement(VE);
-
+    
     DictionaryData da = new DictionaryData();
-
+    
     VoiceImplement speaker = new VoiceImplement();
-
+    
     AddForm af = new AddForm();
     EditForm ef = new EditForm();
     GoogleAPIForm apiForm = new GoogleAPIForm();
-
+    
     public void initRecentWordList() {
         list = da.initRecentList(da.recentWord);
         dictList.setModel(list);
     }
-
+    
     public void initBookmarkWordList() {
         list = da.initBookmarkList(da.markedWord);
         dictList.setModel(list);
     }
-
+    
     public void initDictList() {
         list = new DefaultListModel();
         if (state == EV) {
@@ -92,7 +91,7 @@ public class DictApp extends javax.swing.JFrame {
         veButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         apiButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        practiceButton = new javax.swing.JButton();
         searchButton = new javax.swing.JButton();
         addBmButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -223,12 +222,12 @@ public class DictApp extends javax.swing.JFrame {
                 .addComponent(evButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(94, 94, 94)
                 .addComponent(veButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(11, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(veButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -255,11 +254,16 @@ public class DictApp extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/practice.png"))); // NOI18N
-        jButton1.setText("Luyện tập");
-        jButton1.setToolTipText("Practice");
-        jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        practiceButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        practiceButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/practice.png"))); // NOI18N
+        practiceButton.setText("Luyện tập");
+        practiceButton.setToolTipText("Practice");
+        practiceButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        practiceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                practiceButtonActionPerformed(evt);
+            }
+        });
 
         searchButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/search.png"))); // NOI18N
@@ -287,10 +291,10 @@ public class DictApp extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(apiButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(practiceButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(apiButton, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
             .addComponent(addBmButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,14 +305,14 @@ public class DictApp extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addComponent(apiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(practiceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jMenu1.setText("Tuỳ chọn");
         jMenu1.setToolTipText("");
         jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        recentWordMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        recentWordMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
         recentWordMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/history.png"))); // NOI18N
         recentWordMenuItem.setText("Lịch sử tìm kiếm");
         recentWordMenuItem.setToolTipText("Search history");
@@ -319,7 +323,7 @@ public class DictApp extends javax.swing.JFrame {
         });
         jMenu1.add(recentWordMenuItem);
 
-        bookmarkMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        bookmarkMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
         bookmarkMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/bookmark.png"))); // NOI18N
         bookmarkMenuItem.setText("Từ đánh dấu");
         bookmarkMenuItem.setToolTipText("Bookmark");
@@ -351,15 +355,16 @@ public class DictApp extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(speakerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(searchTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(26, 26, 26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 42, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(speakerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -384,6 +389,7 @@ public class DictApp extends javax.swing.JFrame {
 
     private void searchTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextFieldKeyPressed
         // TODO add your handling code here:
+        boolean finding_Word = false;  // Biến để kiểm tra xem từ ms nhập có trong từ điển không
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String searchWord = searchTextField.getText();
             if (searchWord.trim().isEmpty()) {
@@ -391,17 +397,24 @@ public class DictApp extends javax.swing.JFrame {
             } else if (state == EV) {
                 if (dictEV.getWord().contains(searchWord)) {
                     check_input = 1;
+                    word_select = searchWord;
                     meaningTextPane.setText(dictEV.getDictData().get(searchWord));
+                    finding_Word = true;  // Gán biến kiểm tra = true
                 } else {
                     check_input = 0;
                 }
             } else if (state == VE) {
                 if (dictVE.getWord().contains(searchWord)) {
                     check_input = 1;
+                    word_select = searchWord;
                     meaningTextPane.setText(dictVE.getDictData().get(searchWord));
+                    finding_Word = true;  // Gán biến kiểm tra = true
                 } else {
                     check_input = 0;
                 }
+            }
+            if (finding_Word) {
+            speakerButton.setVisible(true);   // Hiện speakerButton để nói
             }
             if (check_input == -1) {
                 JOptionPane.showMessageDialog(null, "Từ đang bị trống, vui lòng nhập lại", "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -466,20 +479,27 @@ public class DictApp extends javax.swing.JFrame {
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
         String searchWord = searchTextField.getText();
+        boolean finding_Word = false;  // Biến để kiểm tra xem từ ms nhập có trong từ điển không
         if (searchWord.trim().isEmpty()) {
             check_input = -1;
         } else if (state == EV) {
             if (dictEV.getWord().contains(searchWord)) {
                 check_input = 1;
+                word_select = searchWord;
                 meaningTextPane.setText(dictEV.getDictData().get(searchTextField.getText()));
+                finding_Word = true;  // Gán biến kiểm tra = true
             }
         } else if (state == VE) {
             if (dictVE.getWord().contains(searchWord)) {
                 check_input = 1;
+                word_select = searchWord;
                 meaningTextPane.setText(dictVE.getDictData().get(searchTextField.getText()));
+                finding_Word = true;  // Gán biến kiểm tra = true
             }
         }
-
+        if (finding_Word) {
+            speakerButton.setVisible(true);   // Hiện speakerButton để nói
+        }
         if (check_input == -1) {
             JOptionPane.showMessageDialog(null, "Từ đang bị trống, vui lòng nhập lại", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else if (check_input == 0) {
@@ -559,7 +579,9 @@ public class DictApp extends javax.swing.JFrame {
 
     private void searchTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchTextFieldMouseClicked
         // TODO add your handling code here:
+        speakerButton.setVisible(false);
         searchTextField.setText("");
+        meaningTextPane.setText("");
     }//GEN-LAST:event_searchTextFieldMouseClicked
 
     private void speakerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_speakerButtonActionPerformed
@@ -575,7 +597,7 @@ public class DictApp extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(DictApp.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         JOptionPane.showMessageDialog(null, "Mọi thông tin đã được thay đổi!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_exportButtonActionPerformed
 
@@ -614,6 +636,11 @@ public class DictApp extends javax.swing.JFrame {
         initBookmarkWordList();
     }//GEN-LAST:event_bookmarkMenuItemActionPerformed
 
+    private void practiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_practiceButtonActionPerformed
+        new PracticeForm().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_practiceButtonActionPerformed
+    
     public static DictApp dictApp = new DictApp();
 
     /**
@@ -651,7 +678,6 @@ public class DictApp extends javax.swing.JFrame {
     private javax.swing.JButton editButton;
     private javax.swing.JButton evButton;
     private javax.swing.JButton exportButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -661,6 +687,7 @@ public class DictApp extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextPane meaningTextPane;
+    private javax.swing.JButton practiceButton;
     private javax.swing.JMenuItem recentWordMenuItem;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchTextField;

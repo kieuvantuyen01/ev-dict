@@ -95,16 +95,18 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="149" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-              <Component id="speakerButton" min="-2" pref="50" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
-                  <Component id="searchTextField" alignment="0" min="-2" pref="430" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" pref="42" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="speakerButton" min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Component id="searchTextField" min="-2" pref="430" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jScrollPane2" alignment="1" min="-2" pref="430" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Component id="jPanel2" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
           </Group>
           <Component id="jPanel1" max="32767" attributes="0"/>
       </Group>
@@ -219,14 +221,14 @@
                   <Component id="evButton" min="-2" pref="52" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
                   <Component id="veButton" min="-2" pref="52" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="155" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="11" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="veButton" min="-2" pref="51" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
@@ -361,10 +363,10 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="apiButton" max="32767" attributes="0"/>
-              <Component id="jButton1" max="32767" attributes="0"/>
+              <Component id="practiceButton" max="32767" attributes="0"/>
+              <Component id="apiButton" alignment="0" pref="184" max="32767" attributes="0"/>
+              <Component id="addBmButton" max="32767" attributes="0"/>
               <Component id="searchButton" alignment="0" max="32767" attributes="0"/>
-              <Component id="addBmButton" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -376,7 +378,7 @@
                   <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                   <Component id="apiButton" min="-2" pref="51" max="-2" attributes="0"/>
                   <EmptySpace pref="55" max="32767" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="49" max="-2" attributes="0"/>
+                  <Component id="practiceButton" min="-2" pref="49" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -398,7 +400,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="apiButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="practiceButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -410,6 +412,9 @@
             <Property name="toolTipText" type="java.lang.String" value="Practice"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="practiceButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="searchButton">
           <Properties>
