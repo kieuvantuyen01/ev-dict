@@ -25,7 +25,8 @@ public class GoogleAPIForm extends javax.swing.JFrame {
     /**
      * Creates new form GoogleAPIForm
      */
-    public GoogleAPIForm() {
+    public GoogleAPIForm(DictApp newDictApp) {
+        dictApp = newDictApp;
         initComponents();
         textSpeakerButton.setVisible(false);
         meaningSpeakerButton.setVisible(false);

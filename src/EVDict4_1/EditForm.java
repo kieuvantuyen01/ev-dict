@@ -19,7 +19,8 @@ public class EditForm extends javax.swing.JFrame {
     /**
      * Creates new form EditForm
      */
-    public EditForm() {
+    public EditForm(DictApp newDictApp) {
+        dictApp = newDictApp;
         initComponents();
     }
     
