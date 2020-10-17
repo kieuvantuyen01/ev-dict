@@ -351,6 +351,16 @@ public class DictApp extends javax.swing.JFrame {
         guideMenu.setText("Hướng dẫn");
         guideMenu.setToolTipText("Guide");
         guideMenu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        guideMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                guideMenuMouseClicked(evt);
+            }
+        });
+        guideMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guideMenuActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(guideMenu);
 
         aboutMenu.setText("Giới thiệu");
@@ -640,7 +650,26 @@ public class DictApp extends javax.swing.JFrame {
 
     private void aboutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuActionPerformed
         // TODO add your handling code here:
+        String about = "My Team : Phạm Văn Vũ - Đào Xuân Tùng - Kiều Văn Tuyên\n" 
+                + "Class: 2021I_INT2204_24\n" + "Library: Java Swing, Freetts, Synthetica\n"
+                + "Use: Google API source code from Internet\n"
+                + "We look forward to hearing from everyone!";
+        JOptionPane.showMessageDialog(null, about, "About us", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_aboutMenuActionPerformed
+
+    private void guideMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guideMenuActionPerformed
+        // TODO add your handling code here:
+        String guide = "Use mouse and press ENTER to look up new word\n" 
+                + "Use keyboard to type your word you nedd to look up ew word\n";
+        JOptionPane.showMessageDialog(null, guide, "About us", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_guideMenuActionPerformed
+
+    private void guideMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guideMenuMouseClicked
+        // TODO add your handling code here:
+        String guide = "Use mouse and press ENTER to look up new word\n" 
+                + "Use keyboard to type your word you nedd to look up ew word\n";
+        JOptionPane.showMessageDialog(null, guide, "About us", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_guideMenuMouseClicked
 
     public static DictApp dictApp = new DictApp();
 
