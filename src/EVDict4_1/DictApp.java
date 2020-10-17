@@ -17,6 +17,9 @@ import java.util.logging.Logger;
 
 import static EVDict4_1.DictionaryData.dictionaryType.EV;
 import static EVDict4_1.DictionaryData.dictionaryType.VE;
+import static EVDict4_1.DictionaryData.dictionaryType.RECENT;
+import static EVDict4_1.DictionaryData.dictionaryType.BOOKMARK;
+
 
 /**
  * @author ADMIN
@@ -32,7 +35,7 @@ public class DictApp extends javax.swing.JFrame {
         speakerButton.setVisible(false);
     }
 
-    public DictionaryData.dictionaryType state = EV;
+    public DictionaryData.dictionaryType state = RECENT;
     public int check_input = 0;
     DefaultListModel list = new DefaultListModel();
     String word_select = "";
@@ -90,17 +93,19 @@ public class DictApp extends javax.swing.JFrame {
         exportButton = new javax.swing.JButton();
         evButton = new javax.swing.JButton();
         veButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         apiButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         searchButton = new javax.swing.JButton();
         addBmButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        selectMenu1 = new javax.swing.JMenu();
         recentWordMenuItem = new javax.swing.JMenuItem();
         bookmarkMenuItem = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        guideMenu = new javax.swing.JMenu();
+        aboutMenu = new javax.swing.JMenu();
+        stateMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -206,6 +211,9 @@ public class DictApp extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/logo_.png"))); // NOI18N
+        jLabel1.setText("logoLabel");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -219,26 +227,30 @@ public class DictApp extends javax.swing.JFrame {
                 .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(246, 246, 246)
+                .addGap(91, 91, 91)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(evButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(94, 94, 94)
+                .addGap(67, 67, 67)
                 .addComponent(veButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(11, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(evButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(veButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(evButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(1, 1, 1))))
                 .addContainerGap())
         );
 
@@ -304,9 +316,9 @@ public class DictApp extends javax.swing.JFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jMenu1.setText("Tuỳ chọn");
-        jMenu1.setToolTipText("");
-        jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        selectMenu1.setText("Tuỳ chọn");
+        selectMenu1.setToolTipText("");
+        selectMenu1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         recentWordMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         recentWordMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/history.png"))); // NOI18N
@@ -317,7 +329,7 @@ public class DictApp extends javax.swing.JFrame {
                 recentWordMenuItemActionPerformed(evt);
             }
         });
-        jMenu1.add(recentWordMenuItem);
+        selectMenu1.add(recentWordMenuItem);
 
         bookmarkMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         bookmarkMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/bookmark.png"))); // NOI18N
@@ -328,19 +340,23 @@ public class DictApp extends javax.swing.JFrame {
                 bookmarkMenuItemActionPerformed(evt);
             }
         });
-        jMenu1.add(bookmarkMenuItem);
+        selectMenu1.add(bookmarkMenuItem);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(selectMenu1);
 
-        jMenu2.setText("Hướng dẫn");
-        jMenu2.setToolTipText("Guide");
-        jMenu2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuBar1.add(jMenu2);
+        guideMenu.setText("Hướng dẫn");
+        guideMenu.setToolTipText("Guide");
+        guideMenu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuBar1.add(guideMenu);
 
-        jMenu3.setText("Giới thiệu");
-        jMenu3.setToolTipText("About us");
-        jMenu3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuBar1.add(jMenu3);
+        aboutMenu.setText("Giới thiệu");
+        aboutMenu.setToolTipText("About us");
+        aboutMenu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuBar1.add(aboutMenu);
+
+        stateMenu.setText("Vui lòng chọn trạng thái từ điển !!! - Please select the status of the dictionary !!!");
+        stateMenu.setToolTipText("");
+        jMenuBar1.add(stateMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -366,7 +382,7 @@ public class DictApp extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
@@ -387,25 +403,12 @@ public class DictApp extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String searchWord = searchTextField.getText();
             if (searchWord.trim().isEmpty()) {
-                check_input = -1;
-            } else if (state == EV) {
-                if (dictEV.getWord().contains(searchWord)) {
-                    check_input = 1;
-                    meaningTextPane.setText(dictEV.getDictData().get(searchWord));
-                } else {
-                    check_input = 0;
-                }
-            } else if (state == VE) {
-                if (dictVE.getWord().contains(searchWord)) {
-                    check_input = 1;
-                    meaningTextPane.setText(dictVE.getDictData().get(searchWord));
-                } else {
-                    check_input = 0;
-                }
-            }
-            if (check_input == -1) {
                 JOptionPane.showMessageDialog(null, "Từ đang bị trống, vui lòng nhập lại", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            } else if (check_input == 0) {
+            } else if (dictEV.getWord().contains(searchWord)) {
+                meaningTextPane.setText(dictEV.getDictData().get(searchWord));
+            } else if (dictVE.getWord().contains(searchWord)) {
+                meaningTextPane.setText(dictVE.getDictData().get(searchWord));
+            } else {
                 JOptionPane.showMessageDialog(null, "Từ này đang không có trong từ điển!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -416,18 +419,12 @@ public class DictApp extends javax.swing.JFrame {
         ArrayList<String> newDictList = new ArrayList<>();
         list = new DefaultListModel<>();
         String searchWord = searchTextField.getText();
-        if (state == EV) {
-            if (searchWord.trim().isEmpty()) {
-                newDictList = new ArrayList(dictEV.getWord());
-            } else {
-                newDictList = dictEV.searchWord(searchWord, dictEV.getWord());
-            }
+        if (searchWord.trim().isEmpty()) {
+            newDictList = new ArrayList(dictEV.getWord());
+        } else if (state == EV) {
+            newDictList = dictEV.searchWord(searchWord, dictEV.getWord());
         } else if (state == VE) {
-            if (searchWord.trim().isEmpty()) {
-                newDictList = new ArrayList(dictVE.getWord());
-            } else {
-                newDictList = dictVE.searchWord(searchWord, dictVE.getWord());
-            }
+            newDictList = dictVE.searchWord(searchWord, dictVE.getWord());
         }
         for (String word : newDictList) {
             list.addElement(word);
@@ -446,6 +443,13 @@ public class DictApp extends javax.swing.JFrame {
             Logger.getLogger(DictApp.class.getName()).log(Level.SEVERE, null, ex);
         }
         String meaning = "";
+        if (state == RECENT || state == BOOKMARK) {
+            if (dictEV.getWord().contains(word_select)) {
+                meaning = dictEV.getDictData().get(word_select);
+            } else if (dictVE.getWord().contains(word_select)) {
+                meaning = dictVE.getDictData().get(word_select);
+            }
+        }
         if (state == EV) {
             meaning = dictEV.getDictData().get(word_select);
         } else if (state == VE) {
@@ -459,6 +463,7 @@ public class DictApp extends javax.swing.JFrame {
         // TODO add your handling code here:
         searchTextField.setText("");
         meaningTextPane.setText("");
+        stateMenu.setText("State: English - Vietnamese");
         state = EV;
         initDictList();
     }//GEN-LAST:event_evButtonActionPerformed
@@ -467,22 +472,12 @@ public class DictApp extends javax.swing.JFrame {
         // TODO add your handling code here:
         String searchWord = searchTextField.getText();
         if (searchWord.trim().isEmpty()) {
-            check_input = -1;
-        } else if (state == EV) {
-            if (dictEV.getWord().contains(searchWord)) {
-                check_input = 1;
-                meaningTextPane.setText(dictEV.getDictData().get(searchTextField.getText()));
-            }
-        } else if (state == VE) {
-            if (dictVE.getWord().contains(searchWord)) {
-                check_input = 1;
-                meaningTextPane.setText(dictVE.getDictData().get(searchTextField.getText()));
-            }
-        }
-
-        if (check_input == -1) {
             JOptionPane.showMessageDialog(null, "Từ đang bị trống, vui lòng nhập lại", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        } else if (check_input == 0) {
+        } else if (dictEV.getWord().contains(searchWord)) {
+            meaningTextPane.setText(dictEV.getDictData().get(searchWord));
+        } else if (dictVE.getWord().contains(searchWord)) {
+            meaningTextPane.setText(dictVE.getDictData().get(searchWord));
+        } else {
             JOptionPane.showMessageDialog(null, "Từ này đang không có trong từ điển!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_searchButtonActionPerformed
@@ -499,6 +494,7 @@ public class DictApp extends javax.swing.JFrame {
         searchTextField.setText("");
         meaningTextPane.setText("");
         state = VE;
+        stateMenu.setText("Trạng thái: Tiếng Việt - Tiếng Anh");
         initDictList();
     }//GEN-LAST:event_veButtonActionPerformed
 
@@ -522,20 +518,25 @@ public class DictApp extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Bạn chưa chọn từ để xoá!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
             int answer = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá từ này khỏi từ điển không?", "Cảnh báo", JOptionPane.YES_OPTION);
-            if (state == EV) {
-                if (answer == JOptionPane.YES_OPTION) {
-                    dictEV.removeFromDict(word);
-                    initDictList();
-                    check_input = 1;
+            if (answer == JOptionPane.YES_OPTION) {
+                switch (state) {
+                    case EV:
+                        dictEV.removeFromDict(word);
+                        initDictList();
+                        break;
+                    case VE:
+                        dictVE.removeFromDict(word);
+                        initDictList();
+                        break;
+                    case RECENT:
+                        da.removeFromList(da.recentWord, word);
+                        initRecentWordList();
+                        break;
+                    case BOOKMARK:
+                        da.removeFromList(da.markedWord, word);
+                        initRecentWordList();
+                        break;
                 }
-            } else if (state == VE) {
-                if (answer == JOptionPane.YES_OPTION) {
-                    dictVE.removeFromDict(word);
-                    initDictList();
-                    check_input = 1;
-                }
-            }
-            if (check_input == 1) {
                 JOptionPane.showMessageDialog(null, "Đã xong!");
             }
         }
@@ -602,6 +603,7 @@ public class DictApp extends javax.swing.JFrame {
 
     private void recentWordMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recentWordMenuItemActionPerformed
         // TODO add your handling code here:
+        state = RECENT;
         searchTextField.setText("");
         meaningTextPane.setText("");
         initRecentWordList();
@@ -609,6 +611,7 @@ public class DictApp extends javax.swing.JFrame {
 
     private void bookmarkMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookmarkMenuItemActionPerformed
         // TODO add your handling code here:
+        state = BOOKMARK;
         searchTextField.setText("");
         meaningTextPane.setText("");
         initBookmarkWordList();
@@ -642,6 +645,7 @@ public class DictApp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu aboutMenu;
     private javax.swing.JButton addBmButton;
     private javax.swing.JButton addButton;
     private javax.swing.JButton apiButton;
@@ -651,10 +655,9 @@ public class DictApp extends javax.swing.JFrame {
     private javax.swing.JButton editButton;
     private javax.swing.JButton evButton;
     private javax.swing.JButton exportButton;
+    private javax.swing.JMenu guideMenu;
     private javax.swing.JButton jButton1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -664,7 +667,9 @@ public class DictApp extends javax.swing.JFrame {
     private javax.swing.JMenuItem recentWordMenuItem;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchTextField;
+    private javax.swing.JMenu selectMenu1;
     private javax.swing.JButton speakerButton;
+    private javax.swing.JMenu stateMenu;
     private javax.swing.JButton veButton;
     // End of variables declaration//GEN-END:variables
 }

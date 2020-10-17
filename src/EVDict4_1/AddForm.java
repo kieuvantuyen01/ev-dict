@@ -150,7 +150,7 @@ public class AddForm extends javax.swing.JFrame {
         meaning = meaning.replaceAll("\n", "");
 
         if (wordTextField.getText().isEmpty() || meaningTextPane.getText().isEmpty()) {
-            dictApp.check_input = -1;
+            JOptionPane.showMessageDialog(null, "Ô từ mới đang bị rỗng!!! Vui lòng nhập lại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
             if (dictApp.state == EV) {
                 if (dictApp.dictEV.getWord().contains(wordTextField.getText())) {
@@ -177,10 +177,7 @@ public class AddForm extends javax.swing.JFrame {
             setVisible(false);
             dictApp.initDictList();
         }
-
-        if (dictApp.check_input == -1) {
-            JOptionPane.showMessageDialog(null, "Ô từ mới đang bị rỗng!!! Vui lòng nhập lại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        } else if (dictApp.check_input == 1) {
+        if (dictApp.check_input == 1) {
             JOptionPane.showMessageDialog(null, "Từ bị nhập vào đã tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_submitButtonActionPerformed
@@ -206,7 +203,7 @@ public class AddForm extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
-        
+
         //</editor-fold>
 
         /* Create and display the form */

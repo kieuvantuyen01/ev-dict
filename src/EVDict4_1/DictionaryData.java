@@ -3,6 +3,7 @@ package EVDict4_1;
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class DictionaryData {
@@ -14,7 +15,7 @@ public class DictionaryData {
     }
 
     enum dictionaryType {
-        EV, VE;
+        EV, VE, RECENT, BOOKMARK;
     }
 
     public dictionaryType state = dictionaryType.EV;
@@ -39,6 +40,38 @@ public class DictionaryData {
 
     public void setRecentWord(ArrayList<String> recentWord) {
         this.recentWord = recentWord;
+    }
+
+    public void editInDict(String old_word, String new_word, String meaning) {
+        removeFromDict(old_word);
+        addIntoDict(new_word, meaning);
+    }
+
+    public void removeFromList(ArrayList<String> list, String new_word) {
+        int id_remove = list.indexOf(new_word);
+        if (id_remove != -1) {
+            list.remove(id_remove);
+        }
+    }
+
+    public void removeFromDict(String new_word) {
+        int id_remove = word.indexOf(new_word);
+        if (id_remove != -1) {
+            word.remove(id_remove);
+            DictData.remove(id_remove);
+            System.out.println(word.contains(new_word));
+            System.out.println("Số lượng từ sau khi xoá là: " + word.size());
+        }
+    }
+
+    public void addIntoDict(String new_word, String meaning) {
+        word.add(new_word);
+        System.out.println(word.get(word.size()-1));
+        Collections.sort(word);
+        System.out.println(word.get(word.size()-1));
+        DictData.put(new_word, meaning);
+        System.out.println(word.contains(new_word));
+        System.out.println("Số lượng từ sau khi thêm là: " + DictData.size());
     }
 
     public void removeInList(ArrayList<String> list, String new_word) {
