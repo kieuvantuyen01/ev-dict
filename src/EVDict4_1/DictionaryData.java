@@ -7,11 +7,11 @@ import java.util.Collections;
 import java.util.HashMap;
 
 public class DictionaryData {
-    public String path = "src\\EVDict4_1\\E_V.txt";
+    public String path = "data\\E_V.txt";
 
     public DictionaryData() {
-        readFromFile(recentWord, "RecentList.txt");
-        readFromFile(markedWord, "BookmarkList.txt");
+        readFromFile(recentWord, "data\\RecentList.txt");
+        readFromFile(markedWord, "data\\BookmarkList.txt");
     }
 
     enum dictionaryType {
@@ -98,7 +98,8 @@ public class DictionaryData {
 
     public void readToFile(ArrayList<String> list, String new_path) throws IOException {
         FileOutputStream fos = new FileOutputStream(new_path);
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos, "utf-8"));
+        OutputStreamWriter os = new OutputStreamWriter(fos, "utf-8");
+        BufferedWriter bw = new BufferedWriter(os);
 
         for (String new_word : list) {
             bw.write(new_word + "\n");

@@ -5,9 +5,11 @@
  */
 package EVDict4_1;
 
+import static EVDict4_1.DictApp.dictApp;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -16,11 +18,12 @@ import java.util.Random;
  */
 public class PracticeForm extends javax.swing.JFrame {
     public Timer time_to_guess;
-    public int time_iterator = 1;
+    public int time_iterator = 59;
     public Random rd = new Random();
     public int level = 1;
     public String random_word_answer = "";
     public String hide_word_answer = "";
+    public String hide_characters = "";
     public ArrayList<String> word_list_data;
     VoiceImplement speaker = new VoiceImplement();
     DictionaryData da = new DictionaryData();
@@ -28,30 +31,59 @@ public class PracticeForm extends javax.swing.JFrame {
     /**
      * Creates new form PracticeForm
      */
-    public PracticeForm() {
+    public PracticeForm(DictApp newDictApp) {
+        dictApp = newDictApp;
         initComponents();
         resetDefault();
     }
 
     public void resetDefault() {
-        time_iterator = 1;
+        time_iterator = 59;
         userGuessTextField.setText("");
         resultLabel.setText("");
         timeDisplayLabel.setVisible(false);
         clockIconLabel.setVisible(false);
-        guess_WordAnswerLabel.setVisible(false);
+        guessWordAnswerLabel.setVisible(false);
         submitButton.setVisible(false);
         interfaceLabel.setVisible(false);
         nextWordButton.setVisible(false);
         userGuessTextField.setVisible(false);
         resultLabel.setVisible(false);
         userInterfaceLabel.setVisible(false);
+        hintButton.setVisible(false);
+    }
+    
+    public void nextTurn() {
+        time_iterator = 59;
+        resultLabel.setText("");
+        userGuessTextField.setText("");
+        hintButton.setVisible(false);
+        getRandomWord();
+        timeDisplayLabel.setText("");
+        startButton.setVisible(false);
+        showInterface();
+        guessWordAnswerLabel.setText(hide_word_answer);
+        time_to_guess = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (time_iterator >= 0) {
+                    timeDisplayLabel.setText(String.valueOf(time_iterator) + "S");
+                    time_iterator --;
+                } else {
+                    resetDefault();
+                    guessWordAnswerLabel.setVisible(true);
+                    nextWordButton.setVisible(true);
+                    guessWordAnswerLabel.setText(String.format("%40s", "TIME OUT !!"));
+                }
+            }
+        });
+        time_to_guess.start();
     }
 
     public void showInterface() {
         timeDisplayLabel.setVisible(true);
         clockIconLabel.setVisible(true);
-        guess_WordAnswerLabel.setVisible(true);
+        guessWordAnswerLabel.setVisible(true);
         submitButton.setVisible(true);
         interfaceLabel.setVisible(true);
         nextWordButton.setVisible(true);
@@ -72,7 +104,7 @@ public class PracticeForm extends javax.swing.JFrame {
             random_number = rd.nextInt(word_list_data.size());
             random_word_answer = word_list_data.get(random_number);
         }
-        hide_word_answer = random_word_answer;
+        hide_word_answer = random_word_answer.toLowerCase();
         char[] tmp_hide_word_answer = hide_word_answer.toCharArray();
         int hide_character1 = hide_word_answer.length() / 2;
         int hide_character2 = 0;
@@ -83,6 +115,9 @@ public class PracticeForm extends javax.swing.JFrame {
         if ((hide_character1 + 1) <= hide_word_answer.length()) {
             hide_character3 = hide_character1 + 1;
         }
+        hide_characters = random_word_answer.substring(hide_character2, hide_character3+1);
+        System.out.println(hide_characters);
+        System.out.println(userGuessTextField.getText().toLowerCase());
         tmp_hide_word_answer[hide_character1] = '_';
         tmp_hide_word_answer[hide_character2] = '_';
         tmp_hide_word_answer[hide_character3] = '_';
@@ -100,19 +135,21 @@ public class PracticeForm extends javax.swing.JFrame {
 
         startButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        timeDisplayLabel = new javax.swing.JLabel();
-        clockIconLabel = new javax.swing.JLabel();
         submitButton = new javax.swing.JButton();
         levelComboBox = new javax.swing.JComboBox<>();
         interfaceLabel = new javax.swing.JLabel();
-        guess_WordAnswerLabel = new javax.swing.JLabel();
+        guessWordAnswerLabel = new javax.swing.JLabel();
         nextWordButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        userInterfaceLabel = new javax.swing.JLabel();
-        userGuessTextField = new javax.swing.JTextField();
+        hintButton = new javax.swing.JButton();
         resultLabel = new javax.swing.JLabel();
+        userGuessTextField = new javax.swing.JTextField();
+        userInterfaceLabel = new javax.swing.JLabel();
+        timeDisplayLabel = new javax.swing.JLabel();
+        clockIconLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         startButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         startButton.setText("START");
@@ -122,31 +159,20 @@ public class PracticeForm extends javax.swing.JFrame {
             }
         });
 
-        timeDisplayLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-
-        clockIconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/clock.png"))); // NOI18N
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(timeDisplayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(clockIconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(35, Short.MAX_VALUE))
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(timeDisplayLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(clockIconLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(0, 13, Short.MAX_VALUE))
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         submitButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        submitButton.setText("SUBMIT");
+        submitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/submit.png"))); // NOI18N
+        submitButton.setToolTipText("Submit");
         submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submitButtonActionPerformed(evt);
@@ -154,7 +180,7 @@ public class PracticeForm extends javax.swing.JFrame {
         });
 
         levelComboBox.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        levelComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Level1", "Level2"}));
+        levelComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Level1", "Level2" }));
         levelComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 levelComboBoxActionPerformed(evt);
@@ -164,8 +190,8 @@ public class PracticeForm extends javax.swing.JFrame {
         interfaceLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         interfaceLabel.setText("Guess word: ");
 
-        guess_WordAnswerLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        guess_WordAnswerLabel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        guessWordAnswerLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        guessWordAnswerLabel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         nextWordButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/nextWord.png"))); // NOI18N
         nextWordButton.addActionListener(new java.awt.event.ActionListener() {
@@ -174,8 +200,27 @@ public class PracticeForm extends javax.swing.JFrame {
             }
         });
 
-        userInterfaceLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        userInterfaceLabel.setText("Guess: ");
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 11, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        hintButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        hintButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/speaker.png"))); // NOI18N
+        hintButton.setBorder(null);
+        hintButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hintButtonActionPerformed(evt);
+            }
+        });
+
+        resultLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
         userGuessTextField.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         userGuessTextField.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -183,78 +228,102 @@ public class PracticeForm extends javax.swing.JFrame {
                 userGuessTextFieldMouseClicked(evt);
             }
         });
+        userGuessTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                userGuessTextFieldKeyPressed(evt);
+            }
+        });
 
-        resultLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        userInterfaceLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        userInterfaceLabel.setText("Guess: ");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(userInterfaceLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(userGuessTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(resultLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel2Layout.setVerticalGroup(
-                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(userInterfaceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(userGuessTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-                                        .addComponent(resultLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())
-        );
+        timeDisplayLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        clockIconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EVDict4_1/Icon/clock.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(104, 104, 104))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(startButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(submitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                .addGap(202, 202, 202))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(interfaceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(guess_WordAnswerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addGap(89, 89, 89)))
-                                .addGap(24, 24, 24)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(levelComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(nextWordButton))
-                                .addGap(28, 28, 28))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(timeDisplayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clockIconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(levelComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(157, 157, 157)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(434, 434, 434))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(65, 65, 65)
+                                .addComponent(submitButton)
+                                .addGap(37, 37, 37)
+                                .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(interfaceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(userInterfaceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(userGuessTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(resultLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(guessWordAnswerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(nextWordButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(hintButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(70, 70, 70))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(levelComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(76, 76, 76)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(guess_WordAnswerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(interfaceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(32, 32, 32)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(nextWordButton))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
-                                .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(timeDisplayLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(clockIconLabel)))
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(guessWordAnswerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(hintButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(interfaceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(levelComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(userGuessTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(userInterfaceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 9, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(resultLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nextWordButton))))
+                .addGap(30, 30, 30)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51))
         );
 
         pack();
@@ -266,18 +335,18 @@ public class PracticeForm extends javax.swing.JFrame {
         timeDisplayLabel.setText("");
         startButton.setVisible(false);
         showInterface();
-        guess_WordAnswerLabel.setText(hide_word_answer);
+        guessWordAnswerLabel.setText(hide_word_answer);
         time_to_guess = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (time_iterator <= 60) {
+                if (time_iterator >= 0) {
                     timeDisplayLabel.setText(String.valueOf(time_iterator) + "S");
-                    time_iterator++;
+                    time_iterator --;
                 } else {
                     resetDefault();
-                    guess_WordAnswerLabel.setVisible(true);
+                    guessWordAnswerLabel.setVisible(true);
                     nextWordButton.setVisible(true);
-                    guess_WordAnswerLabel.setText(String.format("%40s", "TIME OUT !!"));
+                    guessWordAnswerLabel.setText(String.format("%40s", "TIME OUT !!"));
                 }
             }
         });
@@ -305,13 +374,16 @@ public class PracticeForm extends javax.swing.JFrame {
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
-        if (userGuessTextField.getText().equals(random_word_answer)) {
+        if (userGuessTextField.getText().toLowerCase().equals(hide_characters)) {
             timeDisplayLabel.setVisible(false);
             clockIconLabel.setVisible(false);
+            hintButton.setVisible(false);
+            guessWordAnswerLabel.setText(random_word_answer);
             resultLabel.setText("Congratulation!!");
             speaker.HandleVoice("Correct answer");
         } else {
             resultLabel.setText("Wrong answer!!");
+            hintButton.setVisible(true);
             speaker.HandleVoice("You need to practice more");
         }
     }//GEN-LAST:event_submitButtonActionPerformed
@@ -322,45 +394,71 @@ public class PracticeForm extends javax.swing.JFrame {
         resultLabel.setText("");
     }//GEN-LAST:event_userGuessTextFieldMouseClicked
 
+    private void hintButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hintButtonActionPerformed
+        // TODO add your handling code here:
+        speaker.HandleVoice(random_word_answer);
+    }//GEN-LAST:event_hintButtonActionPerformed
+
+    private void userGuessTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userGuessTextFieldKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (userGuessTextField.getText().toLowerCase().equals(hide_characters)) {
+                timeDisplayLabel.setVisible(false);
+                clockIconLabel.setVisible(false);
+                hintButton.setVisible(false);
+                guessWordAnswerLabel.setText(random_word_answer);
+                resultLabel.setText("Congratulation!!");
+                speaker.HandleVoice("Correct answer");
+            } else {
+                resultLabel.setText("Wrong answer!!");
+                hintButton.setVisible(true);
+                speaker.HandleVoice("You need to practice more");
+            }
+        }
+    }//GEN-LAST:event_userGuessTextFieldKeyPressed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PracticeForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PracticeForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PracticeForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PracticeForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PracticeForm().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(PracticeForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(PracticeForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(PracticeForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(PracticeForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new PracticeForm().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel clockIconLabel;
-    private javax.swing.JLabel guess_WordAnswerLabel;
+    private javax.swing.JLabel guessWordAnswerLabel;
+    private javax.swing.JButton hintButton;
     private javax.swing.JLabel interfaceLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

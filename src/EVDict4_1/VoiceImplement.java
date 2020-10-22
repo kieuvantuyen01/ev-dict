@@ -14,10 +14,12 @@ import com.sun.speech.freetts.VoiceManager;
 public class VoiceImplement {
 
     public void HandleVoice(String word) {
-        Voice voice;
-        VoiceManager voiceManager = VoiceManager.getInstance();
-        voice = voiceManager.getVoice("kevin16");
-        voice.allocate();
-        voice.speak(word);
+        if (word != null) {
+            Voice voice;
+            VoiceManager voiceManager = VoiceManager.getInstance();
+            voice = voiceManager.getVoice("kevin16");
+            voice.allocate();
+            voice.speak(word);
+        }
     }
 }

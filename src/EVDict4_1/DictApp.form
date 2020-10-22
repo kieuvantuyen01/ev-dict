@@ -55,7 +55,6 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="guideMenuMouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guideMenuActionPerformed"/>
           </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="aboutMenu">
@@ -67,13 +66,16 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aboutMenuActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="aboutMenuMouseClicked"/>
           </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="stateMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Vui l&#xf2;ng ch&#x1ecd;n tr&#x1ea1;ng th&#xe1;i t&#x1eeb; &#x111;i&#x1ec3;n !!! - Please select the status of the dictionary !!!"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
           </Properties>
         </Menu>
       </SubComponents>
@@ -81,6 +83,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="VTT Dictionary"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
@@ -106,18 +109,18 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="149" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="speakerButton" min="-2" pref="50" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
-                  <Component id="searchTextField" alignment="0" min="-2" pref="430" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="searchTextField" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Component id="jPanel2" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jPanel2" min="-2" pref="155" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Component id="jPanel1" max="32767" attributes="0"/>
       </Group>
@@ -126,7 +129,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel2" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
@@ -190,6 +193,9 @@
       <SubComponents>
         <Component class="javax.swing.JTextPane" name="meaningTextPane">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="cc" red="cc" type="rgb"/>
+            </Property>
             <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
           </Properties>
         </Component>
@@ -212,7 +218,7 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="f3" green="80" red="40" type="rgb"/>
+          <Color blue="ff" green="99" red="99" type="rgb"/>
         </Property>
       </Properties>
 
@@ -228,9 +234,9 @@
                   <Component id="editButton" min="-2" pref="54" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="exportButton" min="-2" pref="51" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="64" max="32767" attributes="0"/>
+                  <Component id="logoLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                   <Component id="evButton" min="-2" pref="52" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                   <Component id="veButton" min="-2" pref="52" max="-2" attributes="0"/>
@@ -242,20 +248,16 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <Component id="evButton" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="veButton" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="editButton" min="-2" pref="51" max="-2" attributes="0"/>
-                              <Component id="deleteButton" min="-2" pref="49" max="-2" attributes="0"/>
-                              <Component id="addButton" min="-2" pref="49" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="exportButton" min="-2" pref="50" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                          </Group>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="logoLabel" max="32767" attributes="0"/>
+                      <Component id="evButton" alignment="1" max="32767" attributes="0"/>
+                      <Component id="veButton" alignment="1" max="32767" attributes="0"/>
+                      <Component id="editButton" alignment="1" max="32767" attributes="0"/>
+                      <Component id="deleteButton" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
+                      <Component id="addButton" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="exportButton" min="-2" pref="50" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -267,7 +269,7 @@
         <Component class="javax.swing.JButton" name="addButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f3" green="80" red="40" type="rgb"/>
+              <Color blue="ff" green="99" red="99" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/EVDict4_1/Icon/add.png"/>
@@ -284,7 +286,7 @@
         <Component class="javax.swing.JButton" name="deleteButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f3" green="80" red="40" type="rgb"/>
+              <Color blue="ff" green="99" red="99" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/EVDict4_1/Icon/remove.png"/>
@@ -301,7 +303,7 @@
         <Component class="javax.swing.JButton" name="editButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f3" green="80" red="40" type="rgb"/>
+              <Color blue="ff" green="99" red="99" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/EVDict4_1/Icon/edit.png"/>
@@ -318,7 +320,7 @@
         <Component class="javax.swing.JButton" name="exportButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f3" green="80" red="40" type="rgb"/>
+              <Color blue="ff" green="99" red="99" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/EVDict4_1/Icon/export.png"/>
@@ -335,7 +337,7 @@
         <Component class="javax.swing.JButton" name="evButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f3" green="80" red="40" type="rgb"/>
+              <Color blue="ff" green="99" red="99" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/EVDict4_1/Icon/evdict.png"/>
@@ -352,7 +354,7 @@
         <Component class="javax.swing.JButton" name="veButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f3" green="80" red="40" type="rgb"/>
+              <Color blue="ff" green="99" red="99" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/EVDict4_1/Icon/vedict.png"/>
@@ -366,10 +368,10 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="veButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="logoLabel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/EVDict4_1/Icon/logo_.png"/>
+              <Image iconType="3" name="/EVDict4_1/Icon/logo.jpg"/>
             </Property>
           </Properties>
         </Component>
@@ -378,7 +380,7 @@
     <Container class="javax.swing.JPanel" name="jPanel2">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="f3" green="80" red="40" type="rgb"/>
+          <Color blue="ff" green="99" red="99" type="rgb"/>
         </Property>
       </Properties>
 
@@ -395,11 +397,11 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="searchButton" min="-2" pref="51" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                   <Component id="addBmButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                  <EmptySpace pref="68" max="32767" attributes="0"/>
                   <Component id="apiButton" min="-2" pref="51" max="-2" attributes="0"/>
-                  <EmptySpace pref="55" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                   <Component id="practiceButton" min="-2" pref="49" max="-2" attributes="0"/>
               </Group>
           </Group>

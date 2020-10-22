@@ -5,11 +5,9 @@
  */
 package EVDict4_1;
 
-import de.javasoft.plaf.synthetica.SyntheticaPlainLookAndFeel;
-
+import static EVDict4_1.DictApp.dictApp;
 import javax.swing.*;
 
-import static EVDict4_1.DictApp.dictApp;
 import static EVDict4_1.DictionaryData.dictionaryType.EV;
 import static EVDict4_1.DictionaryData.dictionaryType.VE;
 
@@ -17,12 +15,8 @@ import static EVDict4_1.DictionaryData.dictionaryType.VE;
  * @author ADMIN
  */
 public class AddForm extends javax.swing.JFrame {
-    public AddForm() {
-        try {
-            UIManager.setLookAndFeel(new SyntheticaPlainLookAndFeel());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public AddForm(DictApp newDictApp) {
+        dictApp = newDictApp;
         initComponents();
     }
 
@@ -150,14 +144,14 @@ public class AddForm extends javax.swing.JFrame {
         meaning = meaning.replaceAll("\n", "");
 
         if (wordTextField.getText().isEmpty() || meaningTextPane.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ô từ mới đang bị rỗng!!! Vui lòng nhập lại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Ô từ mới đang bị rỗng!!! Vui lòng nhập lại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
             if (dictApp.state == EV) {
                 if (dictApp.dictEV.getWord().contains(wordTextField.getText())) {
                     dictApp.check_input = 1;
                 } else {
                     dictApp.check_input = 0;
-                    int answer = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thêm vào?", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    int answer = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn thêm vào?", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     if (answer == JOptionPane.YES_OPTION) {
                         dictApp.dictEV.addIntoDict(word, meaning);
                     }
@@ -167,18 +161,19 @@ public class AddForm extends javax.swing.JFrame {
                     dictApp.check_input = 1;
                 } else {
                     dictApp.check_input = 0;
-                    int answer = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thêm vào?", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    int answer = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn thêm vào?", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     if (answer == JOptionPane.YES_OPTION) {
                         dictApp.dictVE.addIntoDict(word, meaning);
                     }
                 }
             }
-            JOptionPane.showMessageDialog(null, "Đã hoàn thành", "Thông báo", -1);
-            setVisible(false);
-            dictApp.initDictList();
-        }
-        if (dictApp.check_input == 1) {
-            JOptionPane.showMessageDialog(null, "Từ bị nhập vào đã tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            if (dictApp.check_input == 1) {
+                JOptionPane.showMessageDialog(rootPane, "Từ bị nhập vào đã tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Đã hoàn thành", "Thông báo", -1);
+                setVisible(false);
+                dictApp.initDictList();
+            }
         }
     }//GEN-LAST:event_submitButtonActionPerformed
 
@@ -197,22 +192,22 @@ public class AddForm extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AddForm().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+//         */
+//
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new AddForm().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel dictLabel;

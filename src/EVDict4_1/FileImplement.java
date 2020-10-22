@@ -6,7 +6,7 @@ public class FileImplement extends DictionaryData {
 
     public FileImplement(dictionaryType new_state) {
         if (new_state == dictionaryType.VE) {
-            this.path = "src\\EVDict4_1\\V_E.txt";
+            this.path = "data\\V_E.txt";
             this.state = new_state;
         }
         readFile();
@@ -38,9 +38,6 @@ public class FileImplement extends DictionaryData {
     }
 
     public void updateFile() throws IOException {
-        /*BufferedWriter writer = Files.newBufferedWriter(Paths.get(path));
-        writer.write("");
-        writer.flush();*/
         FileWriter fos = new FileWriter(path);
         BufferedWriter bw = new BufferedWriter(fos);
         for (String new_word : word) {
