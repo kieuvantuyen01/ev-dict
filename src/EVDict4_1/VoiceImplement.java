@@ -20,6 +20,8 @@ public class VoiceImplement {
             voice = voiceManager.getVoice("kevin16");
             voice.allocate();
             voice.speak(word);
+        } else {
+            System.out.println("Word is null, Error!");
         }
     }
 }
